@@ -1,3 +1,0 @@
-# TarasDashboard
-
-git checkout dev
