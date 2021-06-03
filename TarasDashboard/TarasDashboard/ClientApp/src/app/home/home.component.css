@@ -1,0 +1,144 @@
+.flex{
+    position: relative;
+    margin-top: 1%;
+    margin-left: 1%;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+}
+.block{
+    position: relative;
+    margin-top:5px;
+    margin-left:20px;
+    display: block;
+    height: 100%;
+    width: 50%;
+}
+.circle{
+    position: relative;
+    display: block;
+    width: 50%;
+}
+
+.mini-flex{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.block1,.block2,.block3{
+    position: relative;
+    margin-top: 10px;
+    border-radius: 10px;
+    height: 32%;
+}
+
+.block1{
+    background-color: rgb(18, 156, 18);
+}
+
+.block2{
+    width: 100%;
+}
+
+.block2, .block3 {
+    background-color: rgba(211, 211, 211, 0.61);
+}
+
+.block1Value{
+    position: relative;
+    top: 30%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 130px;
+    color: white;
+}
+
+.block2Text{
+    position: relative;
+    top: 30%;
+    text-align: right;
+    font-size: 130px;
+    width: 40%;
+}
+
+.block2Value{
+    position: relative;
+    top: 30%;
+    text-align: left;
+    font-weight: bold;
+    font-size: 130px;
+    width: 60%;
+}
+
+.block3Value{
+    position: relative;
+    top: 30%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 130px;
+}
+.chart-text {
+    font-size: 0.4em;
+    line-height: 1;
+    text-anchor: middle;
+    -moz-transform: translateY(0.25em);
+    -ms-transform: translateY(0.25em);
+    -webkit-transform: translateY(0.25em);
+    transform: translateY(0.25em);
+}
+.table{
+    position: relative;
+    margin-left: 20px;
+    width: 98%;
+}
+
+.table tr:nth-child(odd){
+    background:#eaecec;
+}
+
+.table tr:hover{
+    background:rgb(212, 212, 212); 
+    color:#fff; 
+    text-shadow:1px 1px 1px rgb(114, 113, 153);
+}
+
+th.mat-header-cell{ 
+    color: black;
+    background-color:#fff;
+
+    text-align: center;
+    font-weight: bold;
+}
+
+.table td{
+    vertical-align: middle;
+}
+.thStatistic{
+    font-size: 60px;
+}
+
+.tdStatistic{
+    border:2px; 
+    text-align: center;
+    font-size: 57px;
+}
+
+.thRegion{
+    font-size: 30px;
+}
+
+.tdRegion{
+    border:2px; 
+    text-align: center;
+    font-size: 30px;
+    height: 10px;
+}
+
+.bold{
+    border:2px; 
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+}

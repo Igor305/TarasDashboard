@@ -1,0 +1,94 @@
+
+<div *ngIf="(check == 1)" class = 'flex'>
+    <div class = 'block'>
+        <div class = 'block1'>
+            <div class = 'block1Value'>{{saleOracle.real}} ({{saleOracle.oracle}})</div> 
+        </div>
+        <div class = 'block2'>
+            <div class = 'mini-flex'>            
+                <div class = 'block2Text'>СЧ:</div>
+                <div class = 'block2Value'>{{saleOracle.avgCheck}}</div>
+            </div>
+        </div>
+        <div class = 'block3'>
+            <div class = 'block3Value'>{{saleOracle.recFor7Day}}</div>
+        </div>
+    </div>
+    <div class = 'circle'>
+        <div class="svgLastHour">
+            <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
+                <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="1"></circle>
+                <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#fff" stroke-width="1" stroke-dasharray="100 0"></circle>
+                <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#14DE10" stroke-width="1" style.stroke-dasharray="{{saleOracle.percentOnlineStock}},{{percentOnlineStockLast}}" stroke-dashoffset="25"></circle>
+                <g class="chart-text">
+                    <text x="50%" y="50%" class="chart-number">{{saleOracle.percentOnlineStock}}%</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="(check == 2)">
+    <div class = "flex">
+        <table mat-table [dataSource]="saleStatisticModels" class = 'table'>
+            <ng-container matColumnDef="dateOfString">
+                <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Дата </th>
+                <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.dateOfString}} </td>
+            </ng-container>
+            <ng-container matColumnDef="tSumCC_wt">
+                <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Р </th>
+                <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.tSumCC_wt}} </td>
+            </ng-container>
+            <ng-container matColumnDef="avgCheck">
+                <th mat-header-cell *matHeaderCellDef class = "thStatistic"> СЧ </th>
+                <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.avgCheck}} </td>
+            </ng-container>
+            <ng-container matColumnDef="rec">
+                <th mat-header-cell *matHeaderCellDef class = "thStatistic"> ОП </th>
+                <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.rec}} </td>
+            </ng-container>
+            <ng-container matColumnDef="margin">
+                <th mat-header-cell *matHeaderCellDef class = "thStatistic"> М </th>
+                <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.margin}} </td>
+            </ng-container>
+            <ng-container matColumnDef="turnover">
+                <th mat-header-cell *matHeaderCellDef class = "thStatistic"> О </th>
+                <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.turnover}} </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsStatistic"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: displayedColumnsStatistic"></tr>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="(check == 3)">
+    <div class = "flex">
+        <table mat-table [dataSource]="saleRegionsModels" class = 'table'>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class = "thRegion"></th>
+                <td mat-cell *matCellDef="let element" class = "tdRegion"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="population">
+                <th mat-header-cell *matHeaderCellDef class = "thRegion">Pop</th>
+                <td mat-cell *matCellDef="let element" class = "tdRegion"> {{element.population}} </td>
+            </ng-container>
+            <ng-container matColumnDef="numberTT">
+                <th mat-header-cell *matHeaderCellDef class = "thRegion">NoS</th>
+                <td mat-cell *matCellDef="let element" class = "tdRegion"> {{element.numberTT}} </td>
+            </ng-container>
+            <ng-container matColumnDef="populationForOneTT">
+                <th mat-header-cell *matHeaderCellDef class = "thRegion">PpS</th>
+                <td mat-cell *matCellDef="let element"  class = "tdRegion"> {{element.populationForOneTT}} </td>
+            </ng-container>
+            <ng-container matColumnDef="salesForOnePeople">
+                <th mat-header-cell *matHeaderCellDef class = "thRegion">Sa/P</th>
+                <td mat-cell *matCellDef="let element"  class = "tdRegion"> {{element.salesForOnePeople}} </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsRegions"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: displayedColumnsRegions"></tr>
+        </table>
+    </div>
+</div>
