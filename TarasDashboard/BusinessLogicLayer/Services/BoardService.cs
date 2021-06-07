@@ -46,22 +46,39 @@ namespace BusinessLogicLayer.Services
 
         public async Task getSaleInCache()
         {
-            SaleOracleModel saleOracleModel = await getSaleOracle();
-
-            List<SaleStatisticModel> saleStatisticModels = await getSaleStatistic();
-
-            List<SaleRegionsModel> saleRegionsModels = await getSaleRegions();
-
-            SaleResponseModel saleResponseModel = new SaleResponseModel();
-
-            saleResponseModel.saleOracleModel = saleOracleModel;
-            saleResponseModel.saleStatisticModels = saleStatisticModels;
-            saleResponseModel.saleRegionsModels = saleRegionsModels;
-
-            _memoryCache.Set("responseModel", saleResponseModel, new MemoryCacheEntryOptions
+            try
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
-            });
+                SaleOracleModel saleOracleModel = await getSaleOracle();
+
+                List<SaleStatisticModel> saleStatisticModels = await getSaleStatistic();
+
+                List<SaleRegionsModel> saleRegionsModels = await getSaleRegions();
+
+                string date = DateTime.Now.ToShortDateString();
+                string time = DateTime.Now.ToShortTimeString();
+
+                SaleResponseModel saleResponseModel = new SaleResponseModel();
+
+                saleResponseModel.saleOracleModel = saleOracleModel;
+                saleResponseModel.saleStatisticModels = saleStatisticModels;
+                saleResponseModel.saleRegionsModels = saleRegionsModels;
+                saleResponseModel.Date = date;
+                saleResponseModel.Time = time;
+                saleResponseModel.Status = true;
+                saleResponseModel.Message = "successfully";
+
+                _memoryCache.Set("responseModel", saleResponseModel, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
+                });
+            }
+
+            catch (Exception e)
+            {
+                SaleResponseModel saleResponseModel = new SaleResponseModel();
+                saleResponseModel.Status = false;
+                saleResponseModel.Message = e.Message;
+            }
         }
 
         private async Task<SaleOracleModel> getSaleOracle()
@@ -228,9 +245,9 @@ namespace BusinessLogicLayer.Services
                     saleRegionsModels.Add(new SaleRegionsModel
                     {
                         Name = numTT[i].Name,
-                        Population = populationRegionModels[i].Population,
+                        Population = Math.Round(populationRegionModels[i].Population / 1000000, 2),
                         NumberTT = numTT[i].Population,
-                        PopulationForOneTT = populationForOneTT[i].Population,
+                        PopulationForOneTT = Math.Round(populationForOneTT[i].Population / 1000, 2),
                         SalesInThe30Days = 0,
                         SalesForOnePeople = salesForOnePeoples[i].Population
                     });

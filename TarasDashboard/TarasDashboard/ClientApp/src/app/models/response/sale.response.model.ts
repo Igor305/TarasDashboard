@@ -6,4 +6,8 @@ export interface SaleResponseModel{
     saleOracleModel?: SaleOracleModel;
     saleStatisticModels?: SaleStatisticModel[];
     saleRegionsModels?: SaleRegionsModel[];
+    date?: string;
+    time?: string;
+    status?: boolean;
+    message?: string;
 }

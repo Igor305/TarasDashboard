@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   responseModel: SaleResponseModel
   saleOracle: SaleOracleModel
   percentOnlineStockLast: number
+  dateTime: string
 
   saleStatisticModels: SaleStatisticModel[]
 
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(){
 
-    this.check = 2;
+    this.check = 1;
 
     setInterval(()=> this.getSale(),10000);
     setInterval(()=> this.getCheck(),20000);
@@ -55,10 +56,9 @@ export class HomeComponent implements OnInit {
     this.saleOracle = this.responseModel.saleOracleModel;
     this.percentOnlineStockLast = 100 - this.saleOracle.percentOnlineStock;
 
-    console.log(this.responseModel);
-
     this.saleStatisticModels = this.responseModel.saleStatisticModels;
-
     this.saleRegionsModels = this.responseModel.saleRegionsModels;
+    this.dateTime = this.responseModel.date + " " + this.responseModel.time;
+
   }
 }
