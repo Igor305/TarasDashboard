@@ -8,7 +8,6 @@ using DataAccessLayer.Repositories.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
@@ -54,6 +53,8 @@ namespace BusinessLogicLayer.Services
 
                 List<SaleRegionsModel> saleRegionsModels = await getSaleRegions();
 
+                SaleRegionsModel lastLines = addLastLine(saleRegionsModels);
+
                 string date = DateTime.Now.ToShortDateString();
                 string time = DateTime.Now.ToShortTimeString();
 
@@ -62,10 +63,11 @@ namespace BusinessLogicLayer.Services
                 saleResponseModel.saleOracleModel = saleOracleModel;
                 saleResponseModel.saleStatisticModels = saleStatisticModels;
                 saleResponseModel.saleRegionsModels = saleRegionsModels;
+                saleResponseModel.lastLines = lastLines;
                 saleResponseModel.Date = date;
                 saleResponseModel.Time = time;
                 saleResponseModel.Status = true;
-                saleResponseModel.Message = "successfully";
+                saleResponseModel.Message = "successfully";               
 
                 _memoryCache.Set("responseModel", saleResponseModel, new MemoryCacheEntryOptions
                 {
@@ -253,7 +255,49 @@ namespace BusinessLogicLayer.Services
                     });
                 }
             }
+
             return saleRegionsModels;
+        }
+
+        private SaleRegionsModel addLastLine(List<SaleRegionsModel> saleRegionsModels)
+        {
+            SaleRegionsModel lastLineModel = new SaleRegionsModel();
+
+            double lastPopulation = 0;
+            double lastNumberTT = 0;
+            double lastPopulationForOneTT = 0;
+            double lastSalesForOnePeople = 0;
+
+            double maxSalesForOnePeople = 0;
+            double beforeMaxSalesForOnePeople = 0;
+
+            foreach (SaleRegionsModel saleRegionsModel in saleRegionsModels)
+            {
+                lastPopulation += saleRegionsModel.Population;
+                lastNumberTT += saleRegionsModel.NumberTT;
+
+                if (maxSalesForOnePeople < saleRegionsModel.SalesForOnePeople)
+                {
+                    maxSalesForOnePeople = saleRegionsModel.SalesForOnePeople;
+                }
+
+                if (beforeMaxSalesForOnePeople < saleRegionsModel.SalesForOnePeople && saleRegionsModel.SalesForOnePeople != maxSalesForOnePeople)
+                {
+                    beforeMaxSalesForOnePeople = saleRegionsModel.SalesForOnePeople;
+                }
+            }
+
+            lastPopulationForOneTT = Math.Round(lastPopulation * 1000000 / lastNumberTT / 1000, 2);
+            lastSalesForOnePeople = Math.Round((beforeMaxSalesForOnePeople / 30)* lastPopulation * 365, 2);
+
+            lastLineModel.Name = "";
+            lastLineModel.NumberTT = lastNumberTT;
+            lastLineModel.Population = lastPopulation;
+            lastLineModel.PopulationForOneTT = lastPopulationForOneTT;
+            lastLineModel.SalesInThe30Days = 0;
+            lastLineModel.SalesForOnePeople = lastSalesForOnePeople;
+
+            return lastLineModel;
         }
     }
 }

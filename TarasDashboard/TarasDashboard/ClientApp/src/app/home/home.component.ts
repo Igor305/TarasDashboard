@@ -28,11 +28,13 @@ export class HomeComponent implements OnInit {
 
   displayedColumnsRegions: string [] = ['name', 'population', 'numberTT', 'populationForOneTT', 'salesForOnePeople'];
 
+  lastLines: SaleRegionsModel;
+
   constructor(private saleService: SaleService){}
 
   async ngOnInit(){
 
-    this.check = 1;
+    this.check = 3;
 
     setInterval(()=> this.getSale(),10000);
     setInterval(()=> this.getCheck(),20000);
@@ -60,5 +62,6 @@ export class HomeComponent implements OnInit {
     this.saleRegionsModels = this.responseModel.saleRegionsModels;
     this.dateTime = this.responseModel.date + " " + this.responseModel.time;
 
+    this.lastLines = this.responseModel.lastLines;
   }
 }

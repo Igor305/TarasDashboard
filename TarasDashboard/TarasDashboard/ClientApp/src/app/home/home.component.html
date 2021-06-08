@@ -5,9 +5,17 @@
             <div class = 'block1Value'>{{saleOracle.real}} ({{saleOracle.oracle}})</div> 
         </div>
         <div class = 'block2'>
-            <div class = 'mini-flex'>            
-                <div class = 'block2Text'>СЧ:</div>
-                <div class = 'block2Value'>{{saleOracle.avgCheck}}</div>
+            <div *ngIf="(saleOracle.avgCheck != 0)">  
+                <div class = 'mini-flex'>          
+                    <div class = 'block2Text'>СЧ:</div>
+                    <div class = 'block2Value'>{{saleOracle.avgCheck}}</div>
+                </div>
+            </div>
+            <div  *ngIf="(saleOracle.avgCheck == 0)">     
+                <div class = 'mini-flex'>                
+                    <div class = 'block2TextZero'>СЧ:</div>
+                    <div class = 'block2ValueZero'>{{saleOracle.avgCheck}}</div>
+                </div>
             </div>
         </div>
         <div class = 'block3'>
@@ -69,26 +77,32 @@
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef class = "thRegion"></th>
                 <td mat-cell *matCellDef="let element" class = "tdRegion"> {{element.name}} </td>
+                <td mat-footer-cell *matFooterCellDef class = "tdRegionFooter"> {{lastLines.name}} </td>
             </ng-container>
             <ng-container matColumnDef="population">
                 <th mat-header-cell *matHeaderCellDef class = "thRegion">Pop</th>
                 <td mat-cell *matCellDef="let element" class = "tdRegion"> {{element.population}} </td>
+                <td mat-footer-cell *matFooterCellDef class = "tdRegionFooter"> {{lastLines.population}} </td>
             </ng-container>
             <ng-container matColumnDef="numberTT">
                 <th mat-header-cell *matHeaderCellDef class = "thRegion">NoS</th>
                 <td mat-cell *matCellDef="let element" class = "tdRegion"> {{element.numberTT}} </td>
+                <td mat-footer-cell *matFooterCellDef class = "tdRegionFooter"> {{lastLines.numberTT}} </td>
             </ng-container>
             <ng-container matColumnDef="populationForOneTT">
                 <th mat-header-cell *matHeaderCellDef class = "thRegion">PpS</th>
                 <td mat-cell *matCellDef="let element"  class = "tdRegion"> {{element.populationForOneTT}} </td>
+                <td mat-footer-cell *matFooterCellDef class = "tdRegionFooter"> {{lastLines.populationForOneTT}}  </td>
             </ng-container>
             <ng-container matColumnDef="salesForOnePeople">
                 <th mat-header-cell *matHeaderCellDef class = "thRegion">Sa/P-30</th>
                 <td mat-cell *matCellDef="let element"  class = "tdRegion"> {{element.salesForOnePeople}} </td>
+                <td mat-footer-cell *matFooterCellDef class = "tdRegionFooter">{{lastLines.salesForOnePeople}} </td>
             </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="displayedColumnsRegions"></tr>
             <tr mat-row *matRowDef="let myRowData; columns: displayedColumnsRegions"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumnsRegions"></tr>
         </table>   
     </div>
 </div>

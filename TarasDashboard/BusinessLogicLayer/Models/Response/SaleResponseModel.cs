@@ -8,6 +8,7 @@ namespace BusinessLogicLayer.Models.Response
         public SaleOracleModel saleOracleModel { get; set; }
         public List<SaleStatisticModel> saleStatisticModels { get; set; }
         public List<SaleRegionsModel> saleRegionsModels { get; set; }
+        public SaleRegionsModel lastLines { get; set; }
         public string Date {get; set;} 
         public string Time { get; set; }
         public bool Status { get; set; }
