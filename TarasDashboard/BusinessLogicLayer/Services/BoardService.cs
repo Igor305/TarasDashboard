@@ -256,6 +256,28 @@ namespace BusinessLogicLayer.Services
                 }
             }
 
+            saleRegionsModels = getPercentsSalesForOnePeople(saleRegionsModels);
+
+            return saleRegionsModels;
+        }
+
+        private List<SaleRegionsModel> getPercentsSalesForOnePeople(List<SaleRegionsModel> saleRegionsModels)
+        {
+            double maxSalesForOnePeople = 0;
+
+            foreach (SaleRegionsModel saleRegionsModel in saleRegionsModels)
+            {
+                if (maxSalesForOnePeople < saleRegionsModel.SalesForOnePeople)
+                {
+                    maxSalesForOnePeople = saleRegionsModel.SalesForOnePeople;
+                }
+            }
+
+            foreach (SaleRegionsModel saleRegionsModel in saleRegionsModels)
+            {
+                saleRegionsModel.PercentSalesForOnePeople = saleRegionsModel.SalesForOnePeople * 100 / maxSalesForOnePeople;
+            }
+
             return saleRegionsModels;
         }
 

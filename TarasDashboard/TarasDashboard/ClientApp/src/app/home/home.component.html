@@ -90,13 +90,47 @@
                 <td mat-footer-cell *matFooterCellDef class = "tdRegionFooter"> {{lastLines.numberTT}} </td>
             </ng-container>
             <ng-container matColumnDef="populationForOneTT">
-                <th mat-header-cell *matHeaderCellDef class = "thRegion">PpS</th>
-                <td mat-cell *matCellDef="let element"  class = "tdRegion"> {{element.populationForOneTT}} </td>
+                <th mat-header-cell *matHeaderCellDef class = "thRegion">PpS</th>            
+                <td mat-cell *matCellDef="let element" class = "tdRegion">{{element.populationForOneTT}}</td>
                 <td mat-footer-cell *matFooterCellDef class = "tdRegionFooter"> {{lastLines.populationForOneTT}}  </td>
             </ng-container>
             <ng-container matColumnDef="salesForOnePeople">
                 <th mat-header-cell *matHeaderCellDef class = "thRegion">Sa/P-30</th>
-                <td mat-cell *matCellDef="let element"  class = "tdRegion"> {{element.salesForOnePeople}} </td>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="(element.percentSalesForOnePeople == 0)" class = "tdRegionSalesForOnePeople0"> 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 0 && element.percentSalesForOnePeople <= 10)" class = "tdRegionSalesForOnePeople10"> 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 10 && element.percentSalesForOnePeople <= 20)" class = "tdRegionSalesForOnePeople20" > 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 20 && element.percentSalesForOnePeople <= 30)" class = "tdRegionSalesForOnePeople30" > 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 30 && element.percentSalesForOnePeople <= 40)" class = "tdRegionSalesForOnePeople40" > 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 40 && element.percentSalesForOnePeople <= 50)" class = "tdRegionSalesForOnePeople50" > 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 50 && element.percentSalesForOnePeople <= 60)" class = "tdRegionSalesForOnePeople60" > 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 60 && element.percentSalesForOnePeople <= 70)" class = "tdRegionSalesForOnePeople70" > 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 70 && element.percentSalesForOnePeople <= 80)" class = "tdRegionSalesForOnePeople80" > 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 80 && element.percentSalesForOnePeople <= 90)" class = "tdRegionSalesForOnePeople90" > 
+                        {{element.salesForOnePeople}} 
+                    </span>  
+                    <span *ngIf="(element.percentSalesForOnePeople > 90 && element.percentSalesForOnePeople <= 100)" class = "tdRegionSalesForOnePeople100" > 
+                        {{element.salesForOnePeople}} 
+                    </span> 
+                </td>
                 <td mat-footer-cell *matFooterCellDef class = "tdRegionFooter">{{lastLines.salesForOnePeople}} </td>
             </ng-container>
             

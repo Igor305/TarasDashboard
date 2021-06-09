@@ -5,4 +5,5 @@ export interface SaleRegionsModel{
     populationForOneTT?: number;
     salesInThe30Days?: number;
     salesForOnePeople?: number;
+    percentSalesForOnePeople?: number;
 }

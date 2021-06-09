@@ -8,7 +8,7 @@ import { SaleService } from '../services/sale.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.sass']
 })
 
 export class HomeComponent implements OnInit {
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.check = 3;
 
     setInterval(()=> this.getSale(),10000);
-    setInterval(()=> this.getCheck(),20000);
+    setInterval(()=> this.getCheck(),200000);
 
     await this.getSale();
   }
@@ -63,5 +63,7 @@ export class HomeComponent implements OnInit {
     this.dateTime = this.responseModel.date + " " + this.responseModel.time;
 
     this.lastLines = this.responseModel.lastLines;
+
+    console.log(this.saleRegionsModels);
   }
 }
