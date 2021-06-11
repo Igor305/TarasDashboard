@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.check = 3;
 
     setInterval(()=> this.getSale(),10000);
-    setInterval(()=> this.getCheck(),200000);
+    setInterval(()=> this.getCheck(),20000);
 
     await this.getSale();
   }
@@ -64,6 +64,13 @@ export class HomeComponent implements OnInit {
 
     this.lastLines = this.responseModel.lastLines;
 
-    console.log(this.saleRegionsModels);
+  }
+
+  public async getExcel(){
+    
+    let saleRegionsModels = this.saleRegionsModels;
+    saleRegionsModels.push(this.lastLines);
+
+    this.saleService.generateExel(saleRegionsModels);
   }
 }

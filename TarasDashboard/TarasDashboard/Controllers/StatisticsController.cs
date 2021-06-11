@@ -1,6 +1,8 @@
-﻿using BusinessLogicLayer.Models.Response;
+﻿using BusinessLogicLayer.Models;
+using BusinessLogicLayer.Models.Response;
 using BusinessLogicLayer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace TarasDashboard.Controllers
 {
@@ -22,6 +24,15 @@ namespace TarasDashboard.Controllers
            SaleResponseModel saleResponseModel =  _boardService.getStaticSale();
 
            return saleResponseModel;
+        }
+
+        [HttpPost("getExcel")]
+
+        public byte[] getExcel([FromBody] List<SaleRegionsModel> saleRegionsModels)
+        {
+            byte[] excel = _boardService.getExcel(saleRegionsModels);
+
+            return excel;
         }
     }
 }

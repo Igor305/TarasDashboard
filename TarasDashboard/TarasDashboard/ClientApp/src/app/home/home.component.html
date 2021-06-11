@@ -1,5 +1,4 @@
-
-<div *ngIf="(check == 1)" class = 'flex'>
+ <div *ngIf="(check == 1)" class = 'flex'>
     <div class = 'block'>
         <div class = 'block1'>
             <div class = 'block1Value'>{{saleOracle.real}} ({{saleOracle.oracle}})</div> 
@@ -140,4 +139,17 @@
         </table>   
     </div>
 </div>
-<div class = "dateTime">{{dateTime}}</div>
+
+<div class="flex-footer">
+    <div class = "dateTime">{{dateTime}}</div>
+    <div *ngIf="(check == 3)">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <a (click) = "getExcel()">Завантажити Excel</a>
+        </button>
+        </mat-menu>
+    </div>
+</div>

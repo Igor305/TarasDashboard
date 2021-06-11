@@ -6,8 +6,10 @@ using DataAccessLayer;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Repositories.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
@@ -320,6 +322,49 @@ namespace BusinessLogicLayer.Services
             lastLineModel.SalesForOnePeople = lastSalesForOnePeople;
 
             return lastLineModel;
+        }
+
+        public byte[] getExcel(List<SaleRegionsModel> saleRegionsModels)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (ExcelPackage excel = new ExcelPackage())
+            {
+
+                try
+                { 
+                    ExcelWorksheet ws = excel.Workbook.Worksheets.Add("Sale By Regions");
+
+                    ws.Cells["B1"].Value = "Pop";
+                    ws.Cells["C1"].Value = "NoS";
+                    ws.Cells["D1"].Value = "PpS";
+                    ws.Cells["E1"].Value = "Sa/P30";
+                    ws.Cells["B1:E1"].Style.Font.Bold = true;
+
+                    int x = 2;
+                    foreach (SaleRegionsModel saleRegionsModel in  saleRegionsModels)
+                    {
+                        ws.Cells[$"A{x}"].Value = saleRegionsModel.Name;
+                        ws.Cells[$"B{x}"].Value = saleRegionsModel.Population;
+                        ws.Cells[$"C{x}"].Value = saleRegionsModel.NumberTT;
+                        ws.Cells[$"D{x}"].Value = saleRegionsModel.PopulationForOneTT;
+                        ws.Cells[$"E{x}"].Value = saleRegionsModel.SalesForOnePeople;
+
+                        x++;
+                    }
+                }
+
+                catch
+                {
+
+                }
+
+            FileInfo excelFile = new FileInfo("Sale By Regions.xlsx");
+            excel.SaveAs(excelFile);
+
+            return excel.GetAsByteArray();
+             
+            }
         }
     }
 }
