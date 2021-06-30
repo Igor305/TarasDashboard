@@ -27,7 +27,7 @@ namespace BusinessLogicLayer.Services
                 _logger.LogInformation(
                     "Scoped Processing Service is working. Count: {Count}", executionCount);
 
-                await Task.Delay(7200000, stoppingToken);
+                await Task.Delay(3600000, stoppingToken);
             }
         }
     }
