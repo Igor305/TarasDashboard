@@ -89,6 +89,19 @@ namespace BusinessLogicLayer.Services
                 SaleResponseModel saleResponseModel = new SaleResponseModel();
                 saleResponseModel.Status = false;
                 saleResponseModel.Message = e.Message;
+
+                string token = _configuration["TelegramBot:Token"];
+
+                TelegramBotClient botClient;
+
+                botClient = new TelegramBotClient(token);
+
+                botClient.StartReceiving();
+
+                await botClient.SendTextMessageAsync(
+                   chatId: _configuration["TelegramBot:CreatorId"],
+                   text: e.Message
+                   );
             }
         }
 
@@ -121,7 +134,7 @@ namespace BusinessLogicLayer.Services
             using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 await botClient.SendPhotoAsync(
-                chatId: _configuration["TelegramBot:Id"],
+                chatId: _configuration["TelegramBot:ChannelId"],
                 photo: fileStream
                 );
             }
@@ -132,7 +145,7 @@ namespace BusinessLogicLayer.Services
             Bitmap bitmap = new Bitmap(1920, 1080);
             using (Graphics graphic = Graphics.FromImage(bitmap))
             {
-                Image newImage = Image.FromFile("ClientApp/src/assets/background_1.png");
+                Image newImage = Image.FromFile("ClientApp/dist/assets/background_1.png");
 
                 float x = 0.0F;
                 float y = 0.0F;
@@ -217,7 +230,7 @@ namespace BusinessLogicLayer.Services
             Bitmap bitmap = new Bitmap(1920, 1080);
             using (Graphics graphic = Graphics.FromImage(bitmap))
             {
-                Image newImage = Image.FromFile("ClientApp/src/assets/background_1.png");
+                Image newImage = Image.FromFile("ClientApp/dist/assets/background_1.png");
 
                 float x = 0.0F;
                 float y = 0.0F;
@@ -230,7 +243,6 @@ namespace BusinessLogicLayer.Services
                 using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 255)))
                 {
                     graphic.FillRectangle(brush, 30, 30, 1860, 1020);
-
                 }
 
                 Font font = new Font("Helvetica Neue", 45, FontStyle.Bold);
@@ -324,7 +336,7 @@ namespace BusinessLogicLayer.Services
             Bitmap bitmap = new Bitmap(1920, 1080);
             using (Graphics graphic = Graphics.FromImage(bitmap))
             {
-                Image newImage = Image.FromFile("ClientApp/src/assets/background_1.png");
+                Image newImage = Image.FromFile("ClientApp/dist/assets/background_1.png");
 
                 float x = 0.0F;
                 float y = 0.0F;
@@ -404,11 +416,13 @@ namespace BusinessLogicLayer.Services
 
                     drawBrush = new SolidBrush(Color.Black);
 
-                    float xName = 200;
+                    float xName = 260;
                     float xPop = 620;
                     float xNoS = 920;
                     float xPpS = 1220;
                     float xSa = 1620;
+
+                    xName = centeringName(xName, saleRegionsModel.Name);
 
                     graphic.DrawString(saleRegionsModel.Name, font, drawBrush, xName, y);
 
@@ -468,6 +482,20 @@ namespace BusinessLogicLayer.Services
            bitmap.Save("Photo3.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
+        private float centeringName (float x, string name)
+        {
+            int length = name.Length;
+
+            if (name == "Чернігівська")
+            {
+                x = x - 6 * (length-1);
+            }
+            else
+            {
+                x = x - 6 * (length);
+            }
+            return x;
+        }
         private float centering(float x, double salesForOnePeople)
         {            
             if (salesForOnePeople >= 100 && salesForOnePeople < 1000) { x += 0; }
