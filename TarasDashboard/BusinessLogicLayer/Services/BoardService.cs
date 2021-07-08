@@ -186,10 +186,10 @@ namespace BusinessLogicLayer.Services
                 graphic.DrawArc(pen, new Rectangle(1000, 100, 850, 850), 270, arc);
 
 
-                Font font = new Font("Helvetica Neue", 115, FontStyle.Bold);
+                Font font = new Font("Helvetica Neue", 113, FontStyle.Bold);
                 SolidBrush drawBrush = new SolidBrush(Color.White);
 
-                x = 130;
+                x = 110;
                 y = 130;
 
                 graphic.DrawString($"{saleResponseModel.saleOracleModel.Real} ({Math.Round(saleResponseModel.saleOracleModel.Oracle, 1)})", font, drawBrush, x, y);
