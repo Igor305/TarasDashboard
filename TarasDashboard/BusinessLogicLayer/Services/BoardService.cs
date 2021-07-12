@@ -5,6 +5,7 @@ using BusinessLogicLayer.Services.Interfaces;
 using DataAccessLayer;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Repositories.Interfaces;
+using HtmlAgilityPack;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using OfficeOpenXml;
@@ -591,31 +592,33 @@ namespace BusinessLogicLayer.Services
 
             List<PopulationRegionModel> populationRegionModels = new List<PopulationRegionModel>();
 
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Вінницька", Population = 1522100 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Волинська", Population = 1025800 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Дніпропетровська", Population = 3127600 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Донецька", Population = 4088300 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Житомирська", Population = 1189800 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Закарпатська", Population = 1247700 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Запорізька", Population = 1658300 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Івано-Франківська", Population = 1357200 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Київ", Population = 2954000 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Київська", Population = 1787500 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Кіровоградська", Population = 914900 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Луганська", Population = 2115800 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Львівська", Population = 2490000 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Миколаївська", Population = 1102800 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Одеська", Population = 2361700 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Полтавська", Population = 1365500 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Рівненська", Population = 1146400 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Сумська", Population = 1048000 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Тернопільська", Population = 1027400 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Харківська", Population = 2622800 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Херсонська", Population = 1012300 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Хмельницька", Population = 1238600 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Черкаська", Population = 1172700 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Чернівецька", Population = 894600 });
-            populationRegionModels.Add(new PopulationRegionModel{Name = "Чернігівська", Population = 970900 });
+            List<double> populations = parsing();
+
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Вінницька", Population = populations[0] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Волинська", Population = populations[1] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Дніпропетровська", Population = populations[2] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Донецька", Population = populations[3] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Житомирська", Population = populations[4] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Закарпатська", Population = populations[5] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Запорізька", Population = populations[6] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Івано-Франківська", Population = populations[7] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Київ", Population = populations[24] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Київська", Population = populations[8] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Кіровоградська", Population = populations[9] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Луганська", Population = populations[10] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Львівська", Population = populations[11] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Миколаївська", Population = populations[12] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Одеська", Population = populations[13] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Полтавська", Population = populations[14] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Рівненська", Population = populations[15] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Сумська", Population = populations[16] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Тернопільська", Population = populations[17] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Харківська", Population = populations[18] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Херсонська", Population = populations[19] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Хмельницька", Population = populations[20] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Черкаська", Population = populations[21] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Чернівецька", Population = populations[22] });
+            populationRegionModels.Add(new PopulationRegionModel{Name = "Чернігівська", Population = populations[23] });
 
             List<PopulationRegionModel> populationForOneTT = new List<PopulationRegionModel>();
             List<PopulationRegionModel> salesForOnePeoples = new List<PopulationRegionModel>();
@@ -683,6 +686,33 @@ namespace BusinessLogicLayer.Services
             saleRegionsModels = getPercentsSalesForOnePeople(saleRegionsModels);
 
             return saleRegionsModels;
+        }
+
+        private List<double> parsing()
+        {
+            List<double> populations = new List<double>();
+
+            string html = @"https://index.minfin.com.ua/reference/people/";
+
+            HtmlWeb web = new HtmlWeb();
+
+            var htmlDoc = web.Load(html);
+
+            for (int x = 3; x < 28; x++)
+            {
+                var value = htmlDoc.DocumentNode.SelectSingleNode($"//*[@id='sort-table']/table/tr[{x}]/td[5]");
+
+                string text = value.OuterHtml;
+
+                text = text.Substring(27);
+                text = text.Substring(0, text.Length - 5);
+
+                double population = Math.Truncate(double.Parse(text) * 1000);
+
+                populations.Add(population);
+            }
+
+            return populations;
         }
 
         private List<SaleRegionsModel> getPercentsSalesForOnePeople(List<SaleRegionsModel> saleRegionsModels)
