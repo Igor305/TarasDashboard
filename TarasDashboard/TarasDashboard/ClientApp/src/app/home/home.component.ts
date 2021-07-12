@@ -45,9 +45,9 @@ export class HomeComponent implements OnInit {
   public async getCheck(){
 
     switch(this.check){
-      case 3 : this.check = 1;break;
       case 1 : this.check = 2;break;
       case 2 : this.check = 3;break;
+      case 3 : this.check = 1;break;
     }
   }
 

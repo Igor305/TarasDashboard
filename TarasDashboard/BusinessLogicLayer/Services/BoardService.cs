@@ -124,6 +124,13 @@ namespace BusinessLogicLayer.Services
                 createPhoto2(saleResponseModel);
                 createPhoto3(saleResponseModel);
 
+                string message = $"данные на {dateTime.ToShortTimeString()} {dateTime.ToShortDateString()}";
+
+                await botClient.SendTextMessageAsync(
+                   chatId: _configuration["TelegramBot:ChannelId"],
+                   text: message
+                   );
+
                 await sendPhoto(botClient, "Photo1.jpeg");
                 await sendPhoto(botClient, "Photo2.jpeg");
                 await sendPhoto(botClient, "Photo3.jpeg");
