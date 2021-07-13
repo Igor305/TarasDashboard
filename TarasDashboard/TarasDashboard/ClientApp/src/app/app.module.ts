@@ -29,8 +29,8 @@ import { SaleService } from './services/sale.service';
     MatButtonModule,
     MatIconModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' }
-    ]),
+    { path: '', component: HomeComponent, pathMatch: 'full' }
+], { relativeLinkResolution: 'legacy' }),
     BrowserAnimationsModule
   ],
   providers: [SaleService],
