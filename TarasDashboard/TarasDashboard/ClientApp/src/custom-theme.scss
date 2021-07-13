@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -7,22 +8,22 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$TarasDashboard-primary: mat-palette($mat-indigo);
-$TarasDashboard-accent: mat-palette($mat-pink, A200, A100, A400);
+$TarasDashboard-primary: mat.define-palette(mat.$indigo-palette);
+$TarasDashboard-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$TarasDashboard-warn: mat-palette($mat-red);
+$TarasDashboard-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$TarasDashboard-theme: mat-light-theme($TarasDashboard-primary, $TarasDashboard-accent, $TarasDashboard-warn);
+$TarasDashboard-theme: mat.define-light-theme($TarasDashboard-primary, $TarasDashboard-accent, $TarasDashboard-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($TarasDashboard-theme);
+@include mat.all-component-themes($TarasDashboard-theme);
 
