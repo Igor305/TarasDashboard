@@ -26,4 +26,3 @@ $TarasDashboard-theme: mat.define-light-theme($TarasDashboard-primary, $TarasDas
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($TarasDashboard-theme);
-
