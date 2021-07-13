@@ -34,10 +34,10 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(){
 
-    this.check = 3;
+    this.check = 4;
 
     setInterval(()=> this.getSale(),10000);
-    setInterval(()=> this.getCheck(),20000);
+    //setInterval(()=> this.getCheck(),20000);
 
     await this.getSale();
   }
@@ -47,7 +47,8 @@ export class HomeComponent implements OnInit {
     switch(this.check){
       case 1 : this.check = 2;break;
       case 2 : this.check = 3;break;
-      case 3 : this.check = 1;break;
+      case 3 : this.check = 4;break;
+      case 4 : this.check = 1;break;
     }
   }
 
