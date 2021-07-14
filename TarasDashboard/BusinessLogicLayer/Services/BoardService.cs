@@ -110,7 +110,7 @@ namespace BusinessLogicLayer.Services
         {
             DateTime dateTime = DateTime.Now;
 
-            if (/*dateTime.Hour == 9 ||*/ dateTime.Hour == 13 || dateTime.Hour == 17 || dateTime.Hour == 21)
+            if (dateTime.Hour == 9 || dateTime.Hour == 13 || dateTime.Hour == 17 || dateTime.Hour == 21)
             {
                 string token = _configuration["TelegramBot:Token"];
 
