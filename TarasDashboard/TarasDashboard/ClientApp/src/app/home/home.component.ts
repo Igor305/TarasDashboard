@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.check = 4;
 
     setInterval(()=> this.getSale(),10000);
-    //setInterval(()=> this.getCheck(),20000);
+    setInterval(()=> this.getCheck(),20000);
 
     await this.getSale();
   }
