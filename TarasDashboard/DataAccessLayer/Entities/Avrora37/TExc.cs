@@ -52,5 +52,7 @@ namespace DataAccessLayer
         public string Shipmentaccountable { get; set; }
         public DateTime? CheckQa { get; set; }
         public DateTime? PrintDate { get; set; }
+        public int? DocIdwms { get; set; }
+        public DateTime? DocDateWms { get; set; }
     }
 }

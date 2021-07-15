@@ -43,5 +43,7 @@ namespace DataAccessLayer
         public string ContainerNumber { get; set; }
         public int Customer { get; set; }
         public DateTime? CheckQualityDate { get; set; }
+        public int? DocIdwms { get; set; }
+        public DateTime? DocDateWms { get; set; }
     }
 }

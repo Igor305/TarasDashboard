@@ -141,7 +141,53 @@
 </div>
 
 <div *ngIf="(check == 4)">
-    FFFFFF
+
+    <div class = 'w'>   
+    <ngx-charts-bar-vertical
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="diagramModels"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+    </div>
+
+    <table mat-table [dataSource]="saleHistoryModels" class = 'table'>
+        <ng-container matColumnDef="dates">
+            <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Дата </th>
+            <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.dateString}} </td>
+        </ng-container>
+        <ng-container matColumnDef="stocksQty">
+            <th mat-header-cell *matHeaderCellDef class = "thStatistic"> К-во ТТ </th>
+            <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.stocksQty}} </td>
+        </ng-container>
+        <ng-container matColumnDef="chainPlanDay">
+            <th mat-header-cell *matHeaderCellDef class = "thStatistic"> План выручки </th>
+            <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.chainPlanDay}} </td>
+        </ng-container>
+        <ng-container matColumnDef="chainFactDay">
+            <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Факт выручки </th>
+            <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.chainFactDay}} </td>
+        </ng-container>
+        <ng-container matColumnDef="executionPlanDayPercent">
+            <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Выполнение, % </th>
+            <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.executionPlanDayPercent}} %</td>
+        </ng-container>
+        <ng-container matColumnDef="executionPlanDayUah">
+            <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Выполнение, грн </th>
+            <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.executionPlanDayUah}} </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsHistory"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: displayedColumnsHistory"></tr>
+    </table>
 </div>
 
 <div class="flex-footer">

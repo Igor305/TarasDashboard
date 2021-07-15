@@ -1,5 +1,7 @@
-﻿using DataAccessLayer.Entities;
+﻿using System;
+using DataAccessLayer.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -201,6 +203,8 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<ChRangeValue> ChRangeValues { get; set; }
         public virtual DbSet<CkzMonitoringDatum> CkzMonitoringData { get; set; }
         public virtual DbSet<CountProd> CountProds { get; set; }
+        public virtual DbSet<DelPinp> DelPinps { get; set; }
+        public virtual DbSet<ExecutionPlanDateHistory> ExecutionPlanDateHistories { get; set; }
         public virtual DbSet<HpFilter> HpFilters { get; set; }
         public virtual DbSet<HpGroup> HpGroups { get; set; }
         public virtual DbSet<HpImport> HpImports { get; set; }
@@ -218,6 +222,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<ImRegisterQa> ImRegisterQas { get; set; }
         public virtual DbSet<IrAm> IrAms { get; set; }
         public virtual DbSet<IrAmd> IrAmds { get; set; }
+        public virtual DbSet<IrBrend> IrBrends { get; set; }
         public virtual DbSet<IrCentralWarehouse> IrCentralWarehouses { get; set; }
         public virtual DbSet<IrChildStock> IrChildStocks { get; set; }
         public virtual DbSet<IrCity> IrCitys { get; set; }
@@ -323,6 +328,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<ItOrdProdsRnd> ItOrdProdsRnds { get; set; }
         public virtual DbSet<ItParishJournal> ItParishJournals { get; set; }
         public virtual DbSet<ItParishJournalD> ItParishJournalDs { get; set; }
+        public virtual DbSet<ItPercentDeliveryHistory> ItPercentDeliveryHistories { get; set; }
         public virtual DbSet<ItPlanSaleStockOnDate> ItPlanSaleStockOnDates { get; set; }
         public virtual DbSet<ItPlanSaleStockOnDateD> ItPlanSaleStockOnDateDs { get; set; }
         public virtual DbSet<ItPrintUserBarcode> ItPrintUserBarcodes { get; set; }
@@ -371,6 +377,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<ItWorkTimeD> ItWorkTimeDs { get; set; }
         public virtual DbSet<ItWtime> ItWtimes { get; set; }
         public virtual DbSet<ItWtimeD> ItWtimeDs { get; set; }
+        public virtual DbSet<ItXRep> ItXReps { get; set; }
         public virtual DbSet<IvAccUser> IvAccUsers { get; set; }
         public virtual DbSet<IvAllrateBasePgrId> IvAllrateBasePgrIds { get; set; }
         public virtual DbSet<IvAllrateBasis> IvAllrateBases { get; set; }
@@ -408,6 +415,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<IvRevaluationPlanning> IvRevaluationPlannings { get; set; }
         public virtual DbSet<IvRlog> IvRlogs { get; set; }
         public virtual DbSet<IvSumbonu> IvSumbonus { get; set; }
+        public virtual DbSet<JobError> JobErrors { get; set; }
         public virtual DbSet<Ost> Osts { get; set; }
         public virtual DbSet<Ost201712> Ost201712s { get; set; }
         public virtual DbSet<Ost201801> Ost201801s { get; set; }
@@ -732,6 +740,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<RWrkType> RWrkTypes { get; set; }
         public virtual DbSet<RWtsign> RWtsigns { get; set; }
         public virtual DbSet<RWweek> RWweeks { get; set; }
+        public virtual DbSet<RemDd> RemDds { get; set; }
         public virtual DbSet<Round> Rounds { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<Sale1> Sales1 { get; set; }
@@ -765,6 +774,10 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<TCrretD> TCrretDs { get; set; }
         public virtual DbSet<TCrretDlv> TCrretDlvs { get; set; }
         public virtual DbSet<TCrretPay> TCrretPays { get; set; }
+        public virtual DbSet<TCrretShadow> TCrretShadows { get; set; }
+        public virtual DbSet<TCrretShadowD> TCrretShadowDs { get; set; }
+        public virtual DbSet<TCrretShadowDlv> TCrretShadowDlvs { get; set; }
+        public virtual DbSet<TCrretShadowPay> TCrretShadowPays { get; set; }
         public virtual DbSet<TCst> TCsts { get; set; }
         public virtual DbSet<TCst1> TCsts1 { get; set; }
         public virtual DbSet<TCst2> TCst2s { get; set; }
@@ -850,11 +863,10 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<TRecSpend> TRecSpends { get; set; }
         public virtual DbSet<TRem> TRems { get; set; }
         public virtual DbSet<TRem1> TRems1 { get; set; }
-        public virtual DbSet<TRemD13> TRemDs13 { get; set; }
         public virtual DbSet<TRemD1c> TRemD1cs { get; set; }
+        public virtual DbSet<TRemD9> TRemDs9 { get; set; }
         public virtual DbSet<TRemDBe> TRemDBes { get; set; }
         public virtual DbSet<TRemDCompare> TRemDCompares { get; set; }
-        public virtual DbSet<TRemDDashBoard> TRemDDashBoards { get; set; }
         public virtual DbSet<TRemDStatic> TRemDStatics { get; set; }
         public virtual DbSet<TRemDStaticD> TRemDStaticDs { get; set; }
         public virtual DbSet<TRemDStaticH> TRemDStaticHes { get; set; }
@@ -882,9 +894,6 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<TRemResPp> TRemResPps { get; set; }
         public virtual DbSet<TRemd> TRemds { get; set; }
         public virtual DbSet<TRemd1> TRemds1 { get; set; }
-        public virtual DbSet<TRemd10> TRemds10 { get; set; }
-        public virtual DbSet<TRemd11> TRemds11 { get; set; }
-        public virtual DbSet<TRemd12> TRemds12 { get; set; }
         public virtual DbSet<TRemd2> TRemds2 { get; set; }
         public virtual DbSet<TRemd3> TRemds3 { get; set; }
         public virtual DbSet<TRemd4> TRemds4 { get; set; }
@@ -892,9 +901,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<TRemd6> TRemds6 { get; set; }
         public virtual DbSet<TRemd7> TRemds7 { get; set; }
         public virtual DbSet<TRemd8> TRemds8 { get; set; }
-        public virtual DbSet<TRemd9> TRemds9 { get; set; }
         public virtual DbSet<TRemdAnalytic> TRemdAnalytics { get; set; }
-        public virtual DbSet<TRemdAnalytic1> TRemdAnalytics1 { get; set; }
         public virtual DbSet<TRemdRevizor> TRemdRevizors { get; set; }
         public virtual DbSet<TRemdRudenko> TRemdRudenkos { get; set; }
         public virtual DbSet<TReplicaVen> TReplicaVens { get; set; }
@@ -914,6 +921,12 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<TSaleDlv> TSaleDlvs { get; set; }
         public virtual DbSet<TSaleM> TSaleMs { get; set; }
         public virtual DbSet<TSalePay> TSalePays { get; set; }
+        public virtual DbSet<TSaleShadow> TSaleShadows { get; set; }
+        public virtual DbSet<TSaleShadowC> TSaleShadowCs { get; set; }
+        public virtual DbSet<TSaleShadowD> TSaleShadowDs { get; set; }
+        public virtual DbSet<TSaleShadowDlv> TSaleShadowDlvs { get; set; }
+        public virtual DbSet<TSaleShadowM> TSaleShadowMs { get; set; }
+        public virtual DbSet<TSaleShadowPay> TSaleShadowPays { get; set; }
         public virtual DbSet<TSaleTemp> TSaleTemps { get; set; }
         public virtual DbSet<TSaleTempD> TSaleTempDs { get; set; }
         public virtual DbSet<TSaleTempM> TSaleTempMs { get; set; }
@@ -973,6 +986,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<TempLogDiscRec> TempLogDiscRecs { get; set; }
         public virtual DbSet<TempRProd> TempRProds { get; set; }
         public virtual DbSet<TempRem> TempRems { get; set; }
+        public virtual DbSet<TempRemd206> TempRemd206s { get; set; }
         public virtual DbSet<TempSaled405> TempSaled405s { get; set; }
         public virtual DbSet<TempStocksRudenko> TempStocksRudenkos { get; set; }
         public virtual DbSet<TempTsale> TempTsales { get; set; }
@@ -984,6 +998,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<TempZLogDiscRecDcardchid> TempZLogDiscRecDcardchids { get; set; }
         public virtual DbSet<TempZLogdiscexp> TempZLogdiscexps { get; set; }
         public virtual DbSet<TempZLogdiscrec> TempZLogdiscrecs { get; set; }
+        public virtual DbSet<TempreportUnitBalancefrom06> TempreportUnitBalancefrom06s { get; set; }
         public virtual DbSet<Tempt> Tempts { get; set; }
         public virtual DbSet<Test13> Test13s { get; set; }
         public virtual DbSet<TestTable> TestTables { get; set; }
@@ -1071,6 +1086,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<ZDoc> ZDocs { get; set; }
         public virtual DbSet<ZDocCat> ZDocCats { get; set; }
         public virtual DbSet<ZDocDc> ZDocDcs { get; set; }
+        public virtual DbSet<ZDocDcshadow> ZDocDcshadows { get; set; }
         public virtual DbSet<ZDocForm> ZDocForms { get; set; }
         public virtual DbSet<ZDocGrp> ZDocGrps { get; set; }
         public virtual DbSet<ZDocLink> ZDocLinks { get; set; }
@@ -1091,6 +1107,7 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<ZFrudfrd> ZFrudfrds { get; set; }
         public virtual DbSet<ZInAcc> ZInAccs { get; set; }
         public virtual DbSet<ZLicense> ZLicenses { get; set; }
+        public virtual DbSet<ZLogAmProd> ZLogAmProds { get; set; }
         public virtual DbSet<ZLogAu> ZLogAus { get; set; }
         public virtual DbSet<ZLogBaseRate> ZLogBaseRates { get; set; }
         public virtual DbSet<ZLogCalcDisDd> ZLogCalcDisDds { get; set; }
@@ -1102,7 +1119,9 @@ namespace DataAccessLayer.AppContext
         public virtual DbSet<ZLogDisExc> ZLogDisExcs { get; set; }
         public virtual DbSet<ZLogDiscExp> ZLogDiscExps { get; set; }
         public virtual DbSet<ZLogDiscExpP> ZLogDiscExpPs { get; set; }
+        public virtual DbSet<ZLogDiscExpShadow> ZLogDiscExpShadows { get; set; }
         public virtual DbSet<ZLogDiscRec> ZLogDiscRecs { get; set; }
+        public virtual DbSet<ZLogDiscRecShadow> ZLogDiscRecShadows { get; set; }
         public virtual DbSet<ZLogDiscRecTemp> ZLogDiscRecTemps { get; set; }
         public virtual DbSet<ZLogEotwrite> ZLogEotwrites { get; set; }
         public virtual DbSet<ZLogEowrite> ZLogEowrites { get; set; }
@@ -16200,6 +16219,47 @@ namespace DataAccessLayer.AppContext
                     .HasColumnName("summ");
             });
 
+            modelBuilder.Entity<DelPinp>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("del_pinp", "dbo");
+
+                entity.Property(e => e.Newppid).HasColumnName("newppid");
+
+                entity.Property(e => e.Prodid).HasColumnName("prodid");
+            });
+
+            modelBuilder.Entity<ExecutionPlanDateHistory>(entity =>
+            {
+                entity.HasKey(e => e.Dates)
+                    .HasName("PK__Executio__BFFD859286F63F4B");
+
+                entity.ToTable("ExecutionPlanDate_History", "dbo");
+
+                entity.Property(e => e.Dates).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.ChainFactDay).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.ChainFactToDate).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.ChainPlanDay).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.ChainPlanToDate).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.ExecutionPlanDayPercent).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.ExecutionPlanDayUah)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("ExecutionPlanDayUAH");
+
+                entity.Property(e => e.ExecutionPlanToDatePercent).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.ExecutionPlanToDateUah)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("ExecutionPlanToDateUAH");
+            });
+
             modelBuilder.Entity<HpFilter>(entity =>
             {
                 entity.ToTable("hp_Filters", "dbo");
@@ -16544,6 +16604,33 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.NormRate).HasColumnType("numeric(21, 9)");
 
                 entity.Property(e => e.RnTo).HasColumnType("numeric(21, 9)");
+            });
+
+            modelBuilder.Entity<IrBrend>(entity =>
+            {
+                entity.HasKey(e => e.BrendId)
+                    .HasName("pk_ir_Brends");
+
+                entity.ToTable("ir_Brends", "dbo");
+
+                entity.HasIndex(e => e.BrendName, "BrendID")
+                    .IsUnique()
+                    .HasFillFactor((byte)100);
+
+                entity.HasIndex(e => e.ChId, "ChID")
+                    .IsUnique()
+                    .HasFillFactor((byte)100);
+
+                entity.Property(e => e.BrendId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("BrendID");
+
+                entity.Property(e => e.BrendName)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
             });
 
             modelBuilder.Entity<IrCentralWarehouse>(entity =>
@@ -20704,6 +20791,20 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.Weight1).HasColumnType("numeric(21, 9)");
             });
 
+            modelBuilder.Entity<ItPercentDeliveryHistory>(entity =>
+            {
+                entity.HasKey(e => e.OnDate)
+                    .HasName("PK_PercentDelivery_History");
+
+                entity.ToTable("it_PercentDelivery_History", "dbo");
+
+                entity.Property(e => e.OnDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.Delivery)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("% Delivery");
+            });
+
             modelBuilder.Entity<ItPlanSaleStockOnDate>(entity =>
             {
                 entity.HasKey(e => e.ChId)
@@ -21050,6 +21151,10 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.FempId).HasColumnName("FEmpID");
 
                 entity.Property(e => e.FillingDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.MakeProdDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.ProdExpQty).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.ProdId).HasColumnName("ProdID");
 
@@ -22315,7 +22420,6 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
 
                 entity.Property(e => e.Barcode)
-                    .IsRequired()
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
@@ -22330,7 +22434,6 @@ namespace DataAccessLayer.AppContext
                     .HasColumnName("TNewSumCC_nt");
 
                 entity.Property(e => e.Um)
-                    .IsRequired()
                     .HasMaxLength(250)
                     .IsUnicode(false)
                     .HasColumnName("UM");
@@ -22594,6 +22697,79 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.Wrate)
                     .HasColumnType("numeric(21, 9)")
                     .HasColumnName("WRate");
+            });
+
+            modelBuilder.Entity<ItXRep>(entity =>
+            {
+                entity.HasKey(e => e.ChId)
+                    .HasName("pk_it_xRep")
+                    .IsClustered(false);
+
+                entity.ToTable("it_xRep", "dbo");
+
+                entity.Property(e => e.ChId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ChID");
+
+                entity.Property(e => e.Crid).HasColumnName("CRID");
+
+                entity.Property(e => e.DocDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.DocId).HasColumnName("DocID");
+
+                entity.Property(e => e.DocTime).HasColumnType("datetime");
+
+                entity.Property(e => e.FacId)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("FacID");
+
+                entity.Property(e => e.FinId)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("FinID");
+
+                entity.Property(e => e.Notes)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OperId).HasColumnName("OperID");
+
+                entity.Property(e => e.OurId).HasColumnName("OurID");
+
+                entity.Property(e => e.RetSumCard).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.RetSumCash).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.RetSumCheque).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.RetSumCredit).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.RetSumOther).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumCard).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumCash).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_wt");
+
+                entity.Property(e => e.SumCheque).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumCredit).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumMonExp).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumMonRec).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumOther).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumRem)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasDefaultValueSql("((0))");
             });
 
             modelBuilder.Entity<IvAccUser>(entity =>
@@ -25352,6 +25528,46 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.PersonId).HasColumnName("PersonID");
 
                 entity.Property(e => e.SumBonus).HasColumnType("numeric(21, 9)");
+            });
+
+            modelBuilder.Entity<JobError>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("JobErrors", "dbo");
+
+                entity.Property(e => e.JobName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Job_Name");
+
+                entity.Property(e => e.Message)
+                    .HasMaxLength(7000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RunDate)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("Run_date");
+
+                entity.Property(e => e.RunTime)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("Run_time");
+
+                entity.Property(e => e.Server)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StepName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Step_name");
             });
 
             modelBuilder.Entity<Ost>(entity =>
@@ -39066,6 +39282,10 @@ namespace DataAccessLayer.AppContext
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
+                entity.Property(e => e.BrendId)
+                    .HasColumnName("BrendID")
+                    .HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Capacity)
                     .HasColumnType("numeric(21, 9)")
                     .HasDefaultValueSql("((0))");
@@ -39321,6 +39541,10 @@ namespace DataAccessLayer.AppContext
                     .IsUnicode(false);
 
                 entity.Property(e => e.TaxTypeId).HasColumnName("TaxTypeID");
+
+                entity.Property(e => e.TrackWms)
+                    .HasColumnName("TrackWMS")
+                    .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.TypeTreatment).HasDefaultValueSql("((0))");
 
@@ -41481,6 +41705,10 @@ namespace DataAccessLayer.AppContext
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.ApiServerParams)
+                    .HasMaxLength(4000)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.AskDcardsAfterOpen).HasColumnName("AskDCardsAfterOpen");
 
                 entity.Property(e => e.AskDcardsBeforeClose)
@@ -41894,6 +42122,27 @@ namespace DataAccessLayer.AppContext
                     .HasMaxLength(200)
                     .IsUnicode(false)
                     .HasColumnName("WWeekName");
+            });
+
+            modelBuilder.Entity<RemDd>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("RemDD", "dbo");
+
+                entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.OurId).HasColumnName("OurID");
+
+                entity.Property(e => e.Ppid).HasColumnName("PPID");
+
+                entity.Property(e => e.ProdId).HasColumnName("ProdID");
+
+                entity.Property(e => e.Qty).HasColumnType("numeric(38, 9)");
+
+                entity.Property(e => e.SecId).HasColumnName("SecID");
+
+                entity.Property(e => e.StockId).HasColumnName("StockID");
             });
 
             modelBuilder.Entity<Round>(entity =>
@@ -43496,6 +43745,230 @@ namespace DataAccessLayer.AppContext
                 entity.HasIndex(e => new { e.ChId, e.PayFormCode, e.SumCcWt }, "ChID_PayFormCode_SumCC_wt");
 
                 entity.HasIndex(e => e.SrcPosId, "ix_4Az_t_CRRetPays_SrcPosID_included");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.BservId).HasColumnName("BServID");
+
+                entity.Property(e => e.ChequeText)
+                    .HasMaxLength(8000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Notes)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PospayDocId).HasColumnName("POSPayDocID");
+
+                entity.Property(e => e.PospayId).HasColumnName("POSPayID");
+
+                entity.Property(e => e.PospayRrn)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("POSPayRRN");
+
+                entity.Property(e => e.PospayText)
+                    .HasMaxLength(8000)
+                    .IsUnicode(false)
+                    .HasColumnName("POSPayText");
+
+                entity.Property(e => e.SrcPayPosId).HasColumnName("SrcPayPosID");
+
+                entity.Property(e => e.SumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_wt");
+            });
+
+            modelBuilder.Entity<TCrretShadow>(entity =>
+            {
+                entity.HasKey(e => e.ChId)
+                    .HasName("pk_t_CRRetShadow")
+                    .IsClustered(false);
+
+                entity.ToTable("t_CRRetShadow", "dbo");
+
+                entity.Property(e => e.ChId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ChID");
+
+                entity.Property(e => e.CodeId1).HasColumnName("CodeID1");
+
+                entity.Property(e => e.CodeId2).HasColumnName("CodeID2");
+
+                entity.Property(e => e.CodeId3).HasColumnName("CodeID3");
+
+                entity.Property(e => e.CodeId4).HasColumnName("CodeID4");
+
+                entity.Property(e => e.CodeId5).HasColumnName("CodeID5");
+
+                entity.Property(e => e.CompId).HasColumnName("CompID");
+
+                entity.Property(e => e.CreditId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("CreditID");
+
+                entity.Property(e => e.Crid).HasColumnName("CRID");
+
+                entity.Property(e => e.CurrId).HasColumnName("CurrID");
+
+                entity.Property(e => e.DcardChId).HasColumnName("DCardChID");
+
+                entity.Property(e => e.Discount).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.DocDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.DocId).HasColumnName("DocID");
+
+                entity.Property(e => e.DocTime).HasColumnType("datetime");
+
+                entity.Property(e => e.EmpId).HasColumnName("EmpID");
+
+                entity.Property(e => e.IntDocId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("IntDocID");
+
+                entity.Property(e => e.KursMc)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("KursMC");
+
+                entity.Property(e => e.Notes)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OperId).HasColumnName("OperID");
+
+                entity.Property(e => e.OurId).HasColumnName("OurID");
+
+                entity.Property(e => e.SrcDocDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.SrcDocId)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("SrcDocID");
+
+                entity.Property(e => e.StockId).HasColumnName("StockID");
+
+                entity.Property(e => e.TlevySum)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TLevySum");
+
+                entity.Property(e => e.TrealSum)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TRealSum");
+
+                entity.Property(e => e.TsumCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TSumCC_nt");
+
+                entity.Property(e => e.TsumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TSumCC_wt");
+
+                entity.Property(e => e.TtaxSum)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TTaxSum");
+
+                entity.Property(e => e.Wpid).HasColumnName("WPID");
+            });
+
+            modelBuilder.Entity<TCrretShadowD>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.SrcPosId })
+                    .HasName("pk_t_CRRetShadowD")
+                    .IsClustered(false);
+
+                entity.ToTable("t_CRRetShadowD", "dbo");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.BarCode)
+                    .IsRequired()
+                    .HasMaxLength(42)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreasonId).HasColumnName("CReasonID");
+
+                entity.Property(e => e.CreateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.EmpId).HasColumnName("EmpID");
+
+                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+
+                entity.Property(e => e.NewQty).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.Ppid).HasColumnName("PPID");
+
+                entity.Property(e => e.PriceCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("PriceCC_nt");
+
+                entity.Property(e => e.PriceCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("PriceCC_wt");
+
+                entity.Property(e => e.ProdId).HasColumnName("ProdID");
+
+                entity.Property(e => e.Qty).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.RealPrice).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.RealSum).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SaleSrcPosId).HasColumnName("SaleSrcPosID");
+
+                entity.Property(e => e.SecId).HasColumnName("SecID");
+
+                entity.Property(e => e.SumCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_nt");
+
+                entity.Property(e => e.SumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_wt");
+
+                entity.Property(e => e.Tax).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.TaxSum).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.TaxTypeId).HasColumnName("TaxTypeID");
+
+                entity.Property(e => e.Um)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("UM");
+            });
+
+            modelBuilder.Entity<TCrretShadowDlv>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.SrcPosId })
+                    .HasName("pk_t_CRRetShadowDLV")
+                    .IsClustered(false);
+
+                entity.ToTable("t_CRRetShadowDLV", "dbo");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.LevyId).HasColumnName("LevyID");
+
+                entity.Property(e => e.LevySum).HasColumnType("numeric(21, 9)");
+            });
+
+            modelBuilder.Entity<TCrretShadowPay>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.SrcPosId })
+                    .HasName("pk_t_CRRetShadowPays")
+                    .IsClustered(false);
+
+                entity.ToTable("t_CRRetShadowPays", "dbo");
 
                 entity.Property(e => e.ChId).HasColumnName("ChID");
 
@@ -45198,6 +45671,8 @@ namespace DataAccessLayer.AppContext
                     .HasColumnName("CurrID")
                     .HasDefaultValueSql("((980))");
 
+                entity.Property(e => e.Eodays).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Eoqty)
                     .HasColumnType("numeric(21, 9)")
                     .HasColumnName("EOQty");
@@ -46496,7 +46971,15 @@ namespace DataAccessLayer.AppContext
 
                 entity.Property(e => e.DocDate).HasColumnType("smalldatetime");
 
+                entity.Property(e => e.DocDateWms)
+                    .HasColumnType("datetime")
+                    .HasColumnName("DocDateWMS");
+
                 entity.Property(e => e.DocId).HasColumnName("DocID");
+
+                entity.Property(e => e.DocIdwms)
+                    .HasColumnName("DocIDWMS")
+                    .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.EmpId).HasColumnName("EmpID");
 
@@ -49052,7 +49535,13 @@ namespace DataAccessLayer.AppContext
 
                 entity.Property(e => e.DocDate).HasColumnType("smalldatetime");
 
+                entity.Property(e => e.DocDateWms)
+                    .HasColumnType("datetime")
+                    .HasColumnName("DocDateWMS");
+
                 entity.Property(e => e.DocId).HasColumnName("DocID");
+
+                entity.Property(e => e.DocIdwms).HasColumnName("DocIDWMS");
 
                 entity.Property(e => e.Edate)
                     .HasColumnType("smalldatetime")
@@ -49163,9 +49652,20 @@ namespace DataAccessLayer.AppContext
 
                 entity.Property(e => e.CurrId).HasColumnName("CurrID");
 
+                entity.Property(e => e.CustomerName)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.DocDate).HasColumnType("smalldatetime");
 
+                entity.Property(e => e.DocDateWms)
+                    .HasColumnType("datetime")
+                    .HasColumnName("DocDateWMS");
+
                 entity.Property(e => e.DocId).HasColumnName("DocID");
+
+                entity.Property(e => e.DocIdwms).HasColumnName("DocIDWMS");
 
                 entity.Property(e => e.Edate)
                     .HasColumnType("smalldatetime")
@@ -49287,6 +49787,11 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.ExPlanQty).HasColumnType("numeric(21, 9)");
 
                 entity.Property(e => e.Extra).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.FactQtyWms)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("FactQtyWMS")
+                    .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.FinishDate).HasColumnType("smalldatetime");
 
@@ -49474,7 +49979,26 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.Qty).HasColumnType("numeric(21, 9)");
             });
 
-            modelBuilder.Entity<TRemD13>(entity =>
+            modelBuilder.Entity<TRemD1c>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("t_RemD1C", "dbo");
+
+                entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.OurId).HasColumnName("OurID");
+
+                entity.Property(e => e.Ppid).HasColumnName("PPID");
+
+                entity.Property(e => e.ProdId).HasColumnName("ProdID");
+
+                entity.Property(e => e.Qty).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.StockId).HasColumnName("StockID");
+            });
+
+            modelBuilder.Entity<TRemD9>(entity =>
             {
                 entity.HasNoKey();
 
@@ -49492,25 +50016,6 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.Qty)
                     .HasColumnType("numeric(21, 9)")
                     .HasColumnName("qty");
-
-                entity.Property(e => e.StockId).HasColumnName("StockID");
-            });
-
-            modelBuilder.Entity<TRemD1c>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("t_RemD1C", "dbo");
-
-                entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
-
-                entity.Property(e => e.OurId).HasColumnName("OurID");
-
-                entity.Property(e => e.Ppid).HasColumnName("PPID");
-
-                entity.Property(e => e.ProdId).HasColumnName("ProdID");
-
-                entity.Property(e => e.Qty).HasColumnType("numeric(21, 9)");
 
                 entity.Property(e => e.StockId).HasColumnName("StockID");
             });
@@ -49550,21 +50055,6 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.Qty).HasColumnType("numeric(38, 9)");
 
                 entity.Property(e => e.SecId).HasColumnName("SecID");
-
-                entity.Property(e => e.StockId).HasColumnName("StockID");
-            });
-
-            modelBuilder.Entity<TRemDDashBoard>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("t_RemD_DashBoard", "dbo");
-
-                entity.Property(e => e.Ppid).HasColumnName("PPID");
-
-                entity.Property(e => e.ProdId).HasColumnName("ProdID");
-
-                entity.Property(e => e.Qty).HasColumnType("numeric(38, 9)");
 
                 entity.Property(e => e.StockId).HasColumnName("StockID");
             });
@@ -50806,7 +51296,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "AVRORA\\A.Deriy");
+                entity.ToTable("t_remd", "AVRORA\\A.Khamraeva");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -50827,70 +51317,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "AVRORA\\A.Kyiko");
-
-                entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
-
-                entity.Property(e => e.OurId).HasColumnName("OurID");
-
-                entity.Property(e => e.Ppid).HasColumnName("PPID");
-
-                entity.Property(e => e.ProdId).HasColumnName("ProdID");
-
-                entity.Property(e => e.Qty).HasColumnType("numeric(38, 9)");
-
-                entity.Property(e => e.SecId).HasColumnName("SecID");
-
-                entity.Property(e => e.StockId).HasColumnName("StockID");
-            });
-
-            modelBuilder.Entity<TRemd10>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("t_remd", "AVRORA\\O.Lysenko");
-
-                entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
-
-                entity.Property(e => e.OurId).HasColumnName("OurID");
-
-                entity.Property(e => e.Ppid).HasColumnName("PPID");
-
-                entity.Property(e => e.ProdId).HasColumnName("ProdID");
-
-                entity.Property(e => e.Qty).HasColumnType("numeric(38, 9)");
-
-                entity.Property(e => e.SecId).HasColumnName("SecID");
-
-                entity.Property(e => e.StockId).HasColumnName("StockID");
-            });
-
-            modelBuilder.Entity<TRemd11>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("t_remd", "AVRORA\\V.Shabliy");
-
-                entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
-
-                entity.Property(e => e.OurId).HasColumnName("OurID");
-
-                entity.Property(e => e.Ppid).HasColumnName("PPID");
-
-                entity.Property(e => e.ProdId).HasColumnName("ProdID");
-
-                entity.Property(e => e.Qty).HasColumnType("numeric(38, 9)");
-
-                entity.Property(e => e.SecId).HasColumnName("SecID");
-
-                entity.Property(e => e.StockId).HasColumnName("StockID");
-            });
-
-            modelBuilder.Entity<TRemd12>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("t_remd", "dbo");
+                entity.ToTable("t_remd", "AVRORA\\A.Pysanka");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -50911,7 +51338,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "AVRORA\\A.Pysanka");
+                entity.ToTable("t_remd", "avrora\\e.volotkovskaya");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -50932,7 +51359,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "AVRORA\\E.Kropivko");
+                entity.ToTable("t_remd", "avrora\\i.surzhykov");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -50953,7 +51380,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "avrora\\e.volotkovskaya");
+                entity.ToTable("t_remd", "avrora\\l.trachuk");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -50974,7 +51401,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "AVRORA\\I.Hupsirgenov");
+                entity.ToTable("t_remd", "AVRORA\\N.Chayun");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -50995,7 +51422,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "avrora\\l.trachuk");
+                entity.ToTable("t_remd", "AVRORA\\O.Lysenko");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -51016,7 +51443,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "avrora\\m.vlasenko1");
+                entity.ToTable("t_remd", "AVRORA\\O.Maslak");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -51037,28 +51464,7 @@ namespace DataAccessLayer.AppContext
             {
                 entity.HasNoKey();
 
-                entity.ToTable("t_remd", "AVRORA\\N.Chayun");
-
-                entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
-
-                entity.Property(e => e.OurId).HasColumnName("OurID");
-
-                entity.Property(e => e.Ppid).HasColumnName("PPID");
-
-                entity.Property(e => e.ProdId).HasColumnName("ProdID");
-
-                entity.Property(e => e.Qty).HasColumnType("numeric(38, 9)");
-
-                entity.Property(e => e.SecId).HasColumnName("SecID");
-
-                entity.Property(e => e.StockId).HasColumnName("StockID");
-            });
-
-            modelBuilder.Entity<TRemd9>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("t_remd", "AVRORA\\n.demchenko");
+                entity.ToTable("t_remd", "dbo");
 
                 entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
 
@@ -51076,27 +51482,6 @@ namespace DataAccessLayer.AppContext
             });
 
             modelBuilder.Entity<TRemdAnalytic>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("t_remd_analytic", "AVRORA\\A.Belenko");
-
-                entity.Property(e => e.AccQty).HasColumnType("numeric(21, 9)");
-
-                entity.Property(e => e.OurId).HasColumnName("OurID");
-
-                entity.Property(e => e.Ppid).HasColumnName("PPID");
-
-                entity.Property(e => e.ProdId).HasColumnName("ProdID");
-
-                entity.Property(e => e.Qty).HasColumnType("numeric(38, 9)");
-
-                entity.Property(e => e.SecId).HasColumnName("SecID");
-
-                entity.Property(e => e.StockId).HasColumnName("StockID");
-            });
-
-            modelBuilder.Entity<TRemdAnalytic1>(entity =>
             {
                 entity.HasNoKey();
 
@@ -52001,6 +52386,326 @@ namespace DataAccessLayer.AppContext
                 entity.ToTable("t_SalePays", "dbo");
 
                 entity.HasIndex(e => new { e.ChId, e.PayFormCode, e.SumCcWt }, "ChID_PayFormCode_SumCC_wt");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.BservId).HasColumnName("BServID");
+
+                entity.Property(e => e.ChequeText)
+                    .HasMaxLength(8000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContractNo)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Notes)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PospayDocId).HasColumnName("POSPayDocID");
+
+                entity.Property(e => e.PospayId).HasColumnName("POSPayID");
+
+                entity.Property(e => e.PospayRrn)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("POSPayRRN");
+
+                entity.Property(e => e.PospayText)
+                    .HasMaxLength(8000)
+                    .IsUnicode(false)
+                    .HasColumnName("POSPayText");
+
+                entity.Property(e => e.SumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_wt");
+            });
+
+            modelBuilder.Entity<TSaleShadow>(entity =>
+            {
+                entity.HasKey(e => e.ChId)
+                    .HasName("pk_t_SaleShadow")
+                    .IsClustered(false);
+
+                entity.ToTable("t_SaleShadow", "dbo");
+
+                entity.Property(e => e.ChId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ChID");
+
+                entity.Property(e => e.CashSumCc)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("CashSumCC");
+
+                entity.Property(e => e.ChangeSumCc)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("ChangeSumCC");
+
+                entity.Property(e => e.CodeId1).HasColumnName("CodeID1");
+
+                entity.Property(e => e.CodeId2).HasColumnName("CodeID2");
+
+                entity.Property(e => e.CodeId3).HasColumnName("CodeID3");
+
+                entity.Property(e => e.CodeId4).HasColumnName("CodeID4");
+
+                entity.Property(e => e.CodeId5).HasColumnName("CodeID5");
+
+                entity.Property(e => e.CompId).HasColumnName("CompID");
+
+                entity.Property(e => e.CreditId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("CreditID");
+
+                entity.Property(e => e.Crid).HasColumnName("CRID");
+
+                entity.Property(e => e.CurrId).HasColumnName("CurrID");
+
+                entity.Property(e => e.DcardChId).HasColumnName("DCardChID");
+
+                entity.Property(e => e.Discount).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.DocCreateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.DocDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.DocId).HasColumnName("DocID");
+
+                entity.Property(e => e.DocTime).HasColumnType("datetime");
+
+                entity.Property(e => e.EmpId).HasColumnName("EmpID");
+
+                entity.Property(e => e.IntDocId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("IntDocID");
+
+                entity.Property(e => e.KursMc)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("KursMC");
+
+                entity.Property(e => e.Notes)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OperId).HasColumnName("OperID");
+
+                entity.Property(e => e.OurId).HasColumnName("OurID");
+
+                entity.Property(e => e.StockId).HasColumnName("StockID");
+
+                entity.Property(e => e.TlevySum)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TLevySum");
+
+                entity.Property(e => e.TpurSumCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TPurSumCC_nt");
+
+                entity.Property(e => e.TpurSumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TPurSumCC_wt");
+
+                entity.Property(e => e.TpurTaxSum)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TPurTaxSum");
+
+                entity.Property(e => e.TrealSum)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TRealSum");
+
+                entity.Property(e => e.TsumCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TSumCC_nt");
+
+                entity.Property(e => e.TsumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TSumCC_wt");
+
+                entity.Property(e => e.TtaxSum)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("TTaxSum");
+
+                entity.Property(e => e.Wpid).HasColumnName("WPID");
+            });
+
+            modelBuilder.Entity<TSaleShadowC>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.SrcPosId })
+                    .HasName("pk_t_SaleShadowC")
+                    .IsClustered(false);
+
+                entity.ToTable("t_SaleShadowC", "dbo");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.BarCode)
+                    .IsRequired()
+                    .HasMaxLength(42)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreasonId).HasColumnName("CReasonID");
+
+                entity.Property(e => e.CreateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.EmpId).HasColumnName("EmpID");
+
+                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+
+                entity.Property(e => e.PriceCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("PriceCC_nt");
+
+                entity.Property(e => e.PriceCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("PriceCC_wt");
+
+                entity.Property(e => e.ProdId).HasColumnName("ProdID");
+
+                entity.Property(e => e.Qty).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SumCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_nt");
+
+                entity.Property(e => e.SumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_wt");
+
+                entity.Property(e => e.Tax).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.TaxSum).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.Um)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("UM");
+            });
+
+            modelBuilder.Entity<TSaleShadowD>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.SrcPosId })
+                    .HasName("pk_t_SaleShadowD")
+                    .IsClustered(false);
+
+                entity.ToTable("t_SaleShadowD", "dbo");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.BarCode)
+                    .IsRequired()
+                    .HasMaxLength(42)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Discount).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.EmpId).HasColumnName("EmpID");
+
+                entity.Property(e => e.ModifyTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Plid).HasColumnName("PLID");
+
+                entity.Property(e => e.Ppid).HasColumnName("PPID");
+
+                entity.Property(e => e.PriceCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("PriceCC_nt");
+
+                entity.Property(e => e.PriceCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("PriceCC_wt");
+
+                entity.Property(e => e.ProdId).HasColumnName("ProdID");
+
+                entity.Property(e => e.PurPriceCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("PurPriceCC_nt");
+
+                entity.Property(e => e.PurPriceCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("PurPriceCC_wt");
+
+                entity.Property(e => e.PurTax).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.Qty).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.RealPrice).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.RealSum).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.SecId).HasColumnName("SecID");
+
+                entity.Property(e => e.SumCcNt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_nt");
+
+                entity.Property(e => e.SumCcWt)
+                    .HasColumnType("numeric(21, 9)")
+                    .HasColumnName("SumCC_wt");
+
+                entity.Property(e => e.Tax).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.TaxSum).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.TaxTypeId).HasColumnName("TaxTypeID");
+
+                entity.Property(e => e.Um)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("UM");
+            });
+
+            modelBuilder.Entity<TSaleShadowDlv>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.SrcPosId })
+                    .HasName("pk_t_SaleShadowDLV")
+                    .IsClustered(false);
+
+                entity.ToTable("t_SaleShadowDLV", "dbo");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.LevyId).HasColumnName("LevyID");
+
+                entity.Property(e => e.LevySum).HasColumnType("numeric(21, 9)");
+            });
+
+            modelBuilder.Entity<TSaleShadowM>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.ModCode, e.SrcPosId })
+                    .HasName("pk_t_SaleShadowM")
+                    .IsClustered(false);
+
+                entity.ToTable("t_SaleShadowM", "dbo");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.SaleSrcPosId).HasColumnName("SaleSrcPosID");
+            });
+
+            modelBuilder.Entity<TSaleShadowPay>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.SrcPosId })
+                    .HasName("pk_t_SaleShadowPays")
+                    .IsClustered(false);
+
+                entity.ToTable("t_SaleShadowPays", "dbo");
 
                 entity.Property(e => e.ChId).HasColumnName("ChID");
 
@@ -55796,6 +56501,19 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.Qty).HasColumnType("numeric(21, 9)");
             });
 
+            modelBuilder.Entity<TempRemd206>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("temp_remd206", "dbo");
+
+                entity.Property(e => e.Prodid).HasColumnName("prodid");
+
+                entity.Property(e => e.Qty)
+                    .HasColumnType("numeric(38, 9)")
+                    .HasColumnName("qty");
+            });
+
             modelBuilder.Entity<TempSaled405>(entity =>
             {
                 entity.HasNoKey();
@@ -56039,6 +56757,139 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
 
                 entity.Property(e => e.SumBonus).HasColumnType("numeric(21, 9)");
+            });
+
+            modelBuilder.Entity<TempreportUnitBalancefrom06>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("tempreportUnitBalancefrom06", "dbo");
+
+                entity.Property(e => e._21НеОбработанныеРаспределенияВсегоЮнитов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("2.1. Не обработанные распределения, Всего юнитов");
+
+                entity.Property(e => e._22НеОбработанныеРаспределенияЮнитовНаТт)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("2.2. Не обработанные распределения, Юнитов на ТТ");
+
+                entity.Property(e => e._23НеОбработанныеРаспределенияВсегоКВоАртикулов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("2.3. Не обработанные распределения, Всего к-во артикулов");
+
+                entity.Property(e => e._24НеОбработанныеРаспределенияКВоСтрокЗаказаНаТт)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("2.4. Не обработанные распределения, К-во строк заказа на ТТ");
+
+                entity.Property(e => e._25НеОбработанныеРаспределенияВсегоСуммаЦз)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("2.5. Не обработанные распределения, Всего сумма ЦЗ");
+
+                entity.Property(e => e._31ОбработаноВсегоЮнитовЗаСуткиС800До800)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("3.1. Обработано, Всего юнитов за сутки (с 8.00 до 8.00)");
+
+                entity.Property(e => e._32ОбработаноЮнитовНаТтЗаСуткиС800До800)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("3.2. Обработано, Юнитов на ТТ за сутки (с 8.00 до 8.00)");
+
+                entity.Property(e => e._33ОбработаноКВоАртикуловНаТтЗаСуткиС800До800)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("3.3. Обработано, К-во артикулов на ТТ за сутки (с 8.00 до 8.00)");
+
+                entity.Property(e => e._34ОбработаноКВоСтрокЗаказаНаТтЗаСуткиС800До800)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("3.4. Обработано, К-во строк заказа на ТТ за сутки (с 8.00 до 8.00)");
+
+                entity.Property(e => e._35ОбработаноВсегоСуммаЦзЗаСуткиС800До800)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("3.5. Обработано, Всего сумма ЦЗ за сутки (с 8.00 до 8.00)");
+
+                entity.Property(e => e._36ОбработаноСуммаЦзНаТтЗаСуткиС800До800)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("3.6. Обработано, Сумма ЦЗ на ТТ за сутки (с 8.00 до 8.00)");
+
+                entity.Property(e => e._51ОжидаемоеПоступлениеВсегоЮнитов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("5.1. Ожидаемое поступление, Всего юнитов");
+
+                entity.Property(e => e._52ОжидаемоеПоступлениеВсегоКВоАртикулов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("5.2. Ожидаемое поступление, Всего к-во артикулов");
+
+                entity.Property(e => e._53ОжидаемоеПоступлениеВсегоСуммаЦз)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("5.3. Ожидаемое поступление, Всего сумма ЦЗ");
+
+                entity.Property(e => e._61РаспределеноВсегоЮнитов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("6.1. Распределено, Всего юнитов");
+
+                entity.Property(e => e._62РаспределеноВсегоКВоАртикулов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("6.2. Распределено, Всего к-во артикулов");
+
+                entity.Property(e => e._63РаспределеноВсегоСуммаЦз)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("6.3. Распределено, Всего сумма ЦЗ");
+
+                entity.Property(e => e._71ФактическиПоступилоВсегоЮнитов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("7.1. Фактически поступило, Всего юнитов");
+
+                entity.Property(e => e._72ФактическиПоступилоВсегоКВоАртикулов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("7.2. Фактически поступило, Всего к-во артикулов");
+
+                entity.Property(e => e._73ФактическиПоступилоВсегоСуммаЦз)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("7.3. Фактически поступило, Всего сумма ЦЗ");
+
+                entity.Property(e => e._81НаСколькоДнейОбработкиТовараВсегоЮнитов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("8.1. На сколько дней обработки товара, Всего юнитов");
+
+                entity.Property(e => e._82НаСколькоДнейОбработкиТовараЮнитовНаТт)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("8.2. На сколько дней обработки товара, Юнитов на ТТ");
+
+                entity.Property(e => e._83НаСколькоДнейОбработкиТовараВсегоКВоАртикулов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("8.3. На сколько дней обработки товара, Всего к-во артикулов");
+
+                entity.Property(e => e._84НаСколькоДнейОбработкиТовараКВоСтрокЗаказаНаТт)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("8.4. На сколько дней обработки товара, К-во строк заказа на ТТ");
+
+                entity.Property(e => e._85НаСколькоДнейОбработкиТовараВсегоСуммаЦз)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("8.5. На сколько дней обработки товара, Всего сумма ЦЗ");
+
+                entity.Property(e => e._91СреднедневнаяОбработкаВсегоЮнитов)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("9.1. Среднедневная обработка, Всего юнитов");
+
+                entity.Property(e => e._92СреднедневнаяОбработкаЮнитовНаТт)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("9.2. Среднедневная обработка, Юнитов на ТТ");
+
+                entity.Property(e => e._93СреднедневнаяОбработкаКВоАртикуловНаТт)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("9.3. Среднедневная обработка, К-во артикулов на ТТ");
+
+                entity.Property(e => e._94СреднедневнаяОбработкаКВоСтрокЗаказаНаТт)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("9.4. Среднедневная обработка, К-во строк заказа на ТТ");
+
+                entity.Property(e => e._95СреднедневнаяОбработкаВсегоСуммаЦз)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("9.5. Среднедневная обработка, Всего сумма ЦЗ");
+
+                entity.Property(e => e._96СреднедневнаяОбработкаСуммаЦзНаТт)
+                    .HasColumnType("decimal(21, 9)")
+                    .HasColumnName("9.6. Среднедневная обработка, Сумма ЦЗ на ТТ");
+
+                entity.Property(e => e.Дата).HasColumnType("smalldatetime");
             });
 
             modelBuilder.Entity<Tempt>(entity =>
@@ -60537,6 +61388,19 @@ namespace DataAccessLayer.AppContext
                     .HasConstraintName("FK_z_DocDC_z_Docs");
             });
 
+            modelBuilder.Entity<ZDocDcshadow>(entity =>
+            {
+                entity.HasKey(e => new { e.ChId, e.DcardChId, e.DocCode })
+                    .HasName("pk_z_DocDCShadow")
+                    .IsClustered(false);
+
+                entity.ToTable("z_DocDCShadow", "dbo");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.DcardChId).HasColumnName("DCardChID");
+            });
+
             modelBuilder.Entity<ZDocForm>(entity =>
             {
                 entity.HasKey(e => new { e.DocCode, e.FormDesc })
@@ -61374,6 +62238,29 @@ namespace DataAccessLayer.AppContext
                 entity.Property(e => e.BlobValue).HasColumnType("image");
             });
 
+            modelBuilder.Entity<ZLogAmProd>(entity =>
+            {
+                entity.HasKey(e => e.LogId)
+                    .HasName("PK__z_log_AM__5E5499A87140F771");
+
+                entity.ToTable("z_log_AM_Prods", "dbo");
+
+                entity.Property(e => e.LogId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("LogID");
+
+                entity.Property(e => e.Amid).HasColumnName("AMID");
+
+                entity.Property(e => e.LogDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.ProdId).HasColumnName("ProdID");
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<ZLogAu>(entity =>
             {
                 entity.HasKey(e => e.LogId)
@@ -61580,7 +62467,9 @@ namespace DataAccessLayer.AppContext
 
                 entity.ToTable("z_logDimensions", "dbo");
 
-                entity.Property(e => e.LogId).HasColumnName("LogID");
+                entity.Property(e => e.LogId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("LogID");
 
                 entity.Property(e => e.DepthNew).HasColumnType("numeric(21, 9)");
 
@@ -61720,6 +62609,35 @@ namespace DataAccessLayer.AppContext
                     .HasConstraintName("FK_z_LogDiscExpP_r_DCards");
             });
 
+            modelBuilder.Entity<ZLogDiscExpShadow>(entity =>
+            {
+                entity.HasKey(e => new { e.DbiId, e.LogId })
+                    .HasName("pk_z_LogDiscExpShadow")
+                    .IsClustered(false);
+
+                entity.ToTable("z_LogDiscExpShadow", "dbo");
+
+                entity.Property(e => e.DbiId).HasColumnName("DBiID");
+
+                entity.Property(e => e.LogId).HasColumnName("LogID");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.DcardChId).HasColumnName("DCardChID");
+
+                entity.Property(e => e.Discount).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.GroupDiscount).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.GroupSumBonus).HasColumnType("numeric(21, 9)");
+
+                entity.Property(e => e.LogDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.SumBonus).HasColumnType("numeric(21, 9)");
+            });
+
             modelBuilder.Entity<ZLogDiscRec>(entity =>
             {
                 entity.HasKey(e => new { e.DbiId, e.LogId })
@@ -61773,6 +62691,31 @@ namespace DataAccessLayer.AppContext
                     .HasForeignKey(d => d.DiscCode)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_z_LogDiscRec_r_Discs");
+            });
+
+            modelBuilder.Entity<ZLogDiscRecShadow>(entity =>
+            {
+                entity.HasKey(e => new { e.DbiId, e.LogId })
+                    .HasName("pk_z_LogDiscRecShadow")
+                    .IsClustered(false);
+
+                entity.ToTable("z_LogDiscRecShadow", "dbo");
+
+                entity.Property(e => e.DbiId).HasColumnName("DBiID");
+
+                entity.Property(e => e.LogId).HasColumnName("LogID");
+
+                entity.Property(e => e.ChId).HasColumnName("ChID");
+
+                entity.Property(e => e.DcardChId).HasColumnName("DCardChID");
+
+                entity.Property(e => e.LogDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.SaleSrcPosId).HasColumnName("SaleSrcPosID");
+
+                entity.Property(e => e.SrcPosId).HasColumnName("SrcPosID");
+
+                entity.Property(e => e.SumBonus).HasColumnType("numeric(21, 9)");
             });
 
             modelBuilder.Entity<ZLogDiscRecTemp>(entity =>

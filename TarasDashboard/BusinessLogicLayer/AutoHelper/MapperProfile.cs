@@ -14,6 +14,7 @@ namespace BusinessLogicLayer.AutoHelper
             CreateMap<IpSaleOracle, SaleOracleModel>();
             CreateMap<IpSaleStatistic, SaleStatisticModel>();
             CreateMap<IpSaleLast30Days_ByRegion, SaleLast30Days_ByRegionModel>();
+            CreateMap<ExecutionPlanDateHistory, ExecutionPlanDate_HistoryModel>();
         }
     }
 }

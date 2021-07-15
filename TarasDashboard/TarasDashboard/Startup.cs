@@ -37,7 +37,9 @@ namespace TarasDashboard
             services.AddScoped<ISaleStatisticRepository, SaleStatisticRepository>();
             services.AddScoped<ISaleLast30Days_ByRegionRepository, SaleLast30Days_ByRegionRepository>();
             services.AddScoped<IRegionsLocalizationRepository, RegionsLocalizationRepository>();
+            services.AddScoped<IExecutionPlanDate_HistoryRepository, ExecutionPlanDate_HistoryRepository>();
             services.AddScoped<IShopsRepository, ShopsRepository>();
+
             services.AddScoped<IBoardService, BoardService>();
             services.AddControllers();
             services.AddControllersWithViews();

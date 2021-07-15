@@ -145,5 +145,7 @@ namespace DataAccessLayer
         public int? CrunionChequeFontSize { get; set; }
         public bool? AllowVen { get; set; }
         public int? CrchequeFontSizeReport { get; set; }
+        public string ApiServerParams { get; set; }
+        public bool ApiServerGetRets { get; set; }
     }
 }

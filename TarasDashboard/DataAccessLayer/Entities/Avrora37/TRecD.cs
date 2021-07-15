@@ -41,5 +41,6 @@ namespace DataAccessLayer
         public decimal ExPlanQty { get; set; }
         public decimal ReGradingQty { get; set; }
         public decimal LastVenQty { get; set; }
+        public decimal? FactQtyWms { get; set; }
     }
 }

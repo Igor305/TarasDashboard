@@ -7,7 +7,7 @@ namespace DataAccessLayer
 {
     public partial class ZLogDimension
     {
-        public int LogId { get; set; }
+        public long LogId { get; set; }
         public DateTime LogDate { get; set; }
         public int ProdId { get; set; }
         public string Um { get; set; }

@@ -16,5 +16,7 @@ namespace DataAccessLayer
         public short? QualityCheckId { get; set; }
         public short? CheckStatusId { get; set; }
         public int? FempId { get; set; }
+        public DateTime? MakeProdDate { get; set; }
+        public int? ProdExpQty { get; set; }
     }
 }

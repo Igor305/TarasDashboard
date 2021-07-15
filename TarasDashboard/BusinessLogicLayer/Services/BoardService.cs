@@ -29,9 +29,11 @@ namespace BusinessLogicLayer.Services
         private readonly ISaleOracleRepository _saleOracleRepository;
         private readonly ISaleStatisticRepository _saleStatisticRepository;
         private readonly ISaleLast30Days_ByRegionRepository _saleLast30Days_ByRegionRepository;
+        private readonly IExecutionPlanDate_HistoryRepository _executionPlanDate_HistoryRepository;
 
         public BoardService(IMapper mapper, IMemoryCache memoryCache, IConfiguration configuration, IShopsRepository shopsRepository, IRegionsLocalizationRepository regionsLocalizationRepository, 
-                            ISaleOracleRepository saleOracleRepository, ISaleStatisticRepository saleStatisticRepository, ISaleLast30Days_ByRegionRepository saleLast30Days_ByRegionRepository)
+                            ISaleOracleRepository saleOracleRepository, ISaleStatisticRepository saleStatisticRepository, ISaleLast30Days_ByRegionRepository saleLast30Days_ByRegionRepository,
+                            IExecutionPlanDate_HistoryRepository executionPlanDate_HistoryRepository)
         {
             _mapper = mapper;
             _memoryCache = memoryCache;
@@ -42,6 +44,7 @@ namespace BusinessLogicLayer.Services
             _saleOracleRepository = saleOracleRepository;
             _saleStatisticRepository = saleStatisticRepository;
             _saleLast30Days_ByRegionRepository = saleLast30Days_ByRegionRepository;
+            _executionPlanDate_HistoryRepository = executionPlanDate_HistoryRepository;
         }
 
         public SaleResponseModel getStaticSale()
@@ -63,6 +66,10 @@ namespace BusinessLogicLayer.Services
 
                 SaleRegionsModel lastLines = addLastLine(saleRegionsModels);
 
+                List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels = await getExecutionPlan();
+
+                List<DiagramModel> diagramModels = getDiagramValue(executionPlanDate_HistoryModels);
+
                 string date = DateTime.Now.ToShortDateString();
                 string time = DateTime.Now.ToShortTimeString();
 
@@ -72,6 +79,8 @@ namespace BusinessLogicLayer.Services
                 saleResponseModel.saleStatisticModels = saleStatisticModels;
                 saleResponseModel.saleRegionsModels = saleRegionsModels;
                 saleResponseModel.lastLines = lastLines;
+                saleResponseModel.executionPlanDate_HistoryModels = executionPlanDate_HistoryModels;
+                saleResponseModel.diagramModels = diagramModels;
                 saleResponseModel.Date = date;
                 saleResponseModel.Time = time;
                 saleResponseModel.Status = true;
@@ -82,7 +91,7 @@ namespace BusinessLogicLayer.Services
                     AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
                 });
 
-                await sendInTelegram(saleResponseModel);
+               // await sendInTelegram(saleResponseModel);
             }
 
             catch (Exception e)
@@ -824,6 +833,40 @@ namespace BusinessLogicLayer.Services
             return excel.GetAsByteArray();
              
             }
+        }
+
+        private async Task<List<ExecutionPlanDate_HistoryModel>> getExecutionPlan()
+        {
+            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _executionPlanDate_HistoryRepository.getAll();
+
+            List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels = _mapper.Map<List<ExecutionPlanDateHistory>, List<ExecutionPlanDate_HistoryModel>>(executionPlanDateHistories);
+
+            foreach(ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel in executionPlanDate_HistoryModels)
+            {
+                executionPlanDate_HistoryModel.ChainPlanDay = Math.Round(executionPlanDate_HistoryModel.ChainPlanDay ?? 0, 0);
+                executionPlanDate_HistoryModel.ChainFactDay = Math.Round(executionPlanDate_HistoryModel.ChainFactDay ?? 0, 0);
+                executionPlanDate_HistoryModel.ExecutionPlanDayUah = Math.Round(executionPlanDate_HistoryModel.ExecutionPlanDayUah ?? 0, 0);
+                executionPlanDate_HistoryModel.ExecutionPlanDayPercent = Math.Round(executionPlanDate_HistoryModel.ExecutionPlanDayPercent ?? 0, 2);
+
+                executionPlanDate_HistoryModel.DateString = executionPlanDate_HistoryModel.Dates.ToShortDateString();
+
+                executionPlanDate_HistoryModel.diagramModel.Name = executionPlanDate_HistoryModel.DateString;
+                executionPlanDate_HistoryModel.diagramModel.Value = executionPlanDate_HistoryModel.ChainFactDay;
+            }
+
+            return executionPlanDate_HistoryModels;
+        }
+
+        private List<DiagramModel> getDiagramValue(List<ExecutionPlanDate_HistoryModel>  executionPlanDate_HistoryModels)
+        {
+            List<DiagramModel> diagramModels = new List<DiagramModel>();
+
+            foreach (ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel in executionPlanDate_HistoryModels)
+            { 
+                diagramModels.Add(executionPlanDate_HistoryModel.diagramModel);
+            }
+
+            return diagramModels;
         }
     }
 }

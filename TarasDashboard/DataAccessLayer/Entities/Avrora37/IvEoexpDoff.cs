@@ -59,5 +59,7 @@ namespace DataAccessLayer
         public string StatusMarriage { get; set; }
         public short? ProdGenderId { get; set; }
         public byte? ProdIdroleId { get; set; }
+        public byte? Eodays { get; set; }
+        public bool FirstPriceProduct { get; set; }
     }
 }

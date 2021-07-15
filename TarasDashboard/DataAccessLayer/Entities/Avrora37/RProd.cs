@@ -118,6 +118,8 @@ namespace DataAccessLayer
         public byte? ProdIdroleId { get; set; }
         public string CellNumber { get; set; }
         public bool? FirstPriceProduct { get; set; }
+        public int? BrendId { get; set; }
+        public bool? TrackWms { get; set; }
 
         public virtual ICollection<TOrderMonitorsTemp> TOrderMonitorsTemps { get; set; }
     }

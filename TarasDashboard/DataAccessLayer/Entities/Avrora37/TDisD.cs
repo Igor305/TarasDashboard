@@ -43,5 +43,7 @@ namespace DataAccessLayer
         public decimal? QtyStock1300 { get; set; }
         public decimal? QtyStock301600 { get; set; }
         public decimal? StockQtyDis { get; set; }
+        public bool? FirstPriceProduct { get; set; }
+        public short? TypeTreatment { get; set; }
     }
 }

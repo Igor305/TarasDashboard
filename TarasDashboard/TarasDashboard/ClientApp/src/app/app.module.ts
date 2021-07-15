@@ -8,6 +8,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -28,6 +29,7 @@ import { SaleService } from './services/sale.service';
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
+    NgxChartsModule,
     RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full' }
 ], { relativeLinkResolution: 'legacy' }),

@@ -45,5 +45,8 @@ namespace DataAccessLayer
         public decimal? ProdCount { get; set; }
         public decimal? Weight { get; set; }
         public DateTime? CheckQualityDate { get; set; }
+        public string CustomerName { get; set; }
+        public int? DocIdwms { get; set; }
+        public DateTime? DocDateWms { get; set; }
     }
 }
