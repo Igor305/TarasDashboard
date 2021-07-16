@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { DiagramModel } from '../models/diagram.model';
 import { SaleResponseModel } from '../models/response/sale.response.model';
 import { SaleHistoryModel } from '../models/sale.history.model';
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  view: any[] = [];
+  view: any[] = [1900,500];
 
   // options
   showXAxis = true;
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
 
     this.check = 4;
 
-    //setInterval(()=> this.getSale(),10000);
+    setInterval(()=> this.getSale(),10000);
     setInterval(()=> this.getCheck(),200000);
 
     await this.getSale();

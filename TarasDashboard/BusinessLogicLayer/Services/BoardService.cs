@@ -852,17 +852,128 @@ namespace BusinessLogicLayer.Services
 
                 executionPlanDate_HistoryModel.diagramModel.Name = executionPlanDate_HistoryModel.DateString;
                 executionPlanDate_HistoryModel.diagramModel.Value = executionPlanDate_HistoryModel.ChainFactDay;
+
+                executionPlanDate_HistoryModel.ChainPlanDayString = formatingHistory(executionPlanDate_HistoryModel.ChainPlanDay);
+                executionPlanDate_HistoryModel.ChainFactDayString = formatingHistory(executionPlanDate_HistoryModel.ChainFactDay);
+                executionPlanDate_HistoryModel.ExecutionPlanDayUahString = formatingHistory(executionPlanDate_HistoryModel.ExecutionPlanDayUah);
             }
 
             return executionPlanDate_HistoryModels;
+        }
+
+        private string formatingHistory(decimal? value)
+        {
+            string result = "";
+            bool minus = false;
+
+            if (value < 0)
+            {
+                minus = true;
+                value = Math.Abs(value ?? 0);
+            }
+
+            decimal? valueThousand = value / 1000;
+            valueThousand = Math.Truncate(valueThousand ?? 0);
+
+            if (valueThousand > 0)
+            {
+
+                decimal? valueMillion = valueThousand / 1000;
+                valueMillion = Math.Truncate(valueMillion ?? 0);
+
+                if (valueMillion > 0)
+                {
+                    decimal? valueBillion = valueMillion / 1000;
+                    valueBillion = Math.Truncate(valueBillion ?? 0);
+
+                    if (valueBillion > 0)
+                    {
+                        valueBillion = Math.Truncate((valueMillion ?? 0) / 1000);
+                        valueMillion = Math.Truncate((valueThousand ?? 0) / 1000);
+                        string valueMillionString = returningZeros(valueMillion);
+                        valueThousand = Math.Truncate((value ?? 0) / 1000);
+                        string valueThousandString = returningZeros(valueThousand);
+                        value %= 1000;
+                        string valueString = returningZeros(value);
+                        result += $"{valueBillion} {valueMillionString} {valueThousandString} {valueString}";
+                    }
+
+                    if(valueBillion <= 0)
+                    {
+                        valueMillion = Math.Truncate((valueThousand ?? 0) / 1000);
+                        valueThousand = Math.Truncate((value ?? 0) / 1000 % 1000);
+                        string valueThousandString = returningZeros(valueThousand);
+                        value %= 1000;
+                        string valueString = returningZeros(value);
+                        result += $"{valueMillion} {valueThousandString} {valueString}";
+                    }
+
+                }
+
+                if (valueMillion <= 0)
+                {
+                    valueThousand = Math.Truncate((value ?? 0) / 1000);
+                    value %= 1000;
+                    string valueString = returningZeros(value);
+                    result += $"{valueThousand} {valueString}";
+                }
+            }
+
+            if (valueThousand <= 0)
+            {
+                result += $"{value}";
+            }
+
+            if (minus)
+            {
+                result = result.Insert(0, "-");
+            }
+
+            return  result;
+        }
+
+        private string returningZeros(decimal? value)
+        {
+            string result = "";
+
+            if (value >= 0 && value < 10)
+            {
+                result = $"00{value}";
+            }
+            if (value >= 10 && value < 100)
+            {
+                result = $"0{value}";
+            }
+            if (value >= 100 && value < 1000)
+            {
+                result = $"{value}";
+            }
+
+            return result;
         }
 
         private List<DiagramModel> getDiagramValue(List<ExecutionPlanDate_HistoryModel>  executionPlanDate_HistoryModels)
         {
             List<DiagramModel> diagramModels = new List<DiagramModel>();
 
+            DateTime dateTime = DateTime.Now;
+            int days = DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
+            
             foreach (ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel in executionPlanDate_HistoryModels)
-            { 
+            {
+                diagramModels.Add(executionPlanDate_HistoryModel.diagramModel);
+            }
+
+            for (int x = dateTime.Day; x <= days; x++)
+            {
+                ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel = new ExecutionPlanDate_HistoryModel();
+
+                DateTime date = new DateTime(dateTime.Year, dateTime.Month, x);
+                string dateShort = date.ToShortDateString();
+
+                executionPlanDate_HistoryModel.diagramModel.Name = dateShort;
+                executionPlanDate_HistoryModel.diagramModel.Value = 0;
+
                 diagramModels.Add(executionPlanDate_HistoryModel.diagramModel);
             }
 

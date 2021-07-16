@@ -8,9 +8,12 @@ namespace BusinessLogicLayer.Models
         public DateTime Dates { get; set; }
         public string DateString { get; set; }
         public decimal? ChainPlanDay { get; set; }
+        public string ChainPlanDayString { get; set; }
         public decimal? ChainFactDay { get; set; }
+        public string ChainFactDayString { get; set; }
         public int? StocksQty { get; set; }
         public decimal? ExecutionPlanDayUah { get; set; }
+        public string ExecutionPlanDayUahString { get; set; }
         public decimal? ExecutionPlanDayPercent { get; set; }
         public decimal? ChainPlanToDate { get; set; }
         public decimal? ChainFactToDate { get; set; }
