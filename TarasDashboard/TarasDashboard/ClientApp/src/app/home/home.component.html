@@ -142,20 +142,20 @@
 
 <div *ngIf="(check == 4)" class = "history">
 
-    <ngx-charts-bar-vertical
-    [view]="view"
-    [scheme]="colorScheme"
-    [results]="diagramModels"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    (select)="onSelect($event)" class = 'charts-bar'>
-    </ngx-charts-bar-vertical>
+    <div class="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [yaxis]="chartOptions.yaxis"
+          [xaxis]="chartOptions.xaxis"
+          [labels]="chartOptions.labels"
+          [stroke]="chartOptions.stroke"
+          [title]="chartOptions.title"
+          [dataLabels]="chartOptions.dataLabels"
+          [fill]="chartOptions.fill"
+          [tooltip]="chartOptions.tooltip"
+        ></apx-chart>
+    </div>
 
     <div class="table-container">
         <table mat-table [dataSource]="saleHistoryModels" class = 'table'>

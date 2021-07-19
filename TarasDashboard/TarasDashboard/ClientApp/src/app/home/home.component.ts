@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { DiagramModel } from '../models/diagram.model';
 import { SaleResponseModel } from '../models/response/sale.response.model';
 import { SaleHistoryModel } from '../models/sale.history.model';
@@ -7,6 +7,30 @@ import { SaleRegionsModel } from '../models/sale.regions.model';
 import { SaleStatisticModel } from '../models/sale.statistic.model';
 import { SaleService } from '../services/sale.service';
 
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexFill,
+  ApexYAxis,
+  ApexTooltip,
+  ApexTitleSubtitle,
+  ApexXAxis
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis | ApexYAxis[];
+  title: ApexTitleSubtitle;
+  labels: string[];
+  stroke: any; // ApexStroke;
+  dataLabels: any; // ApexDataLabels;
+  fill: ApexFill;
+  tooltip: ApexTooltip;
+};
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,6 +38,9 @@ import { SaleService } from '../services/sale.service';
 })
 
 export class HomeComponent implements OnInit {
+
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
 
   check: number;
 
@@ -38,37 +65,18 @@ export class HomeComponent implements OnInit {
 
   diagramModels : DiagramModel[];
 
-  single = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-  ];
-
-  view: any[] = [1900,500];
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = false;
-  showXAxisLabel = false;
-  xAxisLabel = 'Dates';
-  showYAxisLabel = false;
-  yAxisLabel = 'Sales';
-
-  colorScheme = {
-    domain: ['#5089d4']
-  };
-
-  constructor(private saleService: SaleService){}
+  plans = []
+  facts = []
+  dates = []
+  constructor(private saleService: SaleService){
+  }
 
   async ngOnInit(){
 
     this.check = 4;
 
-    setInterval(()=> this.getSale(),10000);
-    setInterval(()=> this.getCheck(),200000);
+    setInterval(()=> this.getSale(),20000);
+    setInterval(()=> this.getCheck(),20000);
 
     await this.getSale();
   }
@@ -98,6 +106,74 @@ export class HomeComponent implements OnInit {
 
     this.saleHistoryModels = this.responseModel.executionPlanDate_HistoryModels;
     this.diagramModels = this.responseModel.diagramModels;
+    
+    this.plans = []
+    this.facts = []
+    this.dates = []
+
+    for(let saleHistoryModel of this.saleHistoryModels ){
+        this.plans.push(saleHistoryModel.chainPlanDay);
+        this.facts.push(saleHistoryModel.chainFactDay);   
+    }
+
+    for(let diagramModel of this.diagramModels ){
+        this.dates.push(diagramModel.name);
+    }
+
+    this.plans.reverse();
+    this.facts.reverse();
+
+    this.chartOptions = {
+      series: [
+        {
+          name: "Fact",
+          type: "column",
+          data: this.facts
+        },
+        {
+          name: "Plan",
+          type: "line",
+          data: this.plans
+        }
+      ],
+      chart: {
+        height: 650,
+        type: "line",
+        fontFamily:'Roboto,"Helvetica Neue", sans-serif',
+      },
+      stroke: {
+        width: [0, 4]
+      },
+      title: {},
+      dataLabels: {
+        enabled: true,
+        enabledOnSeries: [1]
+      },
+      labels:this.dates,
+      xaxis: {
+        type: "datetime",
+        tickPlacement: 'between',
+        labels: {
+          datetimeUTC: true,
+          datetimeFormatter: {
+            year: 'yyyy',
+            month: "dd.MM",
+            day: 'dd.MM',
+            hour: 'HH:mm',
+          },
+          style:{
+            fontSize:'15px'
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          style:{
+            fontSize:'15px'
+          },
+        },
+      }
+    }; 
   }
 
   public async getExcel(){

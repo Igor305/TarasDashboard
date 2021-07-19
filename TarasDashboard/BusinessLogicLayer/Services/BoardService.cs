@@ -850,7 +850,7 @@ namespace BusinessLogicLayer.Services
 
                 executionPlanDate_HistoryModel.DateString = executionPlanDate_HistoryModel.Dates.ToShortDateString();
 
-                executionPlanDate_HistoryModel.diagramModel.Name = executionPlanDate_HistoryModel.DateString;
+                executionPlanDate_HistoryModel.diagramModel.Name = executionPlanDate_HistoryModel.Dates;
                 executionPlanDate_HistoryModel.diagramModel.Value = executionPlanDate_HistoryModel.ChainFactDay;
 
                 executionPlanDate_HistoryModel.ChainPlanDayString = formatingHistory(executionPlanDate_HistoryModel.ChainPlanDay);
@@ -969,9 +969,8 @@ namespace BusinessLogicLayer.Services
                 ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel = new ExecutionPlanDate_HistoryModel();
 
                 DateTime date = new DateTime(dateTime.Year, dateTime.Month, x);
-                string dateShort = date.ToShortDateString();
 
-                executionPlanDate_HistoryModel.diagramModel.Name = dateShort;
+                executionPlanDate_HistoryModel.diagramModel.Name = date;
                 executionPlanDate_HistoryModel.diagramModel.Value = 0;
 
                 diagramModels.Add(executionPlanDate_HistoryModel.diagramModel);

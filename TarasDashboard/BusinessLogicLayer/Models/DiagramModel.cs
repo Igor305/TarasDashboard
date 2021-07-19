@@ -1,8 +1,10 @@
-﻿namespace BusinessLogicLayer.Models
+﻿using System;
+
+namespace BusinessLogicLayer.Models
 {
     public class DiagramModel
     {
-        public string Name { get; set; }
+        public DateTime Name { get; set; }
         public decimal? Value { get; set; }
     }
 }

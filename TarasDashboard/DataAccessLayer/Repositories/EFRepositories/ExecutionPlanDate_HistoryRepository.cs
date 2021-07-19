@@ -2,6 +2,7 @@
 using DataAccessLayer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories.EFRepositories
@@ -17,7 +18,7 @@ namespace DataAccessLayer.Repositories.EFRepositories
 
         public async Task<List<ExecutionPlanDateHistory>> getAll()
         {
-            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _avrora37Context.ExecutionPlanDateHistories.ToListAsync();
+            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _avrora37Context.ExecutionPlanDateHistories.OrderByDescending(x=>x.Dates ).ToListAsync();
 
             return executionPlanDateHistories;
         }

@@ -1,4 +1,4 @@
 export interface DiagramModel{
-    name?: string;
+    name?: Date;
     value?: number;
 }

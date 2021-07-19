@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -32,6 +34,8 @@ import { SaleService } from './services/sale.service';
     MatIconModule,
     MatSortModule,
     NgxChartsModule,
+    GoogleChartsModule,
+    NgApexchartsModule,
     RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full' }
 ], { relativeLinkResolution: 'legacy' }),
