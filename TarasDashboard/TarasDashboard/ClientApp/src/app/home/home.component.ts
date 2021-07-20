@@ -120,9 +120,6 @@ export class HomeComponent implements OnInit {
         this.dates.push(diagramModel.name);
     }
 
-    this.plans.reverse();
-    this.facts.reverse();
-
     this.chartOptions = {
       series: [
         {
