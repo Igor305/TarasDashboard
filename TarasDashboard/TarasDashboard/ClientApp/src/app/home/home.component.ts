@@ -44,6 +44,12 @@ export class HomeComponent implements OnInit {
 
   check: number;
 
+  executionPlanToDatePercent : number;
+  executionPlanToDatePercentLast : number;
+  executionPlanToDatePercentString : string;
+  chainFactToDate : string;
+  chainPlanToDate : string;
+  
   responseModel: SaleResponseModel;
   saleOracle: SaleOracleModel;
   percentOnlineStockLast: number;
@@ -68,6 +74,7 @@ export class HomeComponent implements OnInit {
   plans = []
   facts = []
   dates = []
+
   constructor(private saleService: SaleService){
   }
 
@@ -111,9 +118,19 @@ export class HomeComponent implements OnInit {
     this.facts = []
     this.dates = []
 
+    let date = new Date(Date.now()-86400000)
+
     for(let saleHistoryModel of this.saleHistoryModels ){
         this.plans.push(saleHistoryModel.chainPlanDay);
         this.facts.push(saleHistoryModel.chainFactDay);   
+
+        if (date.toLocaleDateString() == saleHistoryModel.dateString){
+          this.executionPlanToDatePercentString = saleHistoryModel.executionPlanToDatePercent.toFixed(1);
+          this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;
+          this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
+          this.chainFactToDate = (saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
+          this.chainPlanToDate = (saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
+        }
     }
 
     for(let diagramModel of this.diagramModels ){
