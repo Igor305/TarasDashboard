@@ -125,7 +125,7 @@ export class HomeComponent implements OnInit {
         this.facts.push(saleHistoryModel.chainFactDay);   
 
         if (date.toLocaleDateString() == saleHistoryModel.dateString){
-          this.executionPlanToDatePercentString = saleHistoryModel.executionPlanToDatePercent.toFixed(1);
+          this.executionPlanToDatePercentString = saleHistoryModel.executionPlanToDatePercent.toFixed(0);
           this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;
           this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
           this.chainFactToDate = (saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
@@ -140,12 +140,12 @@ export class HomeComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: "Fact",
+          name: "Факт",
           type: "column",
           data: this.facts
         },
         {
-          name: "Plan",
+          name: "План",
           type: "line",
           data: this.plans
         }
