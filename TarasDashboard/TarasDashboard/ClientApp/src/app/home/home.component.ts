@@ -80,10 +80,10 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(){
 
-    this.check = 1;
+    this.check = 4;
 
-    setInterval(()=> this.getSale(),20000);
-    setInterval(()=> this.getCheck(),20000);
+    setInterval(()=> this.getSale(),30000);
+    setInterval(()=> this.getCheck(),30000);
 
     await this.getSale();
   }
@@ -119,15 +119,16 @@ export class HomeComponent implements OnInit {
     this.dates = []
 
     let date = new Date(Date.now()-86400000)
-
+    
     for (let saleStatistic of this.saleStatisticModels){
       saleStatistic.lflString = saleStatistic.lfl.toFixed(2);
     }
+
     for(let saleHistoryModel of this.saleHistoryModels ){
         this.plans.push(saleHistoryModel.chainPlanDay);
         this.facts.push(saleHistoryModel.chainFactDay);   
 
-        if (date.toLocaleDateString() == saleHistoryModel.dateString){
+        if (date.getDate().toString() == saleHistoryModel.dateString.split('.')[0]){
           this.executionPlanToDatePercentString = saleHistoryModel.executionPlanToDatePercent.toFixed(0);
           this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;
           this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
