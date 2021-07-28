@@ -91,7 +91,7 @@ namespace BusinessLogicLayer.Services
                     AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
                 });
 
-               // await sendInTelegram(saleResponseModel);
+                //await sendInTelegram(saleResponseModel);
             }
 
             catch (Exception e)

@@ -11,5 +11,6 @@ namespace BusinessLogicLayer.Models
         public decimal Rec { get; set; }
         public decimal Margin { get; set; }
         public decimal Turnover { get; set; }
+        public decimal? LFL { get; set; }
     }
 }

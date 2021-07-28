@@ -6,4 +6,6 @@ export interface SaleStatisticModel{
     rec?: number;
     margin?: number;
     turnover?: number;
+    lfl?: number;
+    lflString?: string;
 }

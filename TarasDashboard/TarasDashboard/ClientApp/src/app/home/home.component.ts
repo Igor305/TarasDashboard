@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
 
   saleStatisticModels: SaleStatisticModel[];
 
-  displayedColumnsStatistic: string[] = ['dateOfString', 'tSumCC_wt', 'avgCheck', 'rec', 'margin', 'turnover'];
+  displayedColumnsStatistic: string[] = ['dateOfString', 'tSumCC_wt', 'avgCheck', 'rec', 'margin', 'turnover', 'LFL'];
 
   saleRegionsModels: SaleRegionsModel[];
 
@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(){
 
-    this.check = 4;
+    this.check = 1;
 
     setInterval(()=> this.getSale(),20000);
     setInterval(()=> this.getCheck(),20000);
@@ -120,6 +120,9 @@ export class HomeComponent implements OnInit {
 
     let date = new Date(Date.now()-86400000)
 
+    for (let saleStatistic of this.saleStatisticModels){
+      saleStatistic.lflString = saleStatistic.lfl.toFixed(2);
+    }
     for(let saleHistoryModel of this.saleHistoryModels ){
         this.plans.push(saleHistoryModel.chainPlanDay);
         this.facts.push(saleHistoryModel.chainFactDay);   
