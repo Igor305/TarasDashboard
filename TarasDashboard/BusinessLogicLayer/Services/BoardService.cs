@@ -837,12 +837,13 @@ namespace BusinessLogicLayer.Services
 
         private async Task<List<ExecutionPlanDate_HistoryModel>> getExecutionPlan()
         {
-            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _executionPlanDate_HistoryRepository.getAll();
+            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _executionPlanDate_HistoryRepository.getAllForThisMonth();
 
             List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels = _mapper.Map<List<ExecutionPlanDateHistory>, List<ExecutionPlanDate_HistoryModel>>(executionPlanDateHistories);
 
-            foreach(ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel in executionPlanDate_HistoryModels)
+            foreach (ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel in executionPlanDate_HistoryModels)
             {
+               
                 executionPlanDate_HistoryModel.ChainPlanDay = Math.Round(executionPlanDate_HistoryModel.ChainPlanDay ?? 0, 0);
                 executionPlanDate_HistoryModel.ChainFactDay = Math.Round(executionPlanDate_HistoryModel.ChainFactDay ?? 0, 0);
                 executionPlanDate_HistoryModel.ExecutionPlanDayUah = Math.Round(executionPlanDate_HistoryModel.ExecutionPlanDayUah ?? 0, 0);
@@ -856,6 +857,7 @@ namespace BusinessLogicLayer.Services
                 executionPlanDate_HistoryModel.ChainPlanDayString = formatingHistory(executionPlanDate_HistoryModel.ChainPlanDay);
                 executionPlanDate_HistoryModel.ChainFactDayString = formatingHistory(executionPlanDate_HistoryModel.ChainFactDay);
                 executionPlanDate_HistoryModel.ExecutionPlanDayUahString = formatingHistory(executionPlanDate_HistoryModel.ExecutionPlanDayUah);
+                
             }
 
             return executionPlanDate_HistoryModels;

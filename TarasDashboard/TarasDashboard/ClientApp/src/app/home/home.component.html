@@ -21,12 +21,30 @@
             <div class = 'block3Value'>{{saleOracle.recFor7Day}}</div>
         </div>
     </div>
-    <div class = 'block4'>
+    <div *ngIf="chainPlanToDate == 0" class = 'block4Null'>
         <div class = 'circle'>
             <div class="svgLastHour">
                 <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
                     <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                    <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="1"></circle>
+                    <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="1.3"></circle>
+                    <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#fff" stroke-width="1" stroke-dasharray="100 0"></circle>
+                    <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#14DE10" stroke-width="1" style.stroke-dasharray= "{{ executionPlanToDatePercent }},{{executionPlanToDatePercentLast}}" stroke-dashoffset="25"></circle>
+                    <g class="chart-text">
+                        <text x="50%" y="50%" class="chart-number">{{executionPlanToDatePercentString}}%</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+       <div class = "chainToDate">
+            {{chainFactToDate}} ({{chainPlanToDate}})
+        </div>
+    </div>
+    <div *ngIf="chainPlanToDate != 0" class = 'block4'>
+        <div class = 'circle'>
+            <div class="svgLastHour">
+                <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
+                    <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                    <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="1.3"></circle>
                     <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#fff" stroke-width="1" stroke-dasharray="100 0"></circle>
                     <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#14DE10" stroke-width="1" style.stroke-dasharray= "{{ executionPlanToDatePercent }},{{executionPlanToDatePercentLast}}" stroke-dashoffset="25"></circle>
                     <g class="chart-text">

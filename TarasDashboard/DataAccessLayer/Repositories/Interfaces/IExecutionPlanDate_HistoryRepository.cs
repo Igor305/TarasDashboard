@@ -5,6 +5,6 @@ namespace DataAccessLayer.Repositories.Interfaces
 {
     public interface IExecutionPlanDate_HistoryRepository
     {
-        public Task<List<ExecutionPlanDateHistory>> getAll();
+        public Task<List<ExecutionPlanDateHistory>> getAllForThisMonth();
     }
 }

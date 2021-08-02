@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.AppContext;
 using DataAccessLayer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +17,12 @@ namespace DataAccessLayer.Repositories.EFRepositories
             _avrora37Context = avrora37Context;
         }
 
-        public async Task<List<ExecutionPlanDateHistory>> getAll()
+        public async Task<List<ExecutionPlanDateHistory>> getAllForThisMonth()
         {
-            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _avrora37Context.ExecutionPlanDateHistories.OrderByDescending(x=>x.Dates ).ToListAsync();
+            DateTime dateTime = DateTime.Now;
+            int month = dateTime.Month;
+
+            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _avrora37Context.ExecutionPlanDateHistories.Where(x=>x.Dates.Month == month).OrderByDescending(x=>x.Dates).ToListAsync();
 
             return executionPlanDateHistories;
         }

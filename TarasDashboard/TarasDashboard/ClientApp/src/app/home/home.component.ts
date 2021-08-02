@@ -17,6 +17,7 @@ import {
   ApexTitleSubtitle,
   ApexXAxis
 } from "ng-apexcharts";
+import { ConditionalExpr } from '@angular/compiler';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -113,13 +114,9 @@ export class HomeComponent implements OnInit {
 
     this.saleHistoryModels = this.responseModel.executionPlanDate_HistoryModels;
     this.diagramModels = this.responseModel.diagramModels;
-    
-    this.plans = []
-    this.facts = []
-    this.dates = []
 
-    let date = new Date(Date.now()-86400000)
-    
+    let date = new Date(Date.now()-86400000) 
+
     for (let saleStatistic of this.saleStatisticModels){
       saleStatistic.lflString = saleStatistic.lfl.toFixed(2);
     }
@@ -127,18 +124,45 @@ export class HomeComponent implements OnInit {
     for(let saleHistoryModel of this.saleHistoryModels ){
         this.plans.push(saleHistoryModel.chainPlanDay);
         this.facts.push(saleHistoryModel.chainFactDay);   
+/*
+        let dateString = "";
+        let monthString = "";
+        let yearString = "";
 
-        if (date.getDate().toString() == saleHistoryModel.dateString.split('.')[0]){
+        if (date.getDate() < 10){
+          dateString = saleHistoryModel.dateString.split('.')[0].slice(1);       
+        }
+
+        if (date.getDate() >= 10){
+          dateString = saleHistoryModel.dateString.split('.')[0];
+        }
+
+        if (date.getMonth() < 10){
+          monthString = saleHistoryModel.dateString.slice(3).split('.')[0].slice(1);
+        }
+
+        if (date.getMonth() >= 10){
+          monthString = saleHistoryModel.dateString.slice(3).split('.')[0];
+        }
+
+        yearString = saleHistoryModel.dateString.slice(6).split('.')[0];
+
+        // Get today
+
+        if (date.getUTCDate().toString() == dateString && (date.getUTCMonth()+1).toString() == monthString && date.getUTCFullYear().toString() == yearString ){
+
+    */     
+
           this.executionPlanToDatePercentString = saleHistoryModel.executionPlanToDatePercent.toFixed(0);
           this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;
           this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
           this.chainFactToDate = (saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
           this.chainPlanToDate = (saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
-        }
+        
     }
 
     for(let diagramModel of this.diagramModels ){
-        this.dates.push(diagramModel.name);
+        this.dates.push(diagramModel.name);      
     }
 
     this.chartOptions = {
@@ -189,6 +213,47 @@ export class HomeComponent implements OnInit {
           style:{
             fontSize:'15px'
           },
+        },
+      },
+      tooltip: {
+        enabled: true,
+        enabledOnSeries: undefined,
+        shared: true,
+        followCursor: false,
+        intersect: false,
+        inverseOrder: false,
+        custom: undefined,
+        fillSeriesColor: false,
+        style: {
+          fontSize: '12px',
+          fontFamily: undefined
+        },
+        onDatasetHover: {
+            highlightDataSeries: false,
+        },
+        x: {
+            show: false,
+            format: 'dd MMM',
+            formatter: undefined,
+        },
+        y: {
+            formatter: undefined,
+            title: {
+                formatter: (seriesName) => seriesName,
+            },
+        },
+        z: {
+            formatter: undefined,
+            title: 'Size: '
+        },
+        marker: {
+            show: true,
+        },
+        fixed: {
+            enabled: false,
+            position: 'topRight',
+            offsetX: 0,
+            offsetY: 0,
         },
       }
     }; 
