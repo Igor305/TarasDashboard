@@ -38,5 +38,6 @@ namespace DataAccessLayer
         public decimal PriceCcNt { get; set; }
         public decimal PriceRc { get; set; }
         public int? OriginalOwner { get; set; }
+        public short? CounId { get; set; }
     }
 }

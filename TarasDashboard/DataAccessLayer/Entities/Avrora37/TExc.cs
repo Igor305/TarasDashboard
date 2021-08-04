@@ -54,5 +54,6 @@ namespace DataAccessLayer
         public DateTime? PrintDate { get; set; }
         public int? DocIdwms { get; set; }
         public DateTime? DocDateWms { get; set; }
+        public bool? SyncToWms { get; set; }
     }
 }

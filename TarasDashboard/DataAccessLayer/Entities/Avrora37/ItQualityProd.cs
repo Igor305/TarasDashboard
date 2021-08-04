@@ -18,5 +18,6 @@ namespace DataAccessLayer
         public int? FempId { get; set; }
         public DateTime? MakeProdDate { get; set; }
         public int? ProdExpQty { get; set; }
+        public string SupplierLetter { get; set; }
     }
 }

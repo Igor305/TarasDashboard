@@ -25,5 +25,7 @@ namespace DataAccessLayer
         public decimal CorrectionQty { get; set; }
         public bool Editing { get; set; }
         public string ReasonMarriage { get; set; }
+        public string Sscccode { get; set; }
+        public int? PcatKmid { get; set; }
     }
 }

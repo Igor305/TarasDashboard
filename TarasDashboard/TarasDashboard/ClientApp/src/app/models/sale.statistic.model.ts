@@ -1,7 +1,7 @@
 export interface SaleStatisticModel{
     dateOfData?: Date;
     dateOfString?: string;
-    tSumCC_wt ?: number;
+    tsumCc_Wt?: number;
     avgCheck?: number;
     rec?: number;
     margin?: number;

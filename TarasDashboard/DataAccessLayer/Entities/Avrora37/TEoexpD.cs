@@ -81,5 +81,8 @@ namespace DataAccessLayer
         public byte? ProdIdroleId { get; set; }
         public byte? Eodays { get; set; }
         public bool FirstPriceProduct { get; set; }
+        public string MtranUn { get; set; }
+        public decimal? PalletaCrat { get; set; }
+        public decimal? TranQty { get; set; }
     }
 }

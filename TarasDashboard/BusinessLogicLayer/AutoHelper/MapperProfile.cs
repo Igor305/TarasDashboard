@@ -12,7 +12,7 @@ namespace BusinessLogicLayer.AutoHelper
             CreateMap<Shop, ShopModel>();
             CreateMap<RegionsLocalization, RegionsLocalizationModel>();
             CreateMap<IpSaleOracle, SaleOracleModel>();
-            CreateMap<IpSaleStatistic, SaleStatisticModel>();
+            CreateMap<SaleStatistic, SaleStatisticModel>();
             CreateMap<IpSaleLast30Days_ByRegion, SaleLast30Days_ByRegionModel>();
             CreateMap<ExecutionPlanDateHistory, ExecutionPlanDate_HistoryModel>();
         }

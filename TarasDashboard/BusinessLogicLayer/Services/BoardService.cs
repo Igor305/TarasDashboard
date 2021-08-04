@@ -335,7 +335,7 @@ namespace BusinessLogicLayer.Services
                     int xO = 1700;
 
                     graphic.DrawString(saleStatisticModel.DateOfString, font, drawBrush, xDate, y);
-                    graphic.DrawString(Math.Round(saleStatisticModel.TSumCC_wt,2).ToString(), font, drawBrush, xP, y);
+                    graphic.DrawString(Math.Round(saleStatisticModel.TsumCc_Wt,2).ToString(), font, drawBrush, xP, y);
                     graphic.DrawString(Math.Round(saleStatisticModel.AvgCheck,2).ToString(), font, drawBrush, xCH, y);
                     graphic.DrawString(Math.Round(saleStatisticModel.Rec,2).ToString(), font, drawBrush, xOP, y);
                     graphic.DrawString(Math.Round(saleStatisticModel.Margin,2).ToString(), font, drawBrush, xM, y);
@@ -538,9 +538,9 @@ namespace BusinessLogicLayer.Services
         private async Task<List<SaleStatisticModel>> getSaleStatistic()
         {
 
-            List<IpSaleStatistic> ipSaleStatistics = await _saleStatisticRepository.getSaleStatistic();
+            List<SaleStatistic> saleStatistics = await _saleStatisticRepository.getSaleStatistic();
 
-            List<SaleStatisticModel> saleStatisticModels = _mapper.Map<List<IpSaleStatistic>, List<SaleStatisticModel>>(ipSaleStatistics);
+            List<SaleStatisticModel> saleStatisticModels = _mapper.Map<List<SaleStatistic>, List<SaleStatisticModel>>(saleStatistics);
 
             foreach (SaleStatisticModel saleStatisticModel in saleStatisticModels)
             {

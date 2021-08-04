@@ -42,5 +42,6 @@ namespace DataAccessLayer
         public decimal ReGradingQty { get; set; }
         public decimal LastVenQty { get; set; }
         public decimal? FactQtyWms { get; set; }
+        public short? CounId { get; set; }
     }
 }

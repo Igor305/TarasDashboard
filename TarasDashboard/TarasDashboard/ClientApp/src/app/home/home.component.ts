@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
   saleStatisticModels: SaleStatisticModel[];
 
-  displayedColumnsStatistic: string[] = ['dateOfString', 'tSumCC_wt', 'avgCheck', 'rec', 'margin', 'turnover', 'LFL'];
+  displayedColumnsStatistic: string[] = ['dateOfString', 'tsumCc_Wt', 'avgCheck', 'rec', 'margin', 'turnover', 'LFL'];
 
   saleRegionsModels: SaleRegionsModel[];
 
@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(){
 
-    this.check = 4;
+    this.check = 2;
 
     setInterval(()=> this.getSale(),30000);
     setInterval(()=> this.getCheck(),30000);
@@ -116,49 +116,38 @@ export class HomeComponent implements OnInit {
     this.diagramModels = this.responseModel.diagramModels;
 
     let date = new Date(Date.now()-86400000) 
-
+    console.log(this.saleStatisticModels);
     for (let saleStatistic of this.saleStatisticModels){
       saleStatistic.lflString = saleStatistic.lfl.toFixed(2);
     }
 
+    this.plans = [];
+    this.facts = [];
+    this.dates = [];
+
     for(let saleHistoryModel of this.saleHistoryModels ){
-        this.plans.push(saleHistoryModel.chainPlanDay);
-        this.facts.push(saleHistoryModel.chainFactDay);   
-/*
-        let dateString = "";
-        let monthString = "";
-        let yearString = "";
 
-        if (date.getDate() < 10){
-          dateString = saleHistoryModel.dateString.split('.')[0].slice(1);       
-        }
+      this.plans.push(saleHistoryModel.chainPlanDay);
+      this.facts.push(saleHistoryModel.chainFactDay);  
 
-        if (date.getDate() >= 10){
-          dateString = saleHistoryModel.dateString.split('.')[0];
-        }
+      let dateString = "";  
 
-        if (date.getMonth() < 10){
-          monthString = saleHistoryModel.dateString.slice(3).split('.')[0].slice(1);
-        }
+      if (date.getDate() < 10){
+        dateString = saleHistoryModel.dateString.split('.')[0].slice(1);       
+      }
 
-        if (date.getMonth() >= 10){
-          monthString = saleHistoryModel.dateString.slice(3).split('.')[0];
-        }
+      if (date.getDate() >= 10){
+        dateString = saleHistoryModel.dateString.split('.')[0];
+      }
 
-        yearString = saleHistoryModel.dateString.slice(6).split('.')[0];
-
-        // Get today
-
-        if (date.getUTCDate().toString() == dateString && (date.getUTCMonth()+1).toString() == monthString && date.getUTCFullYear().toString() == yearString ){
-
-    */     
-
-          this.executionPlanToDatePercentString = saleHistoryModel.executionPlanToDatePercent.toFixed(0);
-          this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;
-          this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
-          this.chainFactToDate = (saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
-          this.chainPlanToDate = (saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
-        
+      if (date.getUTCDate().toString() == dateString ){
+    
+        this.executionPlanToDatePercentString = saleHistoryModel.executionPlanToDatePercent.toFixed(0);
+        this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;      
+        this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
+        this.chainFactToDate = (saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
+        this.chainPlanToDate = (saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
+      }
     }
 
     for(let diagramModel of this.diagramModels ){

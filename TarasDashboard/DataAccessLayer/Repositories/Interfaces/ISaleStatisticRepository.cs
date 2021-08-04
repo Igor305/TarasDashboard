@@ -6,6 +6,6 @@ namespace DataAccessLayer.Repositories.Interfaces
 {
     public interface ISaleStatisticRepository
     {
-        public Task<List<IpSaleStatistic>> getSaleStatistic();
+        public Task<List<SaleStatistic>> getSaleStatistic();
     }
 }

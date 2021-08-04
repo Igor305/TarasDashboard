@@ -31,5 +31,6 @@ namespace DataAccessLayer
         public int StateCode { get; set; }
         public int BookkeeperEmpId { get; set; }
         public int PrincipalEmpId { get; set; }
+        public DateTime? PrintDate { get; set; }
     }
 }

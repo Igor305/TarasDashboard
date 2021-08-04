@@ -6,7 +6,7 @@ namespace BusinessLogicLayer.Models
     {
         public DateTime DateOfData { get; set; }
         public string DateOfString { get; set; }
-        public decimal TSumCC_wt { get; set; }
+        public decimal TsumCc_Wt { get; set; }
         public decimal AvgCheck { get; set; }
         public decimal Rec { get; set; }
         public decimal Margin { get; set; }

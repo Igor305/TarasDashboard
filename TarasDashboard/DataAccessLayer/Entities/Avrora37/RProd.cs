@@ -120,6 +120,11 @@ namespace DataAccessLayer
         public bool? FirstPriceProduct { get; set; }
         public int? BrendId { get; set; }
         public bool? TrackWms { get; set; }
+        public bool? ActiveAssortment { get; set; }
+        public decimal? SupExpDate { get; set; }
+        public decimal? StockExpDate { get; set; }
+        public decimal? ShopExpDate { get; set; }
+        public decimal? ConsumerExpDate { get; set; }
 
         public virtual ICollection<TOrderMonitorsTemp> TOrderMonitorsTemps { get; set; }
     }
