@@ -12,6 +12,7 @@ using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -56,70 +57,75 @@ namespace BusinessLogicLayer.Services
 
         public async Task getSaleInCache()
         {
-            try
+            DateTime dateTime = DateTime.Now;
+
+            if (dateTime.Minute >= 0)
             {
-                SaleOracleModel saleOracleModel = await getSaleOracle();
-
-                List<SaleStatisticModel> saleStatisticModels = await getSaleStatistic();
-
-                List<SaleRegionsModel> saleRegionsModels = await getSaleRegions();
-
-                SaleRegionsModel lastLines = addLastLine(saleRegionsModels);
-
-                List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels = await getExecutionPlan();
-
-                List<DiagramModel> diagramModels = getDiagramValue(executionPlanDate_HistoryModels);
-
-                string date = DateTime.Now.ToShortDateString();
-                string time = DateTime.Now.ToShortTimeString();
-
-                SaleResponseModel saleResponseModel = new SaleResponseModel();
-
-                saleResponseModel.saleOracleModel = saleOracleModel;
-                saleResponseModel.saleStatisticModels = saleStatisticModels;
-                saleResponseModel.saleRegionsModels = saleRegionsModels;
-                saleResponseModel.lastLines = lastLines;
-                saleResponseModel.executionPlanDate_HistoryModels = executionPlanDate_HistoryModels;
-                saleResponseModel.diagramModels = diagramModels;
-                saleResponseModel.Date = date;
-                saleResponseModel.Time = time;
-                saleResponseModel.Status = true;
-                saleResponseModel.Message = "successfully";
-
-                _memoryCache.Set("responseModel", saleResponseModel, new MemoryCacheEntryOptions
+                try
                 {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
-                });
+                    SaleOracleModel saleOracleModel = await getSaleOracle();
 
-                await sendInTelegram(saleResponseModel);
-            }
+                    List<SaleStatisticModel> saleStatisticModels = await getSaleStatistic();
 
-            catch (Exception e)
-            {
-                SaleResponseModel saleResponseModel = new SaleResponseModel();
-                saleResponseModel.Status = false;
-                saleResponseModel.Message = e.Message;
+                    List<SaleRegionsModel> saleRegionsModels = await getSaleRegions();
 
-                string token = _configuration["TelegramBot:Token"];
+                    SaleRegionsModel lastLines = addLastLine(saleRegionsModels);
 
-                TelegramBotClient botClient;
+                    List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels = await getExecutionPlan();
 
-                botClient = new TelegramBotClient(token);
+                    List<DiagramModel> diagramModels = getDiagramValue(executionPlanDate_HistoryModels);
 
-                botClient.StartReceiving();
+                    string date = DateTime.Now.ToShortDateString();
+                    string time = DateTime.Now.ToShortTimeString();
 
-                await botClient.SendTextMessageAsync(
-                   chatId: _configuration["TelegramBot:CreatorId"],
-                   text: e.Message
-                   );
-            }
+                    SaleResponseModel saleResponseModel = new SaleResponseModel();
+
+                    saleResponseModel.saleOracleModel = saleOracleModel;
+                    saleResponseModel.saleStatisticModels = saleStatisticModels;
+                    saleResponseModel.saleRegionsModels = saleRegionsModels;
+                    saleResponseModel.lastLines = lastLines;
+                    saleResponseModel.executionPlanDate_HistoryModels = executionPlanDate_HistoryModels;
+                    saleResponseModel.diagramModels = diagramModels;
+                    saleResponseModel.Date = date;
+                    saleResponseModel.Time = time;
+                    saleResponseModel.Status = true;
+                    saleResponseModel.Message = "successfully";
+
+                    _memoryCache.Set("responseModel", saleResponseModel, new MemoryCacheEntryOptions
+                    {
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
+                    });
+
+                    await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels);
+                }
+
+                catch (Exception e)
+                {
+                    SaleResponseModel saleResponseModel = new SaleResponseModel();
+                    saleResponseModel.Status = false;
+                    saleResponseModel.Message = e.Message;
+
+                    string token = _configuration["TelegramBot:Token"];
+
+                    TelegramBotClient botClient;
+
+                    botClient = new TelegramBotClient(token);
+
+                    botClient.StartReceiving();
+
+                    await botClient.SendTextMessageAsync(
+                       chatId: _configuration["TelegramBot:CreatorId"],
+                       text: e.Message
+                       );
+                }
+            }      
         }
 
-        private async Task sendInTelegram(SaleResponseModel saleResponseModel)
+        private async Task sendInTelegram(SaleResponseModel saleResponseModel, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels, List<DiagramModel> diagramModels)
         {
             DateTime dateTime = DateTime.Now;
 
-            if (dateTime.Hour == 10 || dateTime.Hour == 13 || dateTime.Hour == 17 || dateTime.Hour == 21)
+            if (dateTime.Hour >= 10 || dateTime.Hour == 13 || dateTime.Hour == 17 || dateTime.Hour == 21)
             {
                 string token = _configuration["TelegramBot:Token"];
 
@@ -129,35 +135,39 @@ namespace BusinessLogicLayer.Services
 
                 botClient.StartReceiving();
 
-                createPhoto1(saleResponseModel);
+                createPhoto1(saleResponseModel, executionPlanDate_HistoryModels);
                 createPhoto2(saleResponseModel);
                 createPhoto3(saleResponseModel);
+                createPhoto4(diagramModels);
 
                 string message = $"данные на {dateTime.ToShortTimeString()} {dateTime.ToShortDateString()}";
-
+                
                 await botClient.SendTextMessageAsync(
-                   chatId: _configuration["TelegramBot:ChannelId"],
+                   chatId: _configuration["TelegramBot:CreatorId"],
                    text: message
-                   );
+                   );            
 
                 await sendPhoto(botClient, "Photo1.jpeg");
                 await sendPhoto(botClient, "Photo2.jpeg");
                 await sendPhoto(botClient, "Photo3.jpeg");
+                await sendPhoto(botClient, "Photo4.jpeg");
             }
         }
 
         private async Task sendPhoto(TelegramBotClient botClient, string path)
         {
+
             using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 await botClient.SendPhotoAsync(
-                chatId: _configuration["TelegramBot:ChannelId"],
-                photo: fileStream
-                );
+                    chatId: _configuration["TelegramBot:CreatorId"],
+                    photo: fileStream
+                    );
             }
+
         }
 
-        private void createPhoto1(SaleResponseModel saleResponseModel)
+        private void createPhoto1(SaleResponseModel saleResponseModel, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels)
         {
             Bitmap bitmap = new Bitmap(1920, 1080);
             using (Graphics graphic = Graphics.FromImage(bitmap))
@@ -198,10 +208,25 @@ namespace BusinessLogicLayer.Services
                 
                 Pen pen = new Pen(Color.FromArgb(18, 156, 18),20);
 
-                float arc = saleResponseModel.saleOracleModel.PercentOnlineStock * 360 / 100;
+                DateTime dateTime = DateTime.Now.AddDays(-1);
 
-                graphic.DrawArc(pen, new Rectangle(1000, 100, 850, 850), 270, arc);
+                float arc = 0;
+                decimal planDate = 0;
+                decimal chainFactToDate = 0;
+                decimal chainPlanToDate = 0;
 
+                foreach (ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel in executionPlanDate_HistoryModels){
+                    if (dateTime.Date == executionPlanDate_HistoryModel.Dates)
+                    {
+                        planDate = Math.Truncate(executionPlanDate_HistoryModel.ExecutionPlanToDatePercent ?? 0);
+                        arc = float.Parse((planDate * 360 / 100).ToString());
+
+                        chainFactToDate = Math.Round((executionPlanDate_HistoryModel.ChainFactToDate ?? 0) /1000000, 2);
+                        chainPlanToDate = Math.Round((executionPlanDate_HistoryModel.ChainPlanToDate ?? 0) /1000000, 2);
+                    }
+                }
+
+                graphic.DrawArc(pen, new Rectangle(1180, 100, 550, 550), 270, arc);
 
                 Font font = new Font("Helvetica Neue", 105, FontStyle.Bold);
                 SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -211,12 +236,12 @@ namespace BusinessLogicLayer.Services
 
                 graphic.DrawString($"{saleResponseModel.saleOracleModel.Real} ({Math.Round(saleResponseModel.saleOracleModel.Oracle, 1)})", font, drawBrush, x, y);
 
-                x = 130;
+                x = 120;
                 y = 440;
 
                 drawBrush = new SolidBrush(Color.Black);
 
-                font = new Font("Helvetica Neue", 115);
+                font = new Font("Helvetica Neue", 115, FontStyle.Bold);
 
                 graphic.DrawString("СЧ:", font, drawBrush, x, y);
 
@@ -230,14 +255,23 @@ namespace BusinessLogicLayer.Services
                 x = 200;
                 y = 770;
 
-                font = new Font("Helvetica Neue", 115);
+                font = new Font("Helvetica Neue", 115, FontStyle.Bold);
 
                 graphic.DrawString(Math.Round(saleResponseModel.saleOracleModel.RecFor7Day, 2).ToString(), font, drawBrush, x, y);
 
-                x = 1250;
-                y = 450;
+                font = new Font("Helvetica Neue", 100);
 
-                graphic.DrawString($"{saleResponseModel.saleOracleModel.PercentOnlineStock}% ", font, drawBrush, x, y);
+                x = 1280;
+                y = 310;
+
+                graphic.DrawString($"{planDate}%", font, drawBrush, x, y);
+
+                font = new Font("Helvetica Neue", 90);
+
+                x = 990;
+                y = 800;
+
+                graphic.DrawString($"{chainFactToDate}({chainPlanToDate})", font, drawBrush, x, y);
             }
             bitmap.Save("Photo1.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
         }
@@ -270,34 +304,40 @@ namespace BusinessLogicLayer.Services
 
                 graphic.DrawString("Дата", font, drawBrush, x, y);
 
-                x = 610;
+                x = 480;
                 y = 30;
 
                 graphic.DrawString("Р", font, drawBrush, x, y);
 
-                x = 900;
+                x = 730;
                 y = 30;
 
                 graphic.DrawString("СЧ", font, drawBrush, x, y);
 
-                x = 1200;
+                x = 1000;
                 y = 30;
 
                 graphic.DrawString("ОП", font, drawBrush, x, y);
 
-                x = 1510;
+                x = 1300;
                 y = 30;
 
                 graphic.DrawString("М", font, drawBrush, x, y);
 
-                x = 1700;
+                x = 1500;
                 y = 30;
 
                 graphic.DrawString("О", font, drawBrush, x, y);
 
+                x = 1680;
+                y = 30;
+
+                graphic.DrawString("LFL", font, drawBrush, x, y);
+  
                 int count = 1;
                 int height = 110;
                 y = 120;
+
 
                 foreach (SaleStatisticModel saleStatisticModel in saleResponseModel.saleStatisticModels)
                 {
@@ -328,18 +368,24 @@ namespace BusinessLogicLayer.Services
                     drawBrush = new SolidBrush(Color.Black);
 
                     int xDate = 150;
-                    int xP = 590;
-                    int xCH = 890;
-                    int xOP = 1190;
-                    int xM = 1500;
-                    int xO = 1700;
-
+                    int xP = 450;
+                    int xCH = 720;
+                    int xOP = 1000;
+                    int xM = 1290;
+                    int xO = 1500;
+                    int xLFL = 1680;
+                    if (saleStatisticModel.LFL <= 9 && saleStatisticModel.LFL > 0)
+                    {
+                        xLFL = 1695;
+                    }
+ 
                     graphic.DrawString(saleStatisticModel.DateOfString, font, drawBrush, xDate, y);
                     graphic.DrawString(Math.Round(saleStatisticModel.TsumCc_Wt,2).ToString(), font, drawBrush, xP, y);
                     graphic.DrawString(Math.Round(saleStatisticModel.AvgCheck,2).ToString(), font, drawBrush, xCH, y);
                     graphic.DrawString(Math.Round(saleStatisticModel.Rec,2).ToString(), font, drawBrush, xOP, y);
                     graphic.DrawString(Math.Round(saleStatisticModel.Margin,2).ToString(), font, drawBrush, xM, y);
                     graphic.DrawString(Math.Round(saleStatisticModel.Turnover,0).ToString(), font, drawBrush, xO, y);
+                    graphic.DrawString(Math.Round(saleStatisticModel.LFL ?? 0, 2).ToString(), font, drawBrush, xLFL, y);
 
                     y += 65;
                 }
@@ -497,6 +543,157 @@ namespace BusinessLogicLayer.Services
             }
 
            bitmap.Save("Photo3.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
+
+        public void createPhoto4 (List<DiagramModel> diagramModels)
+        {
+            Bitmap bitmap = new Bitmap(1920, 1090);
+            using (Graphics graphic = Graphics.FromImage(bitmap))
+            {
+                Image newImage = Image.FromFile("ClientApp/dist/assets/background_1.png");
+
+                float x = 0.0F;
+                float y = 0.0F;
+
+                RectangleF srcRect = new RectangleF(0.0F, 0.0F, 1920.0F, 1080.0F);
+                GraphicsUnit units = GraphicsUnit.Pixel;
+
+                graphic.DrawImage(newImage, x, y, srcRect, units);
+
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 255)))
+                {
+                    graphic.FillRectangle(brush, 10, 10, 1900, 1060);
+
+                }
+
+                Pen gray = new Pen(Color.FromArgb(212, 212, 212), 1);
+
+                int x1 = 50;
+                int y1 = 20;
+                int x2 = 1890;
+                int y2 = 20;
+
+                graphic.DrawLine(gray, x1, y1, x2, y2);
+
+                y1 = y2 = 170;
+
+                graphic.DrawLine(gray, x1, y1, x2, y2);
+
+                y1 = y2 = 320;
+
+                graphic.DrawLine(gray, x1, y1, x2, y2);
+
+                y1 = y2 = 470;
+
+                graphic.DrawLine(gray, x1, y1, x2, y2);
+
+                y1 = y2 = 620;
+
+                graphic.DrawLine(gray, x1, y1, x2, y2);
+
+                DateTime dateTime = DateTime.Now;
+                int days = DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
+                string month = dateTime.Month.ToString();
+
+                if (dateTime.Month < 10)
+                {
+                    month = $"0{dateTime.Month}";
+                }
+                
+                x = 50;
+                int count = 0;
+
+                foreach(DiagramModel diagramModel in diagramModels)
+                {
+                    count++;
+
+                    Font font = new Font("Helvetica Neue", 14);
+
+                    SolidBrush drawBrush = new SolidBrush(Color.Black);
+                    if (count != 1)
+                    {
+                        x += 60;
+                    }
+                    using (SolidBrush brush = new SolidBrush(Color.FromArgb(38, 160, 252)))
+                    {
+                        int value = int.Parse(Math.Round(((diagramModel.Value ?? 0)/100000),0).ToString());
+
+                        if (value != 0)
+                        {
+                            double scale = Math.Round(value * 1.5, 0);
+                            value = int.Parse(scale.ToString());
+                        }
+
+                        if (value == 0) 
+                        {
+                            value = 600; 
+                        }
+                        graphic.FillRectangle(brush, x + 15, 20 + value, 20, 600 - value);
+                    }
+
+                    y = 630;
+
+                    graphic.DrawString($"{count}.{month}", font, drawBrush, x, y);
+                }
+
+                y = 610;
+
+
+                int millions = 0;
+
+                for ( int z = 0; z <= 4; z++)
+                {
+                    Font font = new Font("Helvetica Neue", 14);
+
+                    SolidBrush drawBrush = new SolidBrush(Color.Black);
+
+                    if (z != 0)
+                    {
+                        millions += 10;
+                        y -= 150;
+                    }
+
+                    x = 20;
+        
+                    graphic.DrawString($"{millions}", font, drawBrush, x, y);
+                }
+
+                x = 50;
+                count = 0;
+
+                foreach (DiagramModel diagramModel in diagramModels)
+                {
+                    count++;
+
+                    if (count != 1)
+                    {
+                        x += 60;
+                    }
+
+                    int value = int.Parse(Math.Round(((diagramModel.Value ?? 0) / 100000), 0).ToString());
+
+                    if (value != 0)
+                    {
+                        double scale = Math.Round(value * 1.5, 0);
+                        value = int.Parse(scale.ToString());
+                    }
+
+                    if (value == 0)
+                    {
+                        value = 600;
+                    }
+
+                    Pen blackPen = new Pen(Color.Black, 3);
+
+                    PointF point1 = new PointF(x, value);
+                    PointF point2 = new PointF(x + 15, value);
+
+                    graphic.DrawLine(blackPen, point1, point2);
+                }
+
+            }
+
+            bitmap.Save("Photo4.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
         private float centeringName (float x, string name)
@@ -909,7 +1106,6 @@ namespace BusinessLogicLayer.Services
                         string valueString = returningZeros(value);
                         result += $"{valueMillion} {valueThousandString} {valueString}";
                     }
-
                 }
 
                 if (valueMillion <= 0)

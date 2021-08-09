@@ -22,12 +22,11 @@ namespace BusinessLogicLayer.Services
             while (!stoppingToken.IsCancellationRequested)
             {
                 await _boardService.getSaleInCache();
-                executionCount++;
 
                 _logger.LogInformation(
-                    "Scoped Processing Service is working. Count: {Count}", executionCount);
+                    "Scoped Processing Service is working.");
 
-                await Task.Delay(3600000, stoppingToken);
+                await Task.Delay(60000, stoppingToken);
             }
         }
     }

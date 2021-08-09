@@ -29,10 +29,10 @@ namespace BusinessLogicLayer.Services
 
         private void DoWork(object state)
         {
-            var count = Interlocked.Increment(ref executionCount);
+           // var count = Interlocked.Increment(ref executionCount);
 
             _logger.LogInformation(
-                "Timed Hosted Service is working. Count: {Count}", count);
+                "Timed Hosted Service is working.");
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
