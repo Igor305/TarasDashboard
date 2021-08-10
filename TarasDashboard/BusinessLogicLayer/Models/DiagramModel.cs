@@ -6,5 +6,6 @@ namespace BusinessLogicLayer.Models
     {
         public DateTime Name { get; set; }
         public decimal? Value { get; set; }
+        public decimal? Plan { get; set; }
     }
 }

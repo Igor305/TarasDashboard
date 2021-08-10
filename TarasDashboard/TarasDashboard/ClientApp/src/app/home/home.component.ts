@@ -130,6 +130,7 @@ export class HomeComponent implements OnInit {
       this.plans.push(saleHistoryModel.chainPlanDay);
       this.facts.push(saleHistoryModel.chainFactDay);  
 
+
       let dateString = "";  
 
       if (date.getDate() < 10){
@@ -150,6 +151,8 @@ export class HomeComponent implements OnInit {
         this.chainPlanToDate = (saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
       }
     }
+
+    this.saleHistoryModels.reverse();
 
     for(let diagramModel of this.diagramModels ){
         this.dates.push(diagramModel.name);      
