@@ -859,7 +859,7 @@ namespace BusinessLogicLayer.Services
 
                     string chainPlanDay = formatingHistory(Math.Round(executionPlanDate_HistoryModel.ChainPlanDay ?? 0, 2));
                     string chainFactDay = formatingHistory(Math.Round(executionPlanDate_HistoryModel.ChainFactDay ?? 0, 2));
-                    string execution = formatingHistory(Math.Round(executionPlanDate_HistoryModel.ExecutionPlanToDateUah ?? 0, 0));
+                    string execution = formatingHistory(Math.Round(executionPlanDate_HistoryModel.ExecutionPlanDayUah ?? 0, 0));
 
                     graphic.DrawString(executionPlanDate_HistoryModel.DateString, font, drawBrush, xDate, y);
                     graphic.DrawString(executionPlanDate_HistoryModel.StocksQty.ToString(), font, drawBrush, xCount, y);
