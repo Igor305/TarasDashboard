@@ -95,7 +95,7 @@ namespace BusinessLogicLayer.Services
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
                     });
 
-                    await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels);
+                    //await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels);
                 }
 
                 catch (Exception e)
@@ -142,7 +142,7 @@ namespace BusinessLogicLayer.Services
                 string message = $"данные на {dateTime.ToShortTimeString()} {dateTime.ToShortDateString()}";
                 
                 await botClient.SendTextMessageAsync(
-                   chatId: _configuration["TelegramBot:El"],
+                   chatId: _configuration["TelegramBot:ChannelId"],
                    text: message
                    );            
 
@@ -159,7 +159,7 @@ namespace BusinessLogicLayer.Services
             using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 await botClient.SendPhotoAsync(
-                    chatId: _configuration["TelegramBot:El"],
+                    chatId: _configuration["TelegramBot:ChannelId"],
                     photo: fileStream
                     );
             }
@@ -1156,6 +1156,7 @@ namespace BusinessLogicLayer.Services
                 }
             }
 
+            lastPopulation = Math.Round(lastPopulation, 2);
             lastPopulationForOneTT = Math.Round(lastPopulation * 1000000 / lastNumberTT / 1000, 2);
             lastSalesForOnePeople = Math.Round((beforeMaxSalesForOnePeople / 30)* lastPopulation * 365, 2);
 
