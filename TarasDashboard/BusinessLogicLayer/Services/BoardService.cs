@@ -95,7 +95,7 @@ namespace BusinessLogicLayer.Services
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
                     });
 
-                    //await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels);
+                    await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels);
                 }
 
                 catch (Exception e)
@@ -974,6 +974,10 @@ namespace BusinessLogicLayer.Services
                 {
                     if (shopModel.RegionId == x)
                     {
+                        if(shopModel.RegionId == 9)
+                        {
+
+                        }
                         numTT[x-1].Population++;
                     }
                 }
@@ -1032,14 +1036,24 @@ namespace BusinessLogicLayer.Services
                         populationRegion = Math.Round(populationRegion, 2);
                         populationForOneTT.Add(new PopulationRegionModel { Name = numTT[x].Name, Population = populationRegion });
 
+                        int count = 0;
+
                         foreach (SaleLast30Days_ByRegionModel saleLast30Days_ByRegionModel in saleLast30Days_ByRegionModels)
                         {
+
                             if (numTT[x].Name == saleLast30Days_ByRegionModel.RegionName)
                             {
+                                count = 1;
                                 double salesForOnePeople = saleLast30Days_ByRegionModel.SaleSum / populationRegionModels[x].Population;
                                 salesForOnePeople = Math.Round(salesForOnePeople, 2);
                                 salesForOnePeoples.Add(new PopulationRegionModel { Name = numTT[x].Name, Population = salesForOnePeople });
-                            }
+                            }                        
+                        }
+
+                        if (count != 1)
+                        {
+                            double salesForOnePeople = 0;
+                            salesForOnePeoples.Add(new PopulationRegionModel { Name = numTT[x].Name, Population = salesForOnePeople });
                         }
                     }
                 }                          
