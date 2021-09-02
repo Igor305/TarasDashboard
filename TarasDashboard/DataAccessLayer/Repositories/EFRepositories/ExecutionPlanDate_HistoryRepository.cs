@@ -20,12 +20,17 @@ namespace DataAccessLayer.Repositories.EFRepositories
         public async Task<List<ExecutionPlanDateHistory>> getAllForThisMonth()
         {
             DateTime dateTime = DateTime.Now;
+
+            if (dateTime.Day == 1)
+            {
+                dateTime = dateTime.AddDays(-1);
+            }
+
             int month = dateTime.Month;
 
             List<ExecutionPlanDateHistory> executionPlanDateHistories = await _avrora37Context.ExecutionPlanDateHistories.Where(x=>x.Dates.Month == month).OrderByDescending(x=>x.Dates).ToListAsync();
 
             return executionPlanDateHistories;
         }
-
     }
 }

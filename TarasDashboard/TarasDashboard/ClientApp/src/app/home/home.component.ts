@@ -144,11 +144,10 @@ export class HomeComponent implements OnInit {
       if (date.getUTCDate().toString() == dateString ){
     
         this.executionPlanToDatePercentString = Math.round(saleHistoryModel.executionPlanToDatePercent).toFixed(0);
-        console.log(saleHistoryModel.executionPlanToDatePercent);
         this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;      
         this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
-        this.chainFactToDate = Math.round(saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
-        this.chainPlanToDate = Math.round(saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
+        this.chainFactToDate = (saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
+        this.chainPlanToDate = (saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
       }
     }
 

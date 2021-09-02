@@ -207,7 +207,11 @@ namespace BusinessLogicLayer.Services
                 
                 Pen pen = new Pen(Color.FromArgb(18, 156, 18),20);
 
-                DateTime dateTime = DateTime.Now.AddDays(-1);
+                DateTime dateTime = DateTime.Now;
+
+
+                    dateTime = DateTime.Now.AddDays(-1);
+
 
                 float arc = 0;
                 decimal planDate = 0;
@@ -217,7 +221,7 @@ namespace BusinessLogicLayer.Services
                 foreach (ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel in executionPlanDate_HistoryModels){
                     if (dateTime.Date == executionPlanDate_HistoryModel.Dates)
                     {
-                        planDate = Math.Truncate(executionPlanDate_HistoryModel.ExecutionPlanToDatePercent ?? 0);
+                        planDate = Math.Round(executionPlanDate_HistoryModel.ExecutionPlanToDatePercent ?? 0);
                         arc = float.Parse((planDate * 360 / 100).ToString());
 
                         chainFactToDate = Math.Round((executionPlanDate_HistoryModel.ChainFactToDate ?? 0) /1000000, 2);
@@ -562,7 +566,6 @@ namespace BusinessLogicLayer.Services
                 using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 255)))
                 {
                     graphic.FillRectangle(brush, 10, 10, 1900, 1060);
-
                 }
 
                 Pen gray = new Pen(Color.FromArgb(212, 212, 212), 1);
@@ -574,7 +577,11 @@ namespace BusinessLogicLayer.Services
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
-                y1 = y2 = 170;
+                y1 = y2 = 120;
+
+                graphic.DrawLine(gray, x1, y1, x2, y2);
+
+                y1 = y2 = 220;
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
@@ -582,7 +589,11 @@ namespace BusinessLogicLayer.Services
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
-                y1 = y2 = 470;
+                y1 = y2 = 420;
+
+                graphic.DrawLine(gray, x1, y1, x2, y2);
+
+                y1 = y2 = 520;
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
@@ -591,8 +602,14 @@ namespace BusinessLogicLayer.Services
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
                 DateTime dateTime = DateTime.Now;
+
+                if (dateTime.Day == 1)
+                {
+                    dateTime = dateTime.AddDays(-1);
+                }
+
                 int days = DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
-                string month = dateTime.Month.ToString();
+                string month = "";
 
                 if (dateTime.Month < 10)
                 {
@@ -623,7 +640,7 @@ namespace BusinessLogicLayer.Services
 
                         if (value != 0)
                         {
-                            double scale = Math.Round(value * 1.5, 0);
+                            double scale = value * 1;
                             value = int.Parse(scale.ToString());
                         }
 
@@ -645,7 +662,7 @@ namespace BusinessLogicLayer.Services
 
                 int millions = 0;
 
-                for ( int z = 0; z <= 4; z++)
+                for ( int z = 0; z <= 6; z++)
                 {
                     font = new Font("Helvetica Neue", 14);
 
@@ -654,7 +671,7 @@ namespace BusinessLogicLayer.Services
                     if (z != 0)
                     {
                         millions += 10;
-                        y -= 150;
+                        y -= 100;
                     }
 
                     x = 20;
@@ -674,7 +691,7 @@ namespace BusinessLogicLayer.Services
                     {
                         previousPlan = int.Parse(Math.Round(((diagramModel.Plan ?? 0) / 100000), 0).ToString());
 
-                        double scale = Math.Round(previousPlan * 1.5, 0);
+                        double scale = previousPlan * 1;
                         previousPlan = int.Parse(scale.ToString());
 
                         Pen penElipce = new Pen(Color.FromArgb(38, 231, 166), 5);
@@ -713,7 +730,7 @@ namespace BusinessLogicLayer.Services
                         if (plan != 0)
                         {
 
-                            double scale = Math.Round(plan * 1.5, 0);
+                            double scale = plan * 1;
                             plan = int.Parse(scale.ToString());
 
                             Pen pen = new Pen(Color.FromArgb(38, 231, 166), 3);
@@ -1351,6 +1368,12 @@ namespace BusinessLogicLayer.Services
             List<DiagramModel> diagramModels = new List<DiagramModel>();
 
             DateTime dateTime = DateTime.Now;
+            
+            if (dateTime.Day == 1)
+            {
+                dateTime = dateTime.AddDays(-1);
+            }
+
             int days = DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
 
             executionPlanDate_HistoryModels.Reverse();
