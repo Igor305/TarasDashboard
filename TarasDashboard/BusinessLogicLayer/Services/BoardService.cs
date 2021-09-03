@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 
@@ -30,10 +31,13 @@ namespace BusinessLogicLayer.Services
         private readonly ISaleStatisticRepository _saleStatisticRepository;
         private readonly ISaleLast30Days_ByRegionRepository _saleLast30Days_ByRegionRepository;
         private readonly IExecutionPlanDate_HistoryRepository _executionPlanDate_HistoryRepository;
+        private readonly IPlanSaleStockOnDateRepository _planSaleStockOnDateRepository;
+        private readonly IPlanSaleStockOnDateDRepository _planSaleStockOnDateDRepository;
+
 
         public BoardService(IMapper mapper, IMemoryCache memoryCache, IConfiguration configuration, IShopsRepository shopsRepository, IRegionsLocalizationRepository regionsLocalizationRepository, 
                             ISaleOracleRepository saleOracleRepository, ISaleStatisticRepository saleStatisticRepository, ISaleLast30Days_ByRegionRepository saleLast30Days_ByRegionRepository,
-                            IExecutionPlanDate_HistoryRepository executionPlanDate_HistoryRepository)
+                            IExecutionPlanDate_HistoryRepository executionPlanDate_HistoryRepository, IPlanSaleStockOnDateRepository planSaleStockOnDateRepository, IPlanSaleStockOnDateDRepository planSaleStockOnDateDRepository)
         {
             _mapper = mapper;
             _memoryCache = memoryCache;
@@ -45,6 +49,8 @@ namespace BusinessLogicLayer.Services
             _saleStatisticRepository = saleStatisticRepository;
             _saleLast30Days_ByRegionRepository = saleLast30Days_ByRegionRepository;
             _executionPlanDate_HistoryRepository = executionPlanDate_HistoryRepository;
+            _planSaleStockOnDateRepository = planSaleStockOnDateRepository;
+            _planSaleStockOnDateDRepository = planSaleStockOnDateDRepository;
         }
 
         public SaleResponseModel getStaticSale()
@@ -58,7 +64,7 @@ namespace BusinessLogicLayer.Services
         {
             DateTime dateTime = DateTime.Now;
 
-            if (dateTime.Minute == 0)
+            if (dateTime.Minute >= 0)
             {
                 try
                 {
@@ -73,6 +79,8 @@ namespace BusinessLogicLayer.Services
                     List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels = await getExecutionPlan();
 
                     List<DiagramModel> diagramModels = getDiagramValue(executionPlanDate_HistoryModels);
+
+                    List<PlanSaleStockOnDateModel> planSaleStockOnDateModels = await getPlanSaleStockOnDate();
 
                     string date = DateTime.Now.ToShortDateString();
                     string time = DateTime.Now.ToShortTimeString();
@@ -95,7 +103,7 @@ namespace BusinessLogicLayer.Services
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
                     });
 
-                    await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels);
+                    //await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels);
                 }
 
                 catch (Exception e)
@@ -1397,6 +1405,66 @@ namespace BusinessLogicLayer.Services
             }
 
             return diagramModels;
+        }
+
+        public async Task<List<PlanSaleStockOnDateModel>> getPlanSaleStockOnDate()
+        {
+            List<PlanSaleStockOnDateModel> planSaleStockOnDateModels = new List<PlanSaleStockOnDateModel>();
+
+            DateTime today = DateTime.Now;
+            var days = DateTime.DaysInMonth(today.Year, today.Month);
+            DateTime lastDay = new DateTime(today.Year, today.Month, days);
+
+            List<ItPlanSaleStockOnDate> itPlanSaleStockOnDates = await _planSaleStockOnDateRepository.getPlanSaleStocksToMonth(today, lastDay);
+            List<ItPlanSaleStockOnDateModel> itPlanSaleStockOnDateModels = _mapper.Map<List<ItPlanSaleStockOnDate>, List<ItPlanSaleStockOnDateModel>>(itPlanSaleStockOnDates);
+
+            var firstPlan = itPlanSaleStockOnDateModels.First();
+            var lastPlan = itPlanSaleStockOnDateModels.Last();
+
+            List<ItPlanSaleStockOnDateD> itPlanSaleStockOnDateDs = await _planSaleStockOnDateDRepository.getPlanSaleStocksOnDateD(firstPlan.ChId, lastPlan.ChId);
+            List<ItPlanSaleStockOnDateDModel> itPlanSaleStockOnDateDModels = _mapper.Map<List<ItPlanSaleStockOnDateD>, List<ItPlanSaleStockOnDateDModel>>(itPlanSaleStockOnDateDs);
+
+            long chId = itPlanSaleStockOnDateDModels.First().ChId;
+            DateTime date = new DateTime();
+            decimal PlanSum = 0;
+
+            foreach (ItPlanSaleStockOnDateDModel itPlanSaleStockOnDateDModel in itPlanSaleStockOnDateDModels)
+            {
+                if (chId != itPlanSaleStockOnDateDModel.ChId)
+                {
+                    foreach (ItPlanSaleStockOnDateModel itPlanSaleStockOnDateModel in itPlanSaleStockOnDateModels)
+                    {
+                        if (itPlanSaleStockOnDateModel.ChId == chId)
+                        {
+                            date = itPlanSaleStockOnDateModel.DocDate;
+                            break;
+                        }
+                    }
+
+                    planSaleStockOnDateModels.Add(new PlanSaleStockOnDateModel
+                    {
+                        Date = date,
+                        PlanSum = PlanSum
+                    });
+
+                    PlanSum = 0;
+                }
+
+                if (chId == itPlanSaleStockOnDateDModel.ChId)
+                {
+                    PlanSum += itPlanSaleStockOnDateDModel.PlanSum;
+                }
+               
+                chId = itPlanSaleStockOnDateDModel.ChId;
+            }
+
+            planSaleStockOnDateModels.Add(new PlanSaleStockOnDateModel
+            {
+                Date = date.AddDays(1),
+                PlanSum = PlanSum
+            });
+
+            return planSaleStockOnDateModels;
         }
     }
 }

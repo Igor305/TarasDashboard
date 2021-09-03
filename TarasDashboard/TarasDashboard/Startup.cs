@@ -39,6 +39,8 @@ namespace TarasDashboard
             services.AddScoped<IRegionsLocalizationRepository, RegionsLocalizationRepository>();
             services.AddScoped<IExecutionPlanDate_HistoryRepository, ExecutionPlanDate_HistoryRepository>();
             services.AddScoped<IShopsRepository, ShopsRepository>();
+            services.AddScoped<IPlanSaleStockOnDateRepository, PlanSaleStockOnDateRepository>();
+            services.AddScoped<IPlanSaleStockOnDateDRepository, PlanSaleStockOnDateDRepository>();
 
             services.AddScoped<IBoardService, BoardService>();
             services.AddControllers();

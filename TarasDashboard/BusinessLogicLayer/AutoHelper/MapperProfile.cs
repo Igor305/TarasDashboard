@@ -15,6 +15,8 @@ namespace BusinessLogicLayer.AutoHelper
             CreateMap<SaleStatistic, SaleStatisticModel>();
             CreateMap<IpSaleLast30Days_ByRegion, SaleLast30Days_ByRegionModel>();
             CreateMap<ExecutionPlanDateHistory, ExecutionPlanDate_HistoryModel>();
+            CreateMap<ItPlanSaleStockOnDate, ItPlanSaleStockOnDateModel>();
+            CreateMap<ItPlanSaleStockOnDateD, ItPlanSaleStockOnDateDModel>();
         }
     }
 }
