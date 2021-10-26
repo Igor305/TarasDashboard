@@ -18,6 +18,7 @@ import {
   ApexXAxis
 } from "ng-apexcharts";
 import { ConditionalExpr } from '@angular/compiler';
+import { PlanSaleStockOnDateModel } from '../models/plan.sale.stock.on.date.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -72,6 +73,8 @@ export class HomeComponent implements OnInit {
 
   diagramModels : DiagramModel[];
 
+  planSaleStockOnDateModels : PlanSaleStockOnDateModel[];
+
   plans = []
   facts = []
   dates = []
@@ -114,6 +117,7 @@ export class HomeComponent implements OnInit {
 
     this.saleHistoryModels = this.responseModel.executionPlanDate_HistoryModels;
     this.diagramModels = this.responseModel.diagramModels;
+    this.planSaleStockOnDateModels = this.responseModel.planSaleStockOnDateModels;
 
     let date = new Date(Date.now()-86400000) 
 
@@ -130,7 +134,6 @@ export class HomeComponent implements OnInit {
       this.plans.push(saleHistoryModel.chainPlanDay);
       this.facts.push(saleHistoryModel.chainFactDay);  
 
-
       let dateString = "";  
 
       if (date.getDate() < 10){
@@ -143,13 +146,17 @@ export class HomeComponent implements OnInit {
 
       if (date.getUTCDate().toString() == dateString ){
     
-        this.executionPlanToDatePercentString = Math.round(saleHistoryModel.executionPlanToDatePercent).toFixed(0);
+        this.executionPlanToDatePercentString = Math.trunc(saleHistoryModel.executionPlanToDatePercent).toFixed(0);
         this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;      
         this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
         this.chainFactToDate = (saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
         this.chainPlanToDate = (saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
       }
     }
+
+    this.planSaleStockOnDateModels.forEach(planSaleStockOnDateModel => {
+      this.plans.push(planSaleStockOnDateModel.planSum);     
+    });
 
     this.saleHistoryModels.reverse();
 
@@ -188,7 +195,7 @@ export class HomeComponent implements OnInit {
         type: "datetime",
         tickPlacement: 'between',
         labels: {
-          datetimeUTC: true,
+          datetimeUTC: false,
           datetimeFormatter: {
             year: 'yyyy',
             month: "dd.MM",

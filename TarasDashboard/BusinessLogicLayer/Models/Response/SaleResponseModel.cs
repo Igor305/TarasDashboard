@@ -10,6 +10,7 @@ namespace BusinessLogicLayer.Models.Response
         public SaleRegionsModel lastLines { get; set; }
         public List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels { get; set; }
         public List<DiagramModel> diagramModels { get; set; }
+        public List<PlanSaleStockOnDateModel> planSaleStockOnDateModels { get; set; }
         public string Date {get; set;} 
         public string Time { get; set; }
         public bool Status { get; set; }
@@ -21,6 +22,7 @@ namespace BusinessLogicLayer.Models.Response
             saleRegionsModels = new List<SaleRegionsModel>();
             executionPlanDate_HistoryModels = new List<ExecutionPlanDate_HistoryModel>();
             diagramModels = new List<DiagramModel>();
+            planSaleStockOnDateModels = new List<PlanSaleStockOnDateModel>();
         }
     }
 }

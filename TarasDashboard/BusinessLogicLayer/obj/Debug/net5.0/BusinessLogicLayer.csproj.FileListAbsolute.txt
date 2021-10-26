@@ -11,5 +11,4 @@ C:\Users\i.talavyria\Desktop\project\TarasDashboard\TarasDashboard\BusinessLogic
 C:\Users\i.talavyria\Desktop\project\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.pdb
 C:\Users\i.talavyria\Desktop\project\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\DataAccessLayer.dll
 C:\Users\i.talavyria\Desktop\project\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\DataAccessLayer.pdb
-C:\Users\i.talavyria\Desktop\project\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.csproj.CopyComplete
 C:\Users\i.talavyria\Desktop\project\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.csproj.AssemblyReference.cache

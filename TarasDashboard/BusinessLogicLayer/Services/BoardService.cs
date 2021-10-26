@@ -64,7 +64,7 @@ namespace BusinessLogicLayer.Services
         {
             DateTime dateTime = DateTime.Now;
 
-            if (dateTime.Minute >= 0)
+            if (dateTime.Minute == 0)
             {
                 try
                 {
@@ -93,6 +93,7 @@ namespace BusinessLogicLayer.Services
                     saleResponseModel.lastLines = lastLines;
                     saleResponseModel.executionPlanDate_HistoryModels = executionPlanDate_HistoryModels;
                     saleResponseModel.diagramModels = diagramModels;
+                    saleResponseModel.planSaleStockOnDateModels = planSaleStockOnDateModels;
                     saleResponseModel.Date = date;
                     saleResponseModel.Time = time;
                     saleResponseModel.Status = true;
@@ -103,7 +104,7 @@ namespace BusinessLogicLayer.Services
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
                     });
 
-                    //await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels);
+                    await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels, planSaleStockOnDateModels);
                 }
 
                 catch (Exception e)
@@ -118,8 +119,6 @@ namespace BusinessLogicLayer.Services
 
                     botClient = new TelegramBotClient(token);
 
-                    botClient.StartReceiving();
-
                     await botClient.SendTextMessageAsync(
                        chatId: _configuration["TelegramBot:CreatorId"],
                        text: e.Message
@@ -128,7 +127,7 @@ namespace BusinessLogicLayer.Services
             }      
         }
 
-        private async Task sendInTelegram(SaleResponseModel saleResponseModel, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels, List<DiagramModel> diagramModels)
+        private async Task sendInTelegram(SaleResponseModel saleResponseModel, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels, List<DiagramModel> diagramModels, List<PlanSaleStockOnDateModel> planSaleStockOnDateModels)
         {
             DateTime dateTime = DateTime.Now;
 
@@ -140,12 +139,10 @@ namespace BusinessLogicLayer.Services
 
                 botClient = new TelegramBotClient(token);
 
-                botClient.StartReceiving();
-
                 createPhoto1(saleResponseModel, executionPlanDate_HistoryModels);
                 createPhoto2(saleResponseModel);
                 createPhoto3(saleResponseModel);
-                createPhoto4(diagramModels, executionPlanDate_HistoryModels);
+                createPhoto4(diagramModels, executionPlanDate_HistoryModels, planSaleStockOnDateModels);
 
                 string message = $"данные на {dateTime.ToShortTimeString()} {dateTime.ToShortDateString()}";
                 
@@ -171,7 +168,6 @@ namespace BusinessLogicLayer.Services
                     photo: fileStream
                     );
             }
-
         }
 
         private void createPhoto1(SaleResponseModel saleResponseModel, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels)
@@ -229,7 +225,7 @@ namespace BusinessLogicLayer.Services
                 foreach (ExecutionPlanDate_HistoryModel executionPlanDate_HistoryModel in executionPlanDate_HistoryModels){
                     if (dateTime.Date == executionPlanDate_HistoryModel.Dates)
                     {
-                        planDate = Math.Round(executionPlanDate_HistoryModel.ExecutionPlanToDatePercent ?? 0);
+                        planDate = Math.Truncate(executionPlanDate_HistoryModel.ExecutionPlanToDatePercent ?? 0);
                         arc = float.Parse((planDate * 360 / 100).ToString());
 
                         chainFactToDate = Math.Round((executionPlanDate_HistoryModel.ChainFactToDate ?? 0) /1000000, 2);
@@ -556,7 +552,7 @@ namespace BusinessLogicLayer.Services
            bitmap.Save("Photo3.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
-        public void createPhoto4 (List<DiagramModel> diagramModels, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels)
+        public void createPhoto4(List<DiagramModel> diagramModels, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels, List<PlanSaleStockOnDateModel> planSaleStockOnDateModels)
         {
             Bitmap bitmap = new Bitmap(1920, 1090);
             using (Graphics graphic = Graphics.FromImage(bitmap))
@@ -585,11 +581,7 @@ namespace BusinessLogicLayer.Services
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
-                y1 = y2 = 120;
-
-                graphic.DrawLine(gray, x1, y1, x2, y2);
-
-                y1 = y2 = 220;
+                y1 = y2 = 170;
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
@@ -597,11 +589,7 @@ namespace BusinessLogicLayer.Services
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
-                y1 = y2 = 420;
-
-                graphic.DrawLine(gray, x1, y1, x2, y2);
-
-                y1 = y2 = 520;
+                y1 = y2 = 470;
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
@@ -623,14 +611,20 @@ namespace BusinessLogicLayer.Services
                 {
                     month = $"0{dateTime.Month}";
                 }
-                
+                else
+                {
+                    month = $"{dateTime.Month}";
+                }
+
                 x = 50;
                 int count = 0;
 
                 Font font = new Font("Helvetica Neue", 14);
                 SolidBrush drawBrush = new SolidBrush(Color.Black);
 
-                foreach (DiagramModel diagramModel in diagramModels)  // Fact
+                // Fact
+
+                foreach (DiagramModel diagramModel in diagramModels)
                 {
                     count++;
 
@@ -644,22 +638,22 @@ namespace BusinessLogicLayer.Services
 
                     using (SolidBrush brush = new SolidBrush(Color.FromArgb(38, 160, 252)))
                     {
-                        int value = int.Parse(Math.Round(((diagramModel.Value ?? 0)/100000),0).ToString());
+                        int value = int.Parse(Math.Round(((diagramModel.Value ?? 0) / 100000), 0).ToString());
 
                         if (value != 0)
                         {
-                            double scale = value * 1;
+                            double scale = Math.Round(value * 1.5,0);
                             value = int.Parse(scale.ToString());
                         }
 
-                        int temporarily = 600 - value;
-                        if (value == 0) 
+                        int temporarily = 600 + 150 - value;
+                        if (value == 0)
                         {
                             temporarily = 600;
                         }
 
-                        graphic.FillRectangle(brush, x + 5, 600 - value + 20, 35, 600 - temporarily);
-                    }              
+                        graphic.FillRectangle(brush, x + 5, 600 + 150 - value + 20, 35, 600 - temporarily);
+                    }
 
                     y = 630;
 
@@ -668,9 +662,9 @@ namespace BusinessLogicLayer.Services
 
                 y = 610;
 
-                int millions = 0;
+                int millions = 10;
 
-                for ( int z = 0; z <= 6; z++)
+                for (int z = 0; z <= 4; z++)
                 {
                     font = new Font("Helvetica Neue", 14);
 
@@ -679,11 +673,11 @@ namespace BusinessLogicLayer.Services
                     if (z != 0)
                     {
                         millions += 10;
-                        y -= 100;
+                        y -= 150;
                     }
 
                     x = 20;
-        
+
                     graphic.DrawString($"{millions}", font, drawBrush, x, y);
                 }
 
@@ -691,7 +685,9 @@ namespace BusinessLogicLayer.Services
                 count = 0;
                 int previousPlan = 0;
 
-                foreach (DiagramModel diagramModel in diagramModels)                 // Plan
+                // Plan
+
+                foreach (DiagramModel diagramModel in diagramModels)
                 {
                     count++;
 
@@ -699,17 +695,17 @@ namespace BusinessLogicLayer.Services
                     {
                         previousPlan = int.Parse(Math.Round(((diagramModel.Plan ?? 0) / 100000), 0).ToString());
 
-                        double scale = previousPlan * 1;
+                        double scale = Math.Round(previousPlan * 1.5,0);
                         previousPlan = int.Parse(scale.ToString());
 
                         Pen penElipce = new Pen(Color.FromArgb(38, 231, 166), 5);
 
-                        Rectangle rect = new Rectangle(x + 20, 600 - previousPlan + 18, 5, 5);
+                        Rectangle rect = new Rectangle(x + 20, 600 + 150 - previousPlan + 18, 5, 5);
 
                         graphic.DrawEllipse(penElipce, rect);
 
                         SolidBrush blueBrush = new SolidBrush(Color.FromArgb(38, 231, 166));
-                        rect = new Rectangle(x + 5, 590 - previousPlan, 40, 20);
+                        rect = new Rectangle(x + 5, 590 + 150 - previousPlan, 35, 20);
                         graphic.FillRectangle(blueBrush, rect);
 
                         font = new Font("Helvetica Neue", 12);
@@ -717,44 +713,43 @@ namespace BusinessLogicLayer.Services
 
                         decimal pl = Math.Round(((diagramModel.Plan ?? 0) / 1000000), 1);
 
-                        graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 - previousPlan);
+                        graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 + 150 - previousPlan);
 
                         font = new Font("Helvetica Neue", 12);
                         drawBrush = new SolidBrush(Color.Black);
 
                         decimal fact = Math.Round(((diagramModel.Value ?? 0) / 1000000), 1);
 
-                        graphic.DrawString((fact).ToString(), font, drawBrush, x + 5, 660 - previousPlan);
+                        graphic.DrawString((fact).ToString(), font, drawBrush, x + 5, 680 + 150 - previousPlan);
 
                     }
-                 
+
                     if (count != 1)
                     {
-                        x += 60;
 
                         int plan = int.Parse(Math.Round(((diagramModel.Plan ?? 0) / 100000), 0).ToString());
 
-
                         if (plan != 0)
                         {
+                            x += 60;
 
-                            double scale = plan * 1;
+                            double scale = Math.Round(plan * 1.5,0);
                             plan = int.Parse(scale.ToString());
 
                             Pen pen = new Pen(Color.FromArgb(38, 231, 166), 3);
 
-                            PointF point1 = new PointF(x - 35, 600 - previousPlan + 20);
-                            PointF point2 = new PointF(x + 25, 600 - plan + 20);
+                            PointF point1 = new PointF(x - 35, 600 + 150 - previousPlan + 20);
+                            PointF point2 = new PointF(x + 25, 600 + 150 - plan + 20);
 
                             graphic.DrawLine(pen, point1, point2);
 
                             Pen penElipce = new Pen(Color.FromArgb(38, 231, 166), 5);
-                            Rectangle rect = new Rectangle( x + 20, 600 - plan + 18, 5, 5);
+                            Rectangle rect = new Rectangle(x + 20, 600 + 150 - plan + 18, 5, 5);
 
                             graphic.DrawEllipse(penElipce, rect);
 
                             SolidBrush brush = new SolidBrush(Color.FromArgb(38, 231, 166));
-                            rect = new Rectangle(x + 5, 590 - plan, 40, 20);
+                            rect = new Rectangle(x + 5, 590 + 150 - plan, 35, 20);
 
                             graphic.FillRectangle(brush, rect);
 
@@ -763,19 +758,56 @@ namespace BusinessLogicLayer.Services
 
                             decimal pl = Math.Round(((diagramModel.Plan ?? 0) / 1000000), 1);
 
-                            graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 - plan);
+                            graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 + 150 - plan);
 
                             font = new Font("Helvetica Neue", 12);
                             drawBrush = new SolidBrush(Color.Black);
 
                             decimal fact = Math.Round(((diagramModel.Value ?? 0) / 1000000), 1);
 
-                            graphic.DrawString((fact).ToString(), font, drawBrush, x + 5, 660 - plan);
+                            graphic.DrawString((fact).ToString(), font, drawBrush, x + 5, 680 + 150 - plan);
 
                             previousPlan = plan;
                         }
-
                     }
+                }
+
+                // Future Plan
+
+                foreach (PlanSaleStockOnDateModel planSaleStockOnDateModel in planSaleStockOnDateModels)
+                {
+                    x += 60;
+
+                    int plan = int.Parse(Math.Round((planSaleStockOnDateModel.PlanSum / 100000), 0).ToString());
+
+                    double scale = Math.Round(plan * 1.5,0);
+                    plan = int.Parse(scale.ToString());
+
+                    Pen pen = new Pen(Color.FromArgb(38, 231, 166), 3);
+
+                    PointF point1 = new PointF(x - 35, 600 + 150 - previousPlan + 20);
+                    PointF point2 = new PointF(x + 25, 600 + 150 - plan + 20);
+
+                    graphic.DrawLine(pen, point1, point2);
+
+                    Pen penElipce = new Pen(Color.FromArgb(38, 231, 166), 5);
+                    Rectangle rect = new Rectangle(x + 20, 600 + 150 - plan + 18, 5, 5);
+
+                    graphic.DrawEllipse(penElipce, rect);
+
+                    SolidBrush brush = new SolidBrush(Color.FromArgb(38, 231, 166));
+                    rect = new Rectangle(x + 5, 590 + 150 - plan, 35, 20);
+
+                    graphic.FillRectangle(brush, rect);
+
+                    font = new Font("Helvetica Neue", 12);
+                    drawBrush = new SolidBrush(Color.Black);
+
+                    decimal pl = Math.Round((planSaleStockOnDateModel.PlanSum / 1000000), 1);
+
+                    graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 + 150 - plan);
+
+                    previousPlan = plan;
 
                 }
 
@@ -1412,11 +1444,22 @@ namespace BusinessLogicLayer.Services
             List<PlanSaleStockOnDateModel> planSaleStockOnDateModels = new List<PlanSaleStockOnDateModel>();
 
             DateTime today = DateTime.Now;
+
+            if (today.Day == 1)
+            {
+                return planSaleStockOnDateModels;
+            }
+
             var days = DateTime.DaysInMonth(today.Year, today.Month);
             DateTime lastDay = new DateTime(today.Year, today.Month, days);
 
             List<ItPlanSaleStockOnDate> itPlanSaleStockOnDates = await _planSaleStockOnDateRepository.getPlanSaleStocksToMonth(today, lastDay);
             List<ItPlanSaleStockOnDateModel> itPlanSaleStockOnDateModels = _mapper.Map<List<ItPlanSaleStockOnDate>, List<ItPlanSaleStockOnDateModel>>(itPlanSaleStockOnDates);
+
+            if (itPlanSaleStockOnDateModels.Count == 0)
+            {
+                return planSaleStockOnDateModels;
+            }
 
             var firstPlan = itPlanSaleStockOnDateModels.First();
             var lastPlan = itPlanSaleStockOnDateModels.Last();
@@ -1452,7 +1495,7 @@ namespace BusinessLogicLayer.Services
 
                 if (chId == itPlanSaleStockOnDateDModel.ChId)
                 {
-                    PlanSum += itPlanSaleStockOnDateDModel.PlanSum;
+                    PlanSum += Math.Round(itPlanSaleStockOnDateDModel.PlanSum,0);
                 }
                
                 chId = itPlanSaleStockOnDateDModel.ChId;
