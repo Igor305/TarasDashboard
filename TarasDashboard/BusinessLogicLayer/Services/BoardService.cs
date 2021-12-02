@@ -581,15 +581,19 @@ namespace BusinessLogicLayer.Services
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
-                y1 = y2 = 170;
+                y1 = y2 = 140;
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
-                y1 = y2 = 320;
+                y1 = y2 = 260;
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
-                y1 = y2 = 470;
+                y1 = y2 = 380;
+
+                graphic.DrawLine(gray, x1, y1, x2, y2);
+
+                y1 = y2 = 500;
 
                 graphic.DrawLine(gray, x1, y1, x2, y2);
 
@@ -642,7 +646,7 @@ namespace BusinessLogicLayer.Services
 
                         if (value != 0)
                         {
-                            double scale = Math.Round(value * 1.5,0);
+                            double scale = Math.Round(value * 1.25);
                             value = int.Parse(scale.ToString());
                         }
 
@@ -664,7 +668,7 @@ namespace BusinessLogicLayer.Services
 
                 int millions = 10;
 
-                for (int z = 0; z <= 4; z++)
+                for (int z = 0; z <= 5; z++)
                 {
                     font = new Font("Helvetica Neue", 14);
 
@@ -673,7 +677,7 @@ namespace BusinessLogicLayer.Services
                     if (z != 0)
                     {
                         millions += 10;
-                        y -= 150;
+                        y -= 120;
                     }
 
                     x = 20;
@@ -695,7 +699,7 @@ namespace BusinessLogicLayer.Services
                     {
                         previousPlan = int.Parse(Math.Round(((diagramModel.Plan ?? 0) / 100000), 0).ToString());
 
-                        double scale = Math.Round(previousPlan * 1.5,0);
+                        double scale = Math.Round(previousPlan * 1.25);
                         previousPlan = int.Parse(scale.ToString());
 
                         Pen penElipce = new Pen(Color.FromArgb(38, 231, 166), 5);
@@ -733,7 +737,7 @@ namespace BusinessLogicLayer.Services
                         {
                             x += 60;
 
-                            double scale = Math.Round(plan * 1.5,0);
+                            double scale = Math.Round(plan * 1.25);
                             plan = int.Parse(scale.ToString());
 
                             Pen pen = new Pen(Color.FromArgb(38, 231, 166), 3);
@@ -780,7 +784,7 @@ namespace BusinessLogicLayer.Services
 
                     int plan = int.Parse(Math.Round((planSaleStockOnDateModel.PlanSum / 100000), 0).ToString());
 
-                    double scale = Math.Round(plan * 1.5,0);
+                    double scale = Math.Round(plan * 1.25);
                     plan = int.Parse(scale.ToString());
 
                     Pen pen = new Pen(Color.FromArgb(38, 231, 166), 3);
