@@ -213,9 +213,7 @@ namespace BusinessLogicLayer.Services
 
                 DateTime dateTime = DateTime.Now;
 
-
-                    dateTime = DateTime.Now.AddDays(-1);
-
+                dateTime = DateTime.Now.AddDays(-1);
 
                 float arc = 0;
                 decimal planDate = 0;
@@ -277,6 +275,9 @@ namespace BusinessLogicLayer.Services
 
                 x = 990;
                 y = 800;
+
+                if (chainFactToDate < 100) x += 50;
+                if (chainPlanToDate < 100) x += 50;
 
                 graphic.DrawString($"{chainFactToDate}({chainPlanToDate})", font, drawBrush, x, y);
             }
@@ -646,17 +647,17 @@ namespace BusinessLogicLayer.Services
 
                         if (value != 0)
                         {
-                            double scale = Math.Round(value * 1.25);
+                            double scale = Math.Round(value * 1.2);
                             value = int.Parse(scale.ToString());
                         }
 
-                        int temporarily = 600 + 150 - value;
+                        int temporarily = 600 - value;
                         if (value == 0)
                         {
                             temporarily = 600;
                         }
 
-                        graphic.FillRectangle(brush, x + 5, 600 + 150 - value + 20, 35, 600 - temporarily);
+                        graphic.FillRectangle(brush, x + 5, 600 - value + 20, 35, 600 - temporarily);
                     }
 
                     y = 630;
@@ -666,7 +667,7 @@ namespace BusinessLogicLayer.Services
 
                 y = 610;
 
-                int millions = 10;
+                int millions = 0;
 
                 for (int z = 0; z <= 5; z++)
                 {
@@ -699,17 +700,17 @@ namespace BusinessLogicLayer.Services
                     {
                         previousPlan = int.Parse(Math.Round(((diagramModel.Plan ?? 0) / 100000), 0).ToString());
 
-                        double scale = Math.Round(previousPlan * 1.25);
+                        double scale = Math.Round(previousPlan * 1.2);
                         previousPlan = int.Parse(scale.ToString());
 
                         Pen penElipce = new Pen(Color.FromArgb(38, 231, 166), 5);
 
-                        Rectangle rect = new Rectangle(x + 20, 600 + 150 - previousPlan + 18, 5, 5);
+                        Rectangle rect = new Rectangle(x + 20, 600 - previousPlan + 18, 5, 5);
 
                         graphic.DrawEllipse(penElipce, rect);
 
                         SolidBrush blueBrush = new SolidBrush(Color.FromArgb(38, 231, 166));
-                        rect = new Rectangle(x + 5, 590 + 150 - previousPlan, 35, 20);
+                        rect = new Rectangle(x + 5, 590 - previousPlan, 35, 20);
                         graphic.FillRectangle(blueBrush, rect);
 
                         font = new Font("Helvetica Neue", 12);
@@ -717,14 +718,14 @@ namespace BusinessLogicLayer.Services
 
                         decimal pl = Math.Round(((diagramModel.Plan ?? 0) / 1000000), 1);
 
-                        graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 + 150 - previousPlan);
+                        graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 - previousPlan);
 
                         font = new Font("Helvetica Neue", 12);
                         drawBrush = new SolidBrush(Color.Black);
 
                         decimal fact = Math.Round(((diagramModel.Value ?? 0) / 1000000), 1);
 
-                        graphic.DrawString((fact).ToString(), font, drawBrush, x + 5, 680 + 150 - previousPlan);
+                        graphic.DrawString((fact).ToString(), font, drawBrush, x + 5, 650 - previousPlan);
 
                     }
 
@@ -737,23 +738,23 @@ namespace BusinessLogicLayer.Services
                         {
                             x += 60;
 
-                            double scale = Math.Round(plan * 1.25);
+                            double scale = Math.Round(plan * 1.2);
                             plan = int.Parse(scale.ToString());
 
                             Pen pen = new Pen(Color.FromArgb(38, 231, 166), 3);
 
-                            PointF point1 = new PointF(x - 35, 600 + 150 - previousPlan + 20);
-                            PointF point2 = new PointF(x + 25, 600 + 150 - plan + 20);
+                            PointF point1 = new PointF(x - 35, 600 - previousPlan + 20);
+                            PointF point2 = new PointF(x + 25, 600 - plan + 20);
 
                             graphic.DrawLine(pen, point1, point2);
 
                             Pen penElipce = new Pen(Color.FromArgb(38, 231, 166), 5);
-                            Rectangle rect = new Rectangle(x + 20, 600 + 150 - plan + 18, 5, 5);
+                            Rectangle rect = new Rectangle(x + 20, 600 - plan + 18, 5, 5);
 
                             graphic.DrawEllipse(penElipce, rect);
 
                             SolidBrush brush = new SolidBrush(Color.FromArgb(38, 231, 166));
-                            rect = new Rectangle(x + 5, 590 + 150 - plan, 35, 20);
+                            rect = new Rectangle(x + 5, 590 - plan, 35, 20);
 
                             graphic.FillRectangle(brush, rect);
 
@@ -762,14 +763,14 @@ namespace BusinessLogicLayer.Services
 
                             decimal pl = Math.Round(((diagramModel.Plan ?? 0) / 1000000), 1);
 
-                            graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 + 150 - plan);
+                            graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 - plan);
 
                             font = new Font("Helvetica Neue", 12);
                             drawBrush = new SolidBrush(Color.Black);
 
                             decimal fact = Math.Round(((diagramModel.Value ?? 0) / 1000000), 1);
 
-                            graphic.DrawString((fact).ToString(), font, drawBrush, x + 5, 680 + 150 - plan);
+                            graphic.DrawString((fact).ToString(), font, drawBrush, x + 5, 680 - plan);
 
                             previousPlan = plan;
                         }
@@ -784,23 +785,23 @@ namespace BusinessLogicLayer.Services
 
                     int plan = int.Parse(Math.Round((planSaleStockOnDateModel.PlanSum / 100000), 0).ToString());
 
-                    double scale = Math.Round(plan * 1.25);
+                    double scale = Math.Round(plan * 1.2);
                     plan = int.Parse(scale.ToString());
 
                     Pen pen = new Pen(Color.FromArgb(38, 231, 166), 3);
 
-                    PointF point1 = new PointF(x - 35, 600 + 150 - previousPlan + 20);
-                    PointF point2 = new PointF(x + 25, 600 + 150 - plan + 20);
+                    PointF point1 = new PointF(x - 35, 600 - previousPlan + 20);
+                    PointF point2 = new PointF(x + 25, 600 - plan + 20);
 
                     graphic.DrawLine(pen, point1, point2);
 
                     Pen penElipce = new Pen(Color.FromArgb(38, 231, 166), 5);
-                    Rectangle rect = new Rectangle(x + 20, 600 + 150 - plan + 18, 5, 5);
+                    Rectangle rect = new Rectangle(x + 20, 600 - plan + 18, 5, 5);
 
                     graphic.DrawEllipse(penElipce, rect);
 
                     SolidBrush brush = new SolidBrush(Color.FromArgb(38, 231, 166));
-                    rect = new Rectangle(x + 5, 590 + 150 - plan, 35, 20);
+                    rect = new Rectangle(x + 5, 590 - plan, 35, 20);
 
                     graphic.FillRectangle(brush, rect);
 
@@ -809,7 +810,7 @@ namespace BusinessLogicLayer.Services
 
                     decimal pl = Math.Round((planSaleStockOnDateModel.PlanSum / 1000000), 1);
 
-                    graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 + 150 - plan);
+                    graphic.DrawString((pl).ToString(), font, drawBrush, x + 5, 590 - plan);
 
                     previousPlan = plan;
 

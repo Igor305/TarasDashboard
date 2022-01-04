@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\i.talavyria\\Desktop\\project\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {}
+    "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\i.talavyria\\Desktop\\project\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\i.talavyria\\Desktop\\project\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\i.talavyria\\Desktop\\project\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectPath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
         "packagesPath": "C:\\Users\\i.talavyria\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\i.talavyria\\Desktop\\project\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\obj\\",
+        "outputPath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\i.talavyria\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

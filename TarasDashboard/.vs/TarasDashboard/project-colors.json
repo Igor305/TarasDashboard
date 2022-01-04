@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "41068128-c1ac-463d-8762-bcdab8486dca": {
+      "ProjectGuid": "41068128-c1ac-463d-8762-bcdab8486dca",
+      "DisplayName": "BusinessLogicLayer",
+      "ColorIndex": 0
+    },
+    "b15b9a75-5039-4996-96e3-ae4d52899f81": {
+      "ProjectGuid": "b15b9a75-5039-4996-96e3-ae4d52899f81",
+      "DisplayName": "TarasDashboard",
+      "ColorIndex": 1
+    },
+    "201694a9-78ce-48b2-ac83-7e3974611544": {
+      "ProjectGuid": "201694a9-78ce-48b2-ac83-7e3974611544",
+      "DisplayName": "DataAccessLayer",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

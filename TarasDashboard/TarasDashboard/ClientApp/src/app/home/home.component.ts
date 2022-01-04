@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
   executionPlanToDatePercentString : string;
   chainFactToDate : string;
   chainPlanToDate : string;
-  
+
   responseModel: SaleResponseModel;
   saleOracle: SaleOracleModel;
   percentOnlineStockLast: number;
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(){
 
-    this.check = 4;
+    this.check = 1;
 
     setInterval(()=> this.getSale(),30000);
     setInterval(()=> this.getCheck(),30000);
@@ -118,10 +118,10 @@ export class HomeComponent implements OnInit {
     this.saleHistoryModels = this.responseModel.executionPlanDate_HistoryModels;
     this.diagramModels = this.responseModel.diagramModels;
     this.planSaleStockOnDateModels = this.responseModel.planSaleStockOnDateModels;
-
-    let date = new Date(Date.now()-86400000) 
+    let date = new Date(Date.now()-86400000)
 
     for (let saleStatistic of this.saleStatisticModels){
+      if (saleStatistic.lfl == undefined) { saleStatistic.lfl = 0}
       saleStatistic.lflString = saleStatistic.lfl.toFixed(2);
     }
 
@@ -132,12 +132,12 @@ export class HomeComponent implements OnInit {
     for(let saleHistoryModel of this.saleHistoryModels ){
 
       this.plans.push(saleHistoryModel.chainPlanDay);
-      this.facts.push(saleHistoryModel.chainFactDay);  
+      this.facts.push(saleHistoryModel.chainFactDay);
 
-      let dateString = "";  
+      let dateString = "";
 
       if (date.getDate() < 10){
-        dateString = saleHistoryModel.dateString.split('.')[0].slice(1);       
+        dateString = saleHistoryModel.dateString.split('.')[0].slice(1);
       }
 
       if (date.getDate() >= 10){
@@ -145,9 +145,9 @@ export class HomeComponent implements OnInit {
       }
 
       if (date.getUTCDate().toString() == dateString ){
-    
+
         this.executionPlanToDatePercentString = Math.trunc(saleHistoryModel.executionPlanToDatePercent).toFixed(0);
-        this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;      
+        this.executionPlanToDatePercent = saleHistoryModel.executionPlanToDatePercent;
         this.executionPlanToDatePercentLast = 100 - saleHistoryModel.executionPlanToDatePercent;
         this.chainFactToDate = (saleHistoryModel.chainFactToDate / 1000000).toFixed(2);
         this.chainPlanToDate = (saleHistoryModel.chainPlanToDate / 1000000).toFixed(2);
@@ -155,13 +155,13 @@ export class HomeComponent implements OnInit {
     }
 
     this.planSaleStockOnDateModels.forEach(planSaleStockOnDateModel => {
-      this.plans.push(planSaleStockOnDateModel.planSum);     
+      this.plans.push(planSaleStockOnDateModel.planSum);
     });
 
     this.saleHistoryModels.reverse();
 
     for(let diagramModel of this.diagramModels ){
-        this.dates.push(diagramModel.name);      
+        this.dates.push(diagramModel.name);
     }
 
     this.chartOptions = {
@@ -255,11 +255,11 @@ export class HomeComponent implements OnInit {
             offsetY: 0,
         },
       }
-    }; 
+    };
   }
 
   public async getExcel(){
-    
+
     let saleRegionsModels = this.saleRegionsModels;
     saleRegionsModels.push(this.lastLines);
 

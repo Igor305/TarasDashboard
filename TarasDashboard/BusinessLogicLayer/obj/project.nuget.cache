@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s0LClIcQkam8nzC4M1+oXVpTV+Zdt37iopm3KQIL2ocWlb0qNudb8zqdStX1zHhqisb3t8zI3gfL6wRiV5MaLQ==",
+  "dgSpecHash": "PpCJZxGzqDqIQ/XS6IYR3BSgKlIOx5t0bZ1AMAGtpbyat+biLCviQnM2bgSCUFcCfwAJitRtgkXCsfAwnKfyFQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\i.talavyria\\Desktop\\project\\TarasDashboard\\TarasDashboard\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
+  "projectFilePath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\i.talavyria\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\i.talavyria\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512",

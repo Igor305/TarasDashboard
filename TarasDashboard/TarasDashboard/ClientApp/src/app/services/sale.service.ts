@@ -43,8 +43,6 @@ export class SaleService {
 
   }
 
-  console.log(data);
-
   let workbook = new Workbook();
   let worksheet = workbook.addWorksheet('Sales By Regions');
 

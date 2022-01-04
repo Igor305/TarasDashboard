@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XJjkFUgb9dzUMVSakxsGZbVs0iTRl+E1DSX9cqlteWJr1TQ6cXXuBVicvPmhN88M+hfrhrimtMgLFGodBk6N7A==",
+  "dgSpecHash": "2h6JDRuEL2sEM3DCvjJHA14/0Wby3iaDHDOQw5Rbhdy28m20jO2fFYJlotUFECv2eMNxVQ10MhgmZhUWHKNNnA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\i.talavyria\\Desktop\\project\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
+  "projectFilePath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\i.talavyria\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512",
     "C:\\Users\\i.talavyria\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
