@@ -55,7 +55,14 @@ namespace BusinessLogicLayer.Services
 
         public SaleResponseModel getStaticSale()
         {
-            SaleResponseModel saleResponseModel = _memoryCache.Get<SaleResponseModel>("responseModel");
+            SaleResponseModel saleResponseModel = new SaleResponseModel();
+            try
+            {
+                saleResponseModel = _memoryCache.Get<SaleResponseModel>("responseModel");
+            }
+            catch (Exception ex)
+            {
+            }
 
             return saleResponseModel;
         }
