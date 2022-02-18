@@ -9,7 +9,7 @@ namespace DataAccessLayer
     {
         public Shop()
         {
-            BitrixResponses = new HashSet<BitrixResponse>();
+            /*BitrixResponses = new HashSet<BitrixResponse>();
             LinkedShopFirstShops = new HashSet<LinkedShop>();
             LinkedShopSecondShops = new HashSet<LinkedShop>();
             MediaFolders = new HashSet<MediaFolder>();
@@ -22,21 +22,21 @@ namespace DataAccessLayer
             ShopOptimizationSchedules = new HashSet<ShopOptimizationSchedule>();
             ShopProviders = new HashSet<ShopProvider>();
             ShopRents = new HashSet<ShopRent>();
-            Subleases = new HashSet<Sublease>();
+            Subleases = new HashSet<Sublease>();*/
         }
 
         public int Id { get; set; }
-        public DateTime CreatedDate { get; set; }
+        /*public DateTime CreatedDate { get; set; }
         public string Schedule { get; set; }
         public double TotalArea { get; set; }
         public double TradingArea { get; set; }
         public double UtilityRoomArea { get; set; }
         public int? ShopNumber { get; set; }
         public DateTime? OpenFrom { get; set; }
-        public int? StreetId { get; set; }
+        public int? StreetId { get; set; }*/
         public int StatusId { get; set; }
         public int? RegionId { get; set; }
-        public int? CityId { get; set; }
+        /*public int? CityId { get; set; }
         public string WorkPhoneNumber { get; set; }
         public int? ShopRegionId { get; set; }
         public string CreatedByUserId { get; set; }
@@ -103,6 +103,6 @@ namespace DataAccessLayer
         public virtual ICollection<ShopOptimizationSchedule> ShopOptimizationSchedules { get; set; }
         public virtual ICollection<ShopProvider> ShopProviders { get; set; }
         public virtual ICollection<ShopRent> ShopRents { get; set; }
-        public virtual ICollection<Sublease> Subleases { get; set; }
+        public virtual ICollection<Sublease> Subleases { get; set; }*/
     }
 }
