@@ -53,7 +53,7 @@ namespace DataAccessLayer
         public string DevelopmentDepartmentCoordinatorComments { get; set; }
         public DateTime? DateOfStudy { get; set; }
         public string DistrinutionDepartmentComments { get; set; }
-        public string Itequipment { get; set; }
+        public int? ShopITEquipmentId { get; set; }
         public string Logistics { get; set; }
         public string PriceList { get; set; }
         public int RevenuePlan { get; set; }

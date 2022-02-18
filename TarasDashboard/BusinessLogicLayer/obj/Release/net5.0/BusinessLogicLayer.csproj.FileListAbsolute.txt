@@ -15,7 +15,6 @@ C:\Users\i.talavyria\Desktop\project\TarasDashboard\TarasDashboard\BusinessLogic
 C:\Users\i.talavyria\Desktop\project\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Release\net5.0\BusinessLogicLayer.csproj.AssemblyReference.cache
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Release\net5.0\BusinessLogicLayer.deps.json
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Release\net5.0\BusinessLogicLayer.dll
-C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Release\net5.0\ref\BusinessLogicLayer.dll
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Release\net5.0\BusinessLogicLayer.pdb
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Release\net5.0\DataAccessLayer.dll
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Release\net5.0\DataAccessLayer.pdb
@@ -28,3 +27,4 @@ C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\Busin
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Release\net5.0\BusinessLogicLayer.dll
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Release\net5.0\ref\BusinessLogicLayer.dll
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Release\net5.0\BusinessLogicLayer.pdb
+C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Release\net5.0\refint\BusinessLogicLayer.dll

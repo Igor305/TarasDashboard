@@ -730,9 +730,9 @@ namespace DataAccessLayer.AppContext
 
                 entity.Property(e => e.DistrinutionDepartmentComments).HasMaxLength(1024);
 
-                entity.Property(e => e.Itequipment)
+                entity.Property(e => e.ShopITEquipmentId)
                     .HasMaxLength(1024)
-                    .HasColumnName("ITEquipment");
+                    .HasColumnName("ShopITEquipmentId");
 
                 entity.Property(e => e.LandlordLoyaltyComments).HasMaxLength(512);
 
