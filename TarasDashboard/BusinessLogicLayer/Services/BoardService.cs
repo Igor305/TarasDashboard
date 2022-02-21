@@ -71,7 +71,7 @@ namespace BusinessLogicLayer.Services
         {
             DateTime dateTime = DateTime.Now;
 
-            if (dateTime.Minute >= 29)
+            if (dateTime.Minute == 0)
             {
                 try
                 {
