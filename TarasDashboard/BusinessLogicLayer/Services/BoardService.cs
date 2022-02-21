@@ -71,7 +71,7 @@ namespace BusinessLogicLayer.Services
         {
             DateTime dateTime = DateTime.Now;
 
-            if (dateTime.Minute == 0)
+            if (dateTime.Minute >= 29)
             {
                 try
                 {
@@ -1176,7 +1176,7 @@ namespace BusinessLogicLayer.Services
 
             for (int x = 3; x < 28; x++)
             {
-                var value = htmlDoc.DocumentNode.SelectSingleNode($"//*[@id='sort-table']/table/tr[{x}]/td[5]");
+                var value = htmlDoc.DocumentNode.SelectSingleNode($"//*[@id='sort-table']/table/tr[{x}]/td[3]");
 
                 string text = value.OuterHtml;
 
