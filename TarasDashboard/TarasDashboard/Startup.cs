@@ -32,6 +32,7 @@ namespace TarasDashboard
             services.AddHostedService<TimedHostedService>();
             services.AddDbContext<Avrora37Context>(opts => opts.UseSqlServer(Configuration["ConnectionString:SQL31"]));
             services.AddDbContext<ShopsContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:SQL26"]));
+            services.AddDbContext<AvroraContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:SQL03"]));
 
             services.AddScoped<ISaleOracleRepository, SaleOracleRepository>();
             services.AddScoped<ISaleStatisticRepository, SaleStatisticRepository>();
@@ -41,6 +42,7 @@ namespace TarasDashboard
             services.AddScoped<IShopsRepository, ShopsRepository>();
             services.AddScoped<IPlanSaleStockOnDateRepository, PlanSaleStockOnDateRepository>();
             services.AddScoped<IPlanSaleStockOnDateDRepository, PlanSaleStockOnDateDRepository>();
+            services.AddScoped<IIndicatorsByNumberOfStoreRepository, IndicatorsByNumberOfStoreRepository>();
 
             services.AddScoped<IBoardService, BoardService>();
             services.AddControllers();

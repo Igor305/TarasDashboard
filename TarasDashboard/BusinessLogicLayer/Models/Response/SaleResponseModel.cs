@@ -11,6 +11,7 @@ namespace BusinessLogicLayer.Models.Response
         public List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels { get; set; }
         public List<DiagramModel> diagramModels { get; set; }
         public List<PlanSaleStockOnDateModel> planSaleStockOnDateModels { get; set; }
+        public IndicatorsByNumberOfStoreModel indicatorsByNumberOfStoreModel { get; set; }
         public string Date {get; set;} 
         public string Time { get; set; }
         public bool Status { get; set; }

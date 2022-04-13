@@ -4,6 +4,7 @@ using BusinessLogicLayer.Models.Response;
 using BusinessLogicLayer.Services.Interfaces;
 using DataAccessLayer;
 using DataAccessLayer.Entities;
+using DataAccessLayer.Entities.Avrora;
 using DataAccessLayer.Repositories.Interfaces;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Caching.Memory;
@@ -33,11 +34,13 @@ namespace BusinessLogicLayer.Services
         private readonly IExecutionPlanDate_HistoryRepository _executionPlanDate_HistoryRepository;
         private readonly IPlanSaleStockOnDateRepository _planSaleStockOnDateRepository;
         private readonly IPlanSaleStockOnDateDRepository _planSaleStockOnDateDRepository;
+        private readonly IIndicatorsByNumberOfStoreRepository _indicatorsByNumberOfStoreRepository;
 
 
         public BoardService(IMapper mapper, IMemoryCache memoryCache, IConfiguration configuration, IShopsRepository shopsRepository, IRegionsLocalizationRepository regionsLocalizationRepository, 
                             ISaleOracleRepository saleOracleRepository, ISaleStatisticRepository saleStatisticRepository, ISaleLast30Days_ByRegionRepository saleLast30Days_ByRegionRepository,
-                            IExecutionPlanDate_HistoryRepository executionPlanDate_HistoryRepository, IPlanSaleStockOnDateRepository planSaleStockOnDateRepository, IPlanSaleStockOnDateDRepository planSaleStockOnDateDRepository)
+                            IExecutionPlanDate_HistoryRepository executionPlanDate_HistoryRepository, IPlanSaleStockOnDateRepository planSaleStockOnDateRepository, IPlanSaleStockOnDateDRepository planSaleStockOnDateDRepository,
+                            IIndicatorsByNumberOfStoreRepository indicatorsByNumberOfStoreRepository)
         {
             _mapper = mapper;
             _memoryCache = memoryCache;
@@ -51,6 +54,7 @@ namespace BusinessLogicLayer.Services
             _executionPlanDate_HistoryRepository = executionPlanDate_HistoryRepository;
             _planSaleStockOnDateRepository = planSaleStockOnDateRepository;
             _planSaleStockOnDateDRepository = planSaleStockOnDateDRepository;
+            _indicatorsByNumberOfStoreRepository = indicatorsByNumberOfStoreRepository;
         }
 
         public SaleResponseModel getStaticSale()
@@ -89,6 +93,8 @@ namespace BusinessLogicLayer.Services
 
                     List<PlanSaleStockOnDateModel> planSaleStockOnDateModels = await getPlanSaleStockOnDate();
 
+                    IndicatorsByNumberOfStoreModel indicatorsByNumberOfStoreModel = await getIndicatorsByNumberOfStore();
+
                     string date = DateTime.Now.ToShortDateString();
                     string time = DateTime.Now.ToShortTimeString();
 
@@ -101,6 +107,7 @@ namespace BusinessLogicLayer.Services
                     saleResponseModel.executionPlanDate_HistoryModels = executionPlanDate_HistoryModels;
                     saleResponseModel.diagramModels = diagramModels;
                     saleResponseModel.planSaleStockOnDateModels = planSaleStockOnDateModels;
+                    saleResponseModel.indicatorsByNumberOfStoreModel = indicatorsByNumberOfStoreModel;
                     saleResponseModel.Date = date;
                     saleResponseModel.Time = time;
                     saleResponseModel.Status = true;
@@ -1520,6 +1527,15 @@ namespace BusinessLogicLayer.Services
             });
 
             return planSaleStockOnDateModels;
+        }
+
+        public async Task<IndicatorsByNumberOfStoreModel> getIndicatorsByNumberOfStore()
+        {
+            IndicatorsByNumberOfStore indicatorsByNumberOfStore = await _indicatorsByNumberOfStoreRepository.get();
+
+            IndicatorsByNumberOfStoreModel indicatorsByNumberOfStoreModel = _mapper.Map<IndicatorsByNumberOfStore, IndicatorsByNumberOfStoreModel>(indicatorsByNumberOfStore);
+
+            return indicatorsByNumberOfStoreModel;
         }
     }
 }

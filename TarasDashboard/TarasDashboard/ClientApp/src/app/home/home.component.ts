@@ -5,6 +5,7 @@ import { SaleHistoryModel } from '../models/sale.history.model';
 import { SaleOracleModel } from '../models/sale.oracle.model';
 import { SaleRegionsModel } from '../models/sale.regions.model';
 import { SaleStatisticModel } from '../models/sale.statistic.model';
+import { IndicatorsByNumberOfStoreModel } from '../models/indicators.by.number.of.store.model';
 import { SaleService } from '../services/sale.service';
 
 import {
@@ -17,6 +18,7 @@ import {
   ApexTitleSubtitle,
   ApexXAxis
 } from "ng-apexcharts";
+
 import { ConditionalExpr } from '@angular/compiler';
 import { PlanSaleStockOnDateModel } from '../models/plan.sale.stock.on.date.model';
 
@@ -75,6 +77,8 @@ export class HomeComponent implements OnInit {
 
   planSaleStockOnDateModels : PlanSaleStockOnDateModel[];
 
+  indicatorsByNumberOfStoreModel : IndicatorsByNumberOfStoreModel;
+
   plans = []
   facts = []
   dates = []
@@ -98,7 +102,8 @@ export class HomeComponent implements OnInit {
       case 1 : this.check = 2;break;
       case 2 : this.check = 3;break;
       case 3 : this.check = 4;break;
-      case 4 : this.check = 1;break;
+      case 4 : this.check = 5;break;
+      case 5 : this.check = 1;break;
     }
   }
 
@@ -118,6 +123,8 @@ export class HomeComponent implements OnInit {
     this.saleHistoryModels = this.responseModel.executionPlanDate_HistoryModels;
     this.diagramModels = this.responseModel.diagramModels;
     this.planSaleStockOnDateModels = this.responseModel.planSaleStockOnDateModels;
+    this.indicatorsByNumberOfStoreModel = this.responseModel.indicatorsByNumberOfStoreModel;
+
     let date = new Date(Date.now()-86400000)
 
     for (let saleStatistic of this.saleStatisticModels){

@@ -2,6 +2,7 @@
 using BusinessLogicLayer.Models;
 using DataAccessLayer;
 using DataAccessLayer.Entities;
+using DataAccessLayer.Entities.Avrora;
 
 namespace BusinessLogicLayer.AutoHelper
 {
@@ -17,6 +18,8 @@ namespace BusinessLogicLayer.AutoHelper
             CreateMap<ExecutionPlanDateHistory, ExecutionPlanDate_HistoryModel>();
             CreateMap<ItPlanSaleStockOnDate, ItPlanSaleStockOnDateModel>();
             CreateMap<ItPlanSaleStockOnDateD, ItPlanSaleStockOnDateDModel>();
+            CreateMap<IndicatorsByNumberOfStore, IndicatorsByNumberOfStoreModel>();
+            CreateMap<IndicatorsByNumberOfStoreModel, IndicatorsByNumberOfStore>();
         }
     }
 }
