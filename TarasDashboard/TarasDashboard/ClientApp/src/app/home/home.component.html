@@ -7,13 +7,13 @@
             <div class = 'block2'>
                 <div *ngIf="(saleOracle.avgCheck != 0)">
                     <div class = 'mini-flex'>
-                        <div class = 'block2Text'>СЧ:</div>
+                        <div class = 'block2Text'>AC:</div>
                         <div class = 'block2Value'>{{saleOracle.avgCheck}}</div>
                     </div>
                 </div>
                 <div  *ngIf="(saleOracle.avgCheck == 0)">
                     <div class = 'mini-flex'>
-                        <div class = 'block2TextZero'>СЧ:</div>
+                        <div class = 'block2TextZero'>AC:</div>
                         <div class = 'block2ValueZero'>{{saleOracle.avgCheck}}</div>
                     </div>
                 </div>
@@ -64,19 +64,19 @@
         <div class = "flex">
             <table mat-table [dataSource]="saleStatisticModels" class = 'table'>
                 <ng-container matColumnDef="dateOfString">
-                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Дата </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Date </th>
                     <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.dateOfString}} </td>
                 </ng-container>
                 <ng-container matColumnDef="tsumCc_Wt">
-                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> Р </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> S </th>
                     <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.tsumCc_Wt}} </td>
                 </ng-container>
                 <ng-container matColumnDef="avgCheck">
-                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> СЧ </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> AC </th>
                     <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.avgCheck}} </td>
                 </ng-container>
                 <ng-container matColumnDef="rec">
-                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> ОП </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> IG </th>
                     <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.rec}} </td>
                 </ng-container>
                 <ng-container matColumnDef="margin">
@@ -84,7 +84,7 @@
                     <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.margin}} </td>
                 </ng-container>
                 <ng-container matColumnDef="turnover">
-                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> О </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thStatistic"> T </th>
                     <td mat-cell *matCellDef="let element" class = "tdStatistic"> {{element.turnover}} </td>
                 </ng-container>
                 <ng-container matColumnDef="LFL">
@@ -187,27 +187,27 @@
         <div class="table-container">
             <table mat-table [dataSource]="saleHistoryModels" class = 'table'>
                 <ng-container matColumnDef="dates">
-                    <th mat-header-cell *matHeaderCellDef class = "thHistory"  > Дата </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thHistory"  > Date </th>
                     <td mat-cell *matCellDef="let element" class = "tdHistory"> {{element.dateString}} </td>
                 </ng-container>
                 <ng-container matColumnDef="stocksQty">
-                    <th mat-header-cell *matHeaderCellDef class = "thHistory"> К-во ТТ </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thHistory"> Stores Qty </th>
                     <td mat-cell *matCellDef="let element" class = "tdHistory"> {{element.stocksQty}} </td>
                 </ng-container>
                 <ng-container matColumnDef="chainPlanDay">
-                    <th mat-header-cell *matHeaderCellDef class = "thHistory"> План выручки </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thHistory"> Sales (plan)</th>
                     <td mat-cell *matCellDef="let element" class = "tdHistory"> {{element.chainPlanDayString}} </td>
                 </ng-container>
                 <ng-container matColumnDef="chainFactDay">
-                    <th mat-header-cell *matHeaderCellDef class = "thHistory" > Факт выручки </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thHistory" > Sales (fact) </th>
                     <td mat-cell *matCellDef="let element" class = "tdHistory"> {{element.chainFactDayString}} </td>
                 </ng-container>
                 <ng-container matColumnDef="executionPlanDayPercent">
-                    <th mat-header-cell *matHeaderCellDef class = "thHistory"> Выполнение, % </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thHistory"> Execution, % </th>
                     <td mat-cell *matCellDef="let element" class = "tdHistory"> {{element.executionPlanDayPercent}} %</td>
                 </ng-container>
                 <ng-container matColumnDef="executionPlanDayUah">
-                    <th mat-header-cell *matHeaderCellDef class = "thHistory"> Выполнение </th>
+                    <th mat-header-cell *matHeaderCellDef class = "thHistory"> Execution </th>
                     <td mat-cell *matCellDef="let element" class = "tdHistory"> {{element.executionPlanDayUahString}} </td>
                 </ng-container>
 
@@ -219,15 +219,15 @@
 
     <article *ngIf="(check == 5)" class = 'flex'>
         <div class = 'receivedCount'>
-            <div class = 'receivedCountText'>ТТ приняли товар</div>
-            <div class = 'receivedCountNotification'>(последние 5 дней)</div>
-            <div class = 'receivedCountValue'>{{this.indicatorsByNumberOfStoreModel.receivedCount}}</div>
+            <div class = 'receivedCountText'>Received goods, qty of stores</div>
+            <div class = 'receivedCountNotification'>5 days(Last 5 days)</div>
+            <div class = 'receivedCountValue'>{{this.indicatorsByNumberOfStoreModel.receivedCount}} ({{this.indicatorsByNumberOfStoreModel.receivedCountYesterday}})</div>
         </div>
 
         <div class = 'saleCount' >
-            <div class = 'saleCountText'>ТТ с продажами</div>
-            <div class = 'saleCountNotification'>(сегодня)</div>
-            <div class = 'saleCountValue'>{{this.indicatorsByNumberOfStoreModel.saleCount}}</div>
+            <div class = 'saleCountText'>Sales, qty of stores</div>
+            <div class = 'saleCountNotification'>Today (Yesterday)</div>
+            <div class = 'saleCountValue'>{{this.indicatorsByNumberOfStoreModel.saleCount}} ({{this.indicatorsByNumberOfStoreModel.saleCountYesterday}})</div>
         </div>
     </article>
 

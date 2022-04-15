@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(){
 
-    this.check = 1;
+    this.check = 3;
 
     setInterval(()=> this.getSale(),30000);
     setInterval(()=> this.getCheck(),30000);
@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit {
       case 1 : this.check = 2;break;
       case 2 : this.check = 3;break;
       case 3 : this.check = 4;break;
-      case 4 : this.check = 5;break;
+      case 4 : this.check = 3;break;
       case 5 : this.check = 1;break;
     }
   }
@@ -116,6 +116,7 @@ export class HomeComponent implements OnInit {
 
     this.saleStatisticModels = this.responseModel.saleStatisticModels;
     this.saleRegionsModels = this.responseModel.saleRegionsModels;
+    console.log(this.saleRegionsModels)
     this.dateTime = this.responseModel.date + " " + this.responseModel.time;
 
     this.lastLines = this.responseModel.lastLines;
@@ -174,12 +175,12 @@ export class HomeComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: "Факт",
+          name: "Fact",
           type: "column",
           data: this.facts
         },
         {
-          name: "План",
+          name: "Plan",
           type: "line",
           data: this.plans
         }

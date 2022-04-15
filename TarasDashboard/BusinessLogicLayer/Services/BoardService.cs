@@ -998,26 +998,7 @@ namespace BusinessLogicLayer.Services
             foreach (SaleStatisticModel saleStatisticModel in saleStatisticModels)
             {
                 saleStatisticModel.Turnover = Math.Round(saleStatisticModel.Turnover);
-
-                string month = "";
-
-                switch (saleStatisticModel.DateOfData.Month)
-                {
-                    case 1: month = "січня"; break;
-                    case 2: month = "лютого"; break;
-                    case 3: month = "березня"; break;
-                    case 4: month = "квітня"; break;
-                    case 5: month = "травня"; break;
-                    case 6: month = "червня"; break;
-                    case 7: month = "липня"; break;
-                    case 8: month = "серпня"; break;
-                    case 9: month = "вересня"; break;
-                    case 10: month = "жовтня"; break;
-                    case 11: month = "листопада"; break;
-                    case 12: month = "грудня"; break;
-                }
-
-                saleStatisticModel.DateOfString = $"{saleStatisticModel.DateOfData.Day} {month}";
+                saleStatisticModel.DateOfString = $"{saleStatisticModel.DateOfData.ToShortDateString()}";
             }
 
             return saleStatisticModels;
@@ -1166,7 +1147,39 @@ namespace BusinessLogicLayer.Services
                 }
             }
 
-            saleRegionsModels = getPercentsSalesForOnePeople(saleRegionsModels);
+         saleRegionsModels = getPercentsSalesForOnePeople(saleRegionsModels);
+
+            foreach (var saleRegionsModel in saleRegionsModels)
+            {
+                 switch (saleRegionsModel.Name)
+                 {
+                     case "Вінницька": saleRegionsModel.Name = "Vinnytsia region"; break;
+                     case "Волинська": saleRegionsModel.Name = "Volyn region"; break;
+                     case "Дніпропетровська": saleRegionsModel.Name = "Dnipropetrovsk region"; break;
+                     case "Донецька": saleRegionsModel.Name = "Donetsk region"; break;
+                     case "Житомирська": saleRegionsModel.Name = "Zhytomyr region"; break;
+                     case "Закарпатська": saleRegionsModel.Name = "Zakarpattia region"; break;
+                     case "Запорізька": saleRegionsModel.Name = "Zaporizhzhia region"; break;
+                     case "Івано-Франківська": saleRegionsModel.Name = "Ivano-Frankivsk region"; break;
+                     case "Київ": saleRegionsModel.Name = "Kyiv"; break;
+                     case "Київська": saleRegionsModel.Name = "Kyiv region"; break;
+                     case "Кіровоградська": saleRegionsModel.Name = "Kirovohrad region"; break;
+                     case "Луганська": saleRegionsModel.Name = "Luhansk region"; break;
+                     case "Львівська": saleRegionsModel.Name = "Lviv region"; break;
+                     case "Миколаївська": saleRegionsModel.Name = "Mykolaiv region"; break;
+                     case "Одеська": saleRegionsModel.Name = "Odesa region"; break;
+                     case "Полтавська": saleRegionsModel.Name = "Poltava region"; break;
+                     case "Рівненська": saleRegionsModel.Name = "Rivne region"; break;
+                     case "Сумська": saleRegionsModel.Name = "Sumy region"; break;
+                     case "Тернопільська": saleRegionsModel.Name = "Ternopil region"; break;
+                     case "Харківська": saleRegionsModel.Name = "Kharkiv region"; break;
+                     case "Херсонська": saleRegionsModel.Name = "Kherson region"; break;
+                     case "Хмельницька": saleRegionsModel.Name = "Khmelnytsk region"; break;
+                     case "Черкаська": saleRegionsModel.Name = "Cherkasy region"; break;
+                     case "Чернівецька": saleRegionsModel.Name = "Chernivtsi region"; break;
+                     case "Чернігівська": saleRegionsModel.Name = "Chernihiv region"; break;                  
+                 }
+            }
 
             return saleRegionsModels;
         }
