@@ -36,6 +36,7 @@ namespace BusinessLogicLayer.Services
         private readonly IPlanSaleStockOnDateDRepository _planSaleStockOnDateDRepository;
         private readonly IIndicatorsByNumberOfStoreRepository _indicatorsByNumberOfStoreRepository;
 
+        private static bool isStart = false;
 
         public BoardService(IMapper mapper, IMemoryCache memoryCache, IConfiguration configuration, IShopsRepository shopsRepository, IRegionsLocalizationRepository regionsLocalizationRepository, 
                             ISaleOracleRepository saleOracleRepository, ISaleStatisticRepository saleStatisticRepository, ISaleLast30Days_ByRegionRepository saleLast30Days_ByRegionRepository,
@@ -75,10 +76,12 @@ namespace BusinessLogicLayer.Services
         {
             DateTime dateTime = DateTime.Now;
 
-            if (dateTime.Minute == 0)
+            if (dateTime.Minute == 0 || isStart == false)
             {
                 try
                 {
+                    isStart = true;
+
                     SaleOracleModel saleOracleModel = await getSaleOracle();
 
                     List<SaleStatisticModel> saleStatisticModels = await getSaleStatistic();
@@ -118,7 +121,7 @@ namespace BusinessLogicLayer.Services
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3)
                     });
 
-                    await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels, planSaleStockOnDateModels);
+                    await sendInTelegram(saleResponseModel, executionPlanDate_HistoryModels, diagramModels, planSaleStockOnDateModels, indicatorsByNumberOfStoreModel);
                 }
 
                 catch (Exception e)
@@ -141,7 +144,7 @@ namespace BusinessLogicLayer.Services
             }      
         }
 
-        private async Task sendInTelegram(SaleResponseModel saleResponseModel, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels, List<DiagramModel> diagramModels, List<PlanSaleStockOnDateModel> planSaleStockOnDateModels)
+        private async Task sendInTelegram(SaleResponseModel saleResponseModel, List<ExecutionPlanDate_HistoryModel> executionPlanDate_HistoryModels, List<DiagramModel> diagramModels, List<PlanSaleStockOnDateModel> planSaleStockOnDateModels, IndicatorsByNumberOfStoreModel indicatorsByNumberOfStoreModel)
         {
             DateTime dateTime = DateTime.Now;
 
@@ -157,8 +160,9 @@ namespace BusinessLogicLayer.Services
                 createPhoto2(saleResponseModel);
                 createPhoto3(saleResponseModel);
                 createPhoto4(diagramModels, executionPlanDate_HistoryModels, planSaleStockOnDateModels);
+                createPhoto5(indicatorsByNumberOfStoreModel);
 
-                string message = $"данные на {dateTime.ToShortTimeString()} {dateTime.ToShortDateString()}";
+                string message = $"дані на {dateTime.ToShortTimeString()} {dateTime.ToShortDateString()}";
                 
                 await botClient.SendTextMessageAsync(
                    chatId: _configuration["TelegramBot:ChannelId"],
@@ -169,6 +173,7 @@ namespace BusinessLogicLayer.Services
                 await sendPhoto(botClient, "Photo2.jpeg");
                 await sendPhoto(botClient, "Photo3.jpeg");
                 await sendPhoto(botClient, "Photo4.jpeg");
+                await sendPhoto(botClient, "Photo5.jpeg");
             }
         }
 
@@ -262,7 +267,7 @@ namespace BusinessLogicLayer.Services
 
                 font = new Font("Helvetica Neue", 115, FontStyle.Bold);
 
-                graphic.DrawString("СЧ:", font, drawBrush, x, y);
+                graphic.DrawString("AC:", font, drawBrush, x, y);
 
                 x = 390;
                 y = 440;
@@ -324,22 +329,22 @@ namespace BusinessLogicLayer.Services
                 x = 180;
                 y = 30;
 
-                graphic.DrawString("Дата", font, drawBrush, x, y);
+                graphic.DrawString("Date", font, drawBrush, x, y);
 
                 x = 480;
                 y = 30;
 
-                graphic.DrawString("Р", font, drawBrush, x, y);
+                graphic.DrawString("S", font, drawBrush, x, y);
 
                 x = 730;
                 y = 30;
 
-                graphic.DrawString("СЧ", font, drawBrush, x, y);
+                graphic.DrawString("AC", font, drawBrush, x, y);
 
                 x = 1000;
                 y = 30;
 
-                graphic.DrawString("ОП", font, drawBrush, x, y);
+                graphic.DrawString("IG", font, drawBrush, x, y);
 
                 x = 1300;
                 y = 30;
@@ -349,7 +354,7 @@ namespace BusinessLogicLayer.Services
                 x = 1500;
                 y = 30;
 
-                graphic.DrawString("О", font, drawBrush, x, y);
+                graphic.DrawString("T", font, drawBrush, x, y);
 
                 x = 1680;
                 y = 30;
@@ -838,7 +843,7 @@ namespace BusinessLogicLayer.Services
                 font = new Font("Helvetica Neue", 15);
                 drawBrush = new SolidBrush(Color.Black);
 
-                graphic.DrawString("Факт", font, drawBrush, 880, 665);
+                graphic.DrawString("Fact", font, drawBrush, 880, 665);
 
                 elipce = new Pen(Color.FromArgb(38, 231, 166), 10);
                 rectangle = new Rectangle(950, 670, 10, 10);
@@ -848,7 +853,7 @@ namespace BusinessLogicLayer.Services
                 font = new Font("Helvetica Neue", 15);
                 drawBrush = new SolidBrush(Color.Black);
 
-                graphic.DrawString("План", font, drawBrush, 970, 665);
+                graphic.DrawString("Plan", font, drawBrush, 970, 665);
 
                 font = new Font("Helvetica Neue", 21, FontStyle.Bold);
                 drawBrush = new SolidBrush(Color.Black);
@@ -856,32 +861,32 @@ namespace BusinessLogicLayer.Services
                 x = 100;
                 y = 700;
 
-                graphic.DrawString("Дата", font, drawBrush, x, y);
+                graphic.DrawString("Date", font, drawBrush, x, y);
 
                 x = 300;
                 y = 700;
 
-                graphic.DrawString("К-во ТТ", font, drawBrush, x, y);
+                graphic.DrawString("Stores Qty", font, drawBrush, x, y);
 
                 x = 525;
                 y = 700;
 
-                graphic.DrawString("План выручки", font, drawBrush, x, y);
+                graphic.DrawString("Sales (plan)", font, drawBrush, x, y);
 
                 x = 840;
                 y = 700;
 
-                graphic.DrawString("Факт выручки", font, drawBrush, x, y);
+                graphic.DrawString("Sales (fact)", font, drawBrush, x, y);
 
                 x = 1180;
                 y = 700;
 
-                graphic.DrawString("Выполнение, %", font, drawBrush, x, y);
+                graphic.DrawString("Execution, %", font, drawBrush, x, y);
 
                 x = 1550;
                 y = 700;
 
-                graphic.DrawString("Выполнение", font, drawBrush, x, y);
+                graphic.DrawString("Execution", font, drawBrush, x, y);
 
                 List<ExecutionPlanDate_HistoryModel> executionPlanDateModels = new List<ExecutionPlanDate_HistoryModel>();
 
@@ -950,6 +955,88 @@ namespace BusinessLogicLayer.Services
             }
 
             bitmap.Save("Photo4.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
+
+        private void createPhoto5(IndicatorsByNumberOfStoreModel indicatorsByNumberOfStoreModel)
+        {
+            Bitmap bitmap = new Bitmap(1920, 1090);
+            using (Graphics graphic = Graphics.FromImage(bitmap))
+            {
+                Image newImage = Image.FromFile("ClientApp/dist/assets/background_1.png");
+
+                int x = 0;
+                int y = 0;
+
+                RectangleF srcRect = new RectangleF(0.0F, 0.0F, 1920.0F, 1080.0F);
+                GraphicsUnit units = GraphicsUnit.Pixel;
+
+                graphic.DrawImage(newImage, x, y, srcRect, units);
+
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 255)))
+                {
+                    graphic.FillRectangle(brush, 10, 10, 1900, 1060);
+                }
+
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(211, 211, 211)))
+                {
+                    graphic.FillRectangle(brush, 40, 40, 900, 1000);
+                }
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(18, 156, 18)))
+                {
+                    graphic.FillRectangle(brush, 980, 40, 900, 1000);
+                }
+
+                Font font = new Font("Helvetica Neue", 45, FontStyle.Regular);
+                SolidBrush drawBrush = new SolidBrush(Color.Black);
+
+                x = 70;
+                y = 300;
+
+                graphic.DrawString($"Received goods, qty of stores", font, drawBrush, x, y);
+
+                font = new Font("Helvetica Neue", 45, FontStyle.Regular);
+
+                x = 200;
+                y = 400;
+
+                graphic.DrawString($"5 days (Last 5 days)", font, drawBrush, x, y);
+
+
+                font = new Font("Helvetica Neue", 125, FontStyle.Bold);
+
+                x = 100;
+                y = 600;
+
+                graphic.DrawString($"{indicatorsByNumberOfStoreModel.ReceivedCount} ({indicatorsByNumberOfStoreModel.ReceivedCountYesterday})", font, drawBrush, x, y);
+
+
+                font = new Font("Helvetica Neue", 45, FontStyle.Regular);
+                drawBrush = new SolidBrush(Color.White);
+
+                x = 1150;
+                y = 300;              
+
+                graphic.DrawString($"Sales, qty of stores", font, drawBrush, x, y);
+
+
+                font = new Font("Helvetica Neue", 45, FontStyle.Regular);
+
+                x = 1160;
+                y = 400;
+
+                graphic.DrawString($"Today (Yesterday)", font, drawBrush, x, y);
+
+
+                font = new Font("Helvetica Neue", 125, FontStyle.Bold);
+
+                x = 1050;
+                y = 600;
+
+                graphic.DrawString($"{indicatorsByNumberOfStoreModel.SaleCount} ({indicatorsByNumberOfStoreModel.SaleCountYesterday})", font, drawBrush, x, y);
+
+            }
+
+            bitmap.Save("Photo5.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
         private float centeringName (float x, string name)
