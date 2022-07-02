@@ -28,3 +28,33 @@ C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\DataA
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.pdb
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.genruntimeconfig.cache
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\refint\DataAccessLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.deps.json
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.runtimeconfig.json
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.runtimeconfig.dev.json
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.pdb
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.AssemblyInfo.cs
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\refint\DataAccessLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.pdb
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.genruntimeconfig.cache
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\ref\DataAccessLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.deps.json
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.runtimeconfig.json
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.runtimeconfig.dev.json
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\bin\Release\net5.0\DataAccessLayer.pdb
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.csproj.AssemblyReference.cache
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.AssemblyInfoInputs.cache
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.AssemblyInfo.cs
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\refint\DataAccessLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.pdb
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\DataAccessLayer.genruntimeconfig.cache
+D:\Clown\Git\TarasDashboard\TarasDashboard\DataAccessLayer\obj\Release\net5.0\ref\DataAccessLayer.dll

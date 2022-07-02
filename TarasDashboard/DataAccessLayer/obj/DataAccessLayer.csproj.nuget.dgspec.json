@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {}
+    "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\i.talavyria\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\obj\\",
+        "projectPath": "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\igort\\.nuget\\packages\\",
+        "outputPath": "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\i.talavyria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\igort\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

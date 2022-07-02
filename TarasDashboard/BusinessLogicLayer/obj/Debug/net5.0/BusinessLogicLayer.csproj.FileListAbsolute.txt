@@ -28,3 +28,33 @@ C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\Busin
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\ref\BusinessLogicLayer.dll
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.pdb
 C:\Users\i.talavyria\Desktop\project\Angular\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\refint\BusinessLogicLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\BusinessLogicLayer.deps.json
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\BusinessLogicLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\BusinessLogicLayer.pdb
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\DataAccessLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\DataAccessLayer.pdb
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.csproj.AssemblyReference.cache
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.AssemblyInfoInputs.cache
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.AssemblyInfo.cs
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.csproj.CopyComplete
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\refint\BusinessLogicLayer.dll
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.pdb
+C:\Users\igort\OneDrive\Рабочий стол\Новая папка\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\ref\BusinessLogicLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\BusinessLogicLayer.deps.json
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\BusinessLogicLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\BusinessLogicLayer.pdb
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\DataAccessLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\bin\Debug\net5.0\DataAccessLayer.pdb
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.csproj.AssemblyReference.cache
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.AssemblyInfoInputs.cache
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.AssemblyInfo.cs
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.csproj.CopyComplete
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\refint\BusinessLogicLayer.dll
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\BusinessLogicLayer.pdb
+D:\Clown\Git\TarasDashboard\TarasDashboard\BusinessLogicLayer\obj\Debug\net5.0\ref\BusinessLogicLayer.dll

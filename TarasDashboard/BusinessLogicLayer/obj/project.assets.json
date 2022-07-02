@@ -8409,19 +8409,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\i.talavyria\\.nuget\\packages\\": {}
+    "C:\\Users\\igort\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
+      "projectUniqueName": "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
       "projectName": "BusinessLogicLayer",
-      "projectPath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
-      "packagesPath": "C:\\Users\\i.talavyria\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\BusinessLogicLayer\\obj\\",
+      "projectPath": "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\BusinessLogicLayer\\BusinessLogicLayer.csproj",
+      "packagesPath": "C:\\Users\\igort\\.nuget\\packages\\",
+      "outputPath": "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\BusinessLogicLayer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\i.talavyria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\igort\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8435,8 +8435,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\i.talavyria\\Desktop\\project\\Angular\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj"
+            "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "D:\\Clown\\Git\\TarasDashboard\\TarasDashboard\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }

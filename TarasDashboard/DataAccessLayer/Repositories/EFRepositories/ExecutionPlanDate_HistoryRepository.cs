@@ -26,9 +26,7 @@ namespace DataAccessLayer.Repositories.EFRepositories
                 dateTime = dateTime.AddDays(-1);
             }
 
-            int month = dateTime.Month;
-
-            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _avrora37Context.ExecutionPlanDateHistories.Where(x=>x.Dates.Month == month).OrderByDescending(x=>x.Dates).ToListAsync();
+            List<ExecutionPlanDateHistory> executionPlanDateHistories = await _avrora37Context.ExecutionPlanDateHistories.Where(x=>x.Dates.Month == dateTime.Month && x.Dates.Year == dateTime.Year).OrderByDescending(x=>x.Dates).ToListAsync();
 
             return executionPlanDateHistories;
         }
